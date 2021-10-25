@@ -6,7 +6,7 @@ services:
   phalcon-traits-7.4:
     container_name: phalcon-traits-7.4
     hostname: phalcon-74
-    build: docker/7.4
+    build: resources/docker/7.4
     working_dir: /srv
     volumes:
       - .:/srv
@@ -14,7 +14,7 @@ services:
   phalcon-traits-8.0:
     container_name: phalcon-traits-8.0
     hostname: phalcon-80
-    build: docker/8.0
+    build: resources/docker/8.0
     working_dir: /srv
     volumes:
       - .:/srv

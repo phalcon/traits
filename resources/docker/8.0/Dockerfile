@@ -5,7 +5,7 @@ FROM php:8.0-fpm
 RUN CPU_CORES="$(getconf _NPROCESSORS_ONLN)";
 ENV MAKEFLAGS="-j${CPU_CORES}"
 
-ADD ./extra.ini /usr/local/etc/php/conf.d/
+ADD extra.ini /usr/local/etc/php/conf.d/
 
 # User/Group globals
 ENV MY_USER="phalcon" \
@@ -43,6 +43,6 @@ RUN docker-php-ext-enable \
 # Composer
 COPY --from=composer /usr/bin/composer /usr/local/bin/composer
 # Bash script with helper aliases
-COPY ./.bashrc /root/.bashrc
+COPY .bashrc /root/.bashrc
 
 CMD ["php-fpm"]

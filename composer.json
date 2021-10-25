@@ -1,0 +1,39 @@
+{
+    "name": "phalcon/traits",
+    "description": "Phalcon Framework Traits",
+    "keywords": [
+        "php",
+        "framework",
+        "traits"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.4 <9.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "suggest": {
+        "ext-yaml": "*",
+        "ext-gettext": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phalcon\\Traits\\": "src/",
+            "Phalcon\\Tests\\Fixtures\\": "tests/_data/fixtures/",
+            "Phalcon\\Tests\\Unit\\": "tests/unit/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.0",
+        "codeception/module-asserts": "^1.0.0",
+        "pds/skeleton": "^1.0",
+        "phpstan/phpstan": "^0.12",
+        "squizlabs/php_codesniffer": "^3.4",
+        "vimeo/psalm": "^4.10"
+    }
+}

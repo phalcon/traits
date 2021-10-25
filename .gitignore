@@ -1,0 +1,5 @@
+.env
+.php_cs.cache
+tests/_output/
+tests/_support/_generated/
+vendor/

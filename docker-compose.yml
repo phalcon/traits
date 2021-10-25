@@ -1,0 +1,20 @@
+# For local development only.
+
+version: '3'
+
+services:
+  phalcon-traits-7.4:
+    container_name: phalcon-traits-7.4
+    hostname: phalcon-74
+    build: docker/7.4
+    working_dir: /srv
+    volumes:
+      - .:/srv
+
+  phalcon-traits-8.0:
+    container_name: phalcon-traits-8.0
+    hostname: phalcon-80
+    build: docker/8.0
+    working_dir: /srv
+    volumes:
+      - .:/srv

@@ -131,7 +131,5 @@ class FileTraitCest
 
         $I->seeFileFound($name, outputDir());
         $I->safeDeleteFile($fileName);
-
-
     }
 }

@@ -17,15 +17,11 @@ use function mb_strlen;
 use function substr_compare;
 
 /**
- * Trait EndsWithTrait
- *
- * @package Phalcon\Support\Helper\Str\Traits
+ * Check if a string ends with a given string
  */
 trait EndsWithTrait
 {
     /**
-     * Check if a string ends with a given string
-     *
      * @param string $haystack
      * @param string $needle
      * @param bool   $ignoreCase

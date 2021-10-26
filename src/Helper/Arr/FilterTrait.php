@@ -17,16 +17,12 @@ use function array_filter;
 use function is_callable;
 
 /**
- * Trait FilterTrait
- *
- * @package Phalcon\Support\Helper\Str\Traits
+ * Provides a wrapper to array_filter with a callable on an array
  */
 trait FilterTrait
 {
     /**
-     * Helper method to filter the collection
-     *
-     * @param array<int|string,mixed> $collection
+     * @param array<array-key, mixed> $collection
      * @param callable|null           $method
      * @param int                     $mode
      *

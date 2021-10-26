@@ -18,15 +18,11 @@ use function mb_convert_case;
 use const MB_CASE_LOWER;
 
 /**
- * Trait LowerTrait
- *
- * @package Phalcon\Support\Helper\Str\Traits
+ * Lowercases a string using mbstring
  */
 trait LowerTrait
 {
     /**
-     * Lowercases a string using mbstring
-     *
      * @param string $text
      * @param string $encoding
      *

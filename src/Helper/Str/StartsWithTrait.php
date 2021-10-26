@@ -17,15 +17,11 @@ use function mb_strlen;
 use function substr_compare;
 
 /**
- * Trait StartsWithTrait
- *
- * @package Phalcon\Support\Helper\Str\Traits
+ * Check if a string starts with a given string
  */
 trait StartsWithTrait
 {
     /**
-     * Check if a string starts with a given string
-     *
      * @param string $haystack
      * @param string $needle
      * @param bool   $ignoreCase

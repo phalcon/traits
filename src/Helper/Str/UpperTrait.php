@@ -18,15 +18,11 @@ use function mb_convert_case;
 use const MB_CASE_UPPER;
 
 /**
- * Trait UpperTrait
- *
- * @package Phalcon\Support\Helper\Str\Traits
+ * Uppercases a string using mbstring
  */
 trait UpperTrait
 {
     /**
-     * Uppercases a string using mbstring
-     *
      * @param string $text
      * @param string $encoding
      *

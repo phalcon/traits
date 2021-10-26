@@ -14,17 +14,13 @@ declare(strict_types=1);
 namespace Phalcon\Traits\Helper\Str;
 
 /**
- * Trait InterpolateTrait
+ * Interpolates context values into the message placeholders
  *
- * @package Phalcon\Support\Str
+ * @see http://www.php-fig.org/psr/psr-3/ Section 1.2 Message
  */
 trait InterpolateTrait
 {
     /**
-     * Interpolates context values into the message placeholders
-     *
-     * @see http://www.php-fig.org/psr/psr-3/ Section 1.2 Message
-     *
      * @param string $input
      * @param array  $context
      * @param string $left

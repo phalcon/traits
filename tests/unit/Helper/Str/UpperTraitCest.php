@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
-use Phalcon\Tests\Fixtures\Helper\Str\LowerFixture;
+use Phalcon\Tests\Fixtures\Helper\Str\UpperFixture;
 use UnitTester;
 
 /**
- * Tests the Lower trait
+ * Tests the Upper trait
  */
-class LowerTraitCest
+class UpperTraitCest
 {
     /**
-     * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
+     * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
      *
      * @dataProvider getExamples
      *
@@ -33,16 +33,16 @@ class LowerTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrLowerFilter(UnitTester $I, Example $example)
+    public function helperStrUpperFilter(UnitTester $I, Example $example)
     {
-        $I->wantToTest('Str\LowerTrait - ' . $example['label']);
+        $I->wantToTest('Str\UpperTrait - ' . $example['label']);
 
         $text     = $example['text'];
         $encoding = $example['encoding'];
         $expected = $example['expected'];
 
-        $object = new LowerFixture();
-        $actual = $object->lower($text, $encoding);
+        $object = new UpperFixture();
+        $actual = $object->upper($text, $encoding);
         $I->assertEquals($expected, $actual);
     }
 
@@ -56,19 +56,19 @@ class LowerTraitCest
                 'label'    => 'english string mixed',
                 'text'     => 'HeLLo',
                 'encoding' => 'UTF-8',
-                'expected' => 'hello',
+                'expected' => 'HELLO',
             ],
             [
                 'label'    => 'english string all uppercase',
                 'text'     => 'HELLO',
                 'encoding' => 'UTF-8',
-                'expected' => 'hello',
+                'expected' => 'HELLO',
             ],
             [
                 'label'    => 'english string all lowercase',
                 'text'     => 'hello',
                 'encoding' => 'UTF-8',
-                'expected' => 'hello',
+                'expected' => 'HELLO',
             ],
             [
                 'label'    => 'string number',
@@ -86,55 +86,55 @@ class LowerTraitCest
                 'label'    => 'russian string mixed',
                 'text'     => 'ПриВЕт Мир!',
                 'encoding' => 'UTF-8',
-                'expected' => 'привет мир!',
+                'expected' => 'ПРИВЕТ МИР!',
             ],
             [
                 'label'    => 'russian string all uppercase',
                 'text'     => 'ПРИВЕТ МИР!',
                 'encoding' => 'UTF-8',
-                'expected' => 'привет мир!',
+                'expected' => 'ПРИВЕТ МИР!',
             ],
             [
                 'label'    => 'russian string all lowercase',
                 'text'     => 'привет мир!',
                 'encoding' => 'UTF-8',
-                'expected' => 'привет мир!',
+                'expected' => 'ПРИВЕТ МИР!',
             ],
             [
                 'label'    => 'german string mixed',
                 'text'     => 'mÄnnER',
                 'encoding' => 'UTF-8',
-                'expected' => 'männer',
+                'expected' => 'MÄNNER',
             ],
             [
                 'label'    => 'german string all uppercase',
                 'text'     => 'MÄNNER',
                 'encoding' => 'UTF-8',
-                'expected' => 'männer',
+                'expected' => 'MÄNNER',
             ],
             [
                 'label'    => 'german string all lowercase',
                 'text'     => 'männer',
                 'encoding' => 'UTF-8',
-                'expected' => 'männer',
+                'expected' => 'MÄNNER',
             ],
             [
                 'label'    => 'greek string mixed',
                 'text'     => 'ΚαλΗμέΡΑ',
                 'encoding' => 'UTF-8',
-                'expected' => 'καλημέρα',
+                'expected' => 'ΚΑΛΗΜΈΡΑ',
             ],
             [
                 'label'    => 'greek string all uppercase',
                 'text'     => 'ΚΑΛΗΜΕΡΑ',
                 'encoding' => 'UTF-8',
-                'expected' => 'καλημερα',
+                'expected' => 'ΚΑΛΗΜΕΡΑ',
             ],
             [
                 'label'    => 'greek string all lowercase',
                 'text'     => 'καλημέρα',
                 'encoding' => 'UTF-8',
-                'expected' => 'καλημέρα',
+                'expected' => 'ΚΑΛΗΜΈΡΑ',
             ],
             [
                 'label'    => 'greek string EUC-JP encoding',

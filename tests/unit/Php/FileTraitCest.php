@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Tests\Unit\Factory;
+namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\FileFixture;
 use UnitTester;

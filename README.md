@@ -10,4 +10,5 @@ to mock the method in order to get different results and cover paths of the
 application with relevant tests.
 
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square)](https://github.com/php-pds/skeleton)
+[![codecov](https://codecov.io/gh/phalcon/traits/branch/1.x/graph/badge.svg?token=I4bgs0E168)](https://codecov.io/gh/phalcon/traits)
 

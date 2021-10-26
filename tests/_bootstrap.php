@@ -9,7 +9,6 @@ require_once $root . 'tests/_config/functions.php';
 
 $folders = [
     cacheDir(),
-    logsDir(),
     outputDir('assets'),
 ];
 
@@ -18,5 +17,3 @@ foreach ($folders as $folder) {
         mkdir($folder);
     }
 }
-
-loadDefined();

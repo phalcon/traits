@@ -22,10 +22,10 @@ use UnitTester;
 /**
  * Tests the factory trait
  */
-class NewInstanceCest
+class FactoryTraitCest
 {
     /**
-     * Tests Phalcon\Traits\Factory\FactoryTrait :: newInstance()
+     * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance()
      *
      * @param UnitTester $I
      *
@@ -34,7 +34,7 @@ class NewInstanceCest
      */
     public function factoryFactoryTraitNewInstance(UnitTester $I)
     {
-        $I->wantToTest('Factory\FactoryTrait - newInstance()');
+        $I->wantToTest('Arr\FactoryTrait - newInstance()');
 
         $factory = new FactoryFixture();
 
@@ -44,7 +44,7 @@ class NewInstanceCest
     }
 
     /**
-     * Tests Phalcon\Traits\Factory\FactoryTrait :: newInstance() with init
+     * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() with init
      *
      * @param UnitTester $I
      *
@@ -53,7 +53,7 @@ class NewInstanceCest
      */
     public function factoryFactoryTraitNewInstanceWithInit(UnitTester $I)
     {
-        $I->wantToTest('Factory\FactoryTrait - newInstance() with init');
+        $I->wantToTest('Arr\FactoryTrait - newInstance() with init');
 
         $options = ['three' => FactoryThreeFixture::class];
         $factory = new FactoryFixture($options);
@@ -67,7 +67,7 @@ class NewInstanceCest
         $I->assertInstanceOf($class, $actual);
     }
     /**
-     * Tests Phalcon\Traits\Factory\FactoryTrait :: newInstance() - exception
+     * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() - exception
      *
      * @param UnitTester $I
      *
@@ -76,7 +76,7 @@ class NewInstanceCest
      */
     public function factoryFactoryTraitNewInstanceException(UnitTester $I)
     {
-        $I->wantToTest('Factory\FactoryTrait - newInstance() - exception');
+        $I->wantToTest('Arr\FactoryTrait - newInstance() - exception');
 
         $I->expectThrowable(
             new FactoryExceptionFixture(

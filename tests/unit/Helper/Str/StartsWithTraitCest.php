@@ -14,16 +14,16 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
-use Phalcon\Tests\Fixtures\Helper\Str\EndsWithFixture;
+use Phalcon\Tests\Fixtures\Helper\Str\StartsWithFixture;
 use UnitTester;
 
 /**
- * Tests the EndsWith trait
+ * Tests the StartsWith trait
  */
-class EndsWithTraitCest
+class StartsWithTraitCest
 {
     /**
-     * Tests Phalcon\Traits\Str\EndsWithTrait :: toEndsWith()
+     * Tests Phalcon\Traits\Str\StartsWithTrait :: toStartsWith()
      *
      * @dataProvider getExamples
      *
@@ -33,17 +33,17 @@ class EndsWithTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrEndsWithFilter(UnitTester $I, Example $example)
+    public function helperStrStartsWithFilter(UnitTester $I, Example $example)
     {
-        $I->wantToTest('Str\EndsWithTrait - ' . $example['label']);
+        $I->wantToTest('Str\StartsWithTrait - ' . $example['label']);
 
         $haystack    = $example['haystack'];
         $needle      = $example['needle'];
         $insensitive = $example['insensitive'];
         $expected    = $example['expected'];
 
-        $object = new EndsWithFixture();
-        $actual = $object->endsWith($haystack, $needle, $insensitive);
+        $object = new StartsWithFixture();
+        $actual = $object->startsWith($haystack, $needle, $insensitive);
         $I->assertEquals($expected, $actual);
     }
 
@@ -56,14 +56,14 @@ class EndsWithTraitCest
             [
                 'label'       => 'string one character',
                 'haystack'    => 'Hello',
-                'needle'      => 'o',
+                'needle'      => 'H',
                 'insensitive' => true,
                 'expected'    => true,
             ],
             [
                 'label'       => 'string two character',
                 'haystack'    => 'Hello',
-                'needle'      => 'lo',
+                'needle'      => 'He',
                 'insensitive' => true,
                 'expected'    => true,
             ],
@@ -91,14 +91,14 @@ class EndsWithTraitCest
             [
                 'label'       => 'string one character case insensitive',
                 'haystack'    => 'Hello',
-                'needle'      => 'O',
+                'needle'      => 'h',
                 'insensitive' => true,
                 'expected'    => true,
             ],
             [
                 'label'       => 'string two character case insensitive',
                 'haystack'    => 'Hello',
-                'needle'      => 'LO',
+                'needle'      => 'he',
                 'insensitive' => true,
                 'expected'    => true,
             ],
@@ -119,7 +119,7 @@ class EndsWithTraitCest
             [
                 'label'       => 'string one character case sensitive',
                 'haystack'    => 'Hello',
-                'needle'      => 'O',
+                'needle'      => 'h',
                 'insensitive' => false,
                 'expected'    => false,
             ],

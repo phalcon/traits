@@ -17,9 +17,6 @@ use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Arr\FilterFixture;
 use UnitTester;
 
-use function strlen;
-use function strtolower;
-
 /**
  * Tests the Filter trait
  */

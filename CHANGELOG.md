@@ -1,4 +1,9 @@
-## 1.0.0 (2021-10-27)
+## 2.0.0 (2021-10-27)
+
+### Fix
+
+- **php**: added stricter types to php based traits
+- **helper/php/filetrait**: corrected the namespace
 
 ### Feat
 
@@ -14,7 +19,3 @@
 - **helper/str/endswith**: added endsWith trait and relevant tests
 - **helper/arr/filter**: added filter trait and relevant tests
 - **factory**: added factory trait
-
-### Fix
-
-- **helper/php/filetrait**: corrected the namespace

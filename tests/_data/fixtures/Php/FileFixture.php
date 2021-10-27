@@ -137,9 +137,9 @@ class FileFixture
      *
      * @link https://php.net/manual/en/function.is-writable.php
      */
-    public function isWriteable($filename): bool
+    public function isWritable($filename): bool
     {
-        return $this->phpIsWriteable($filename);
+        return $this->phpIsWritable($filename);
     }
 
     /**

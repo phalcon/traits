@@ -92,9 +92,9 @@ class FileTraitCest
         $I->assertTrue($actual);
 
         /**
-         * Check if it is writeable
+         * Check if it is writable
          */
-        $actual = $file->isWriteable($fileName);
+        $actual = $file->isWritable($fileName);
         $I->assertTrue($actual);
 
         /**

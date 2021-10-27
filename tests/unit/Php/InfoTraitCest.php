@@ -42,7 +42,7 @@ class InfoTraitCest
         $I->assertTrue($actual);
 
         $expected = '/tmp';
-        $actual = $info->iniGet('session.save_path');
+        $actual   = $info->iniGet('session.save_path');
         $I->assertEquals($expected, $actual);
     }
 }

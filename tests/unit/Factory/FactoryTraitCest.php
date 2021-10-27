@@ -66,6 +66,7 @@ class FactoryTraitCest
         $actual = $factory->newInstance('three');
         $I->assertInstanceOf($class, $actual);
     }
+
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() - exception
      *

@@ -30,8 +30,8 @@ class FilterTraitCest
      * @param UnitTester $I
      * @param Example    $example
      *
-     * @author Phalcon Team <team@phalcon.io>
-     * @since  2021-10-25
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-25
      */
     public function factoryFilterTraitToFilter(UnitTester $I, Example $example)
     {

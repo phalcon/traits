@@ -13,15 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Traits\Php;
 
-use function fclose;
-use function file_exists;
-use function file_get_contents;
-use function file_put_contents;
-use function fopen;
-use function fwrite;
-use function is_writable;
 use function json_decode;
-use function unlink;
 
 /**
  * JSON wrapper methods

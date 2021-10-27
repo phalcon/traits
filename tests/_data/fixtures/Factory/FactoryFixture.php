@@ -48,8 +48,8 @@ class FactoryFixture
     protected function getServices(): array
     {
         return [
-            'one'   => FactoryOneFixture::class,
-            'two'   => FactoryTwoFixture::class,
+            'one' => FactoryOneFixture::class,
+            'two' => FactoryTwoFixture::class,
         ];
     }
 }

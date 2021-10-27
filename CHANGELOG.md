@@ -2,6 +2,8 @@
 
 ### Feat
 
+- **helper/str/dirseparator**: added dirSeparatorTrait and relevant tests
+- **helper/str/dirfromfile**: added dirFromFile trait and tests
 - **php/infotrait**: added infotrait and relevant tests
 - **php/jsontrait**: added json trait and relevant tests
 - **php/filetrait**: added file trait and relevant tests with testing assets

@@ -34,7 +34,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.file-exists.php
      */
-    protected function phpFileExists($filename)
+    protected function phpFileExists(string $filename)
     {
         return file_exists($filename);
     }
@@ -46,7 +46,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.file-get-contents.php
      */
-    protected function phpFileGetContents($filename)
+    protected function phpFileGetContents(string $filename)
     {
         return file_get_contents($filename);
     }
@@ -62,9 +62,9 @@ trait FileTrait
      * @link https://php.net/manual/en/function.file-put-contents.php
      */
     protected function phpFilePutContents(
-        $filename,
+        string $filename,
         $data,
-        $flags = 0,
+        int $flags = 0,
         $context = null
     ) {
         return file_put_contents($filename, $data, $flags, $context);
@@ -99,10 +99,10 @@ trait FileTrait
      */
     protected function phpFgetCsv(
         $stream,
-        $length = 0,
-        $separator = ',',
-        $enclosure = '"',
-        $escape = '\\'
+        int $length = 0,
+        string $separator = ',',
+        string $enclosure = '"',
+        string $escape = '\\'
     ) {
         return fgetcsv($stream, $length, $separator, $enclosure, $escape);
     }
@@ -116,7 +116,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.fopen.php
      */
-    protected function phpFopen($filename, $mode)
+    protected function phpFopen(string $filename, string $mode)
     {
         return fopen($filename, $mode);
     }
@@ -145,7 +145,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.is-writable.php
      */
-    protected function phpIsWriteable($filename): bool
+    protected function phpIsWritable(string $filename): bool
     {
         return is_writable($filename);
     }
@@ -162,9 +162,9 @@ trait FileTrait
      * @link https://php.net/manual/en/function.parse-ini-file.php
      */
     protected function phpParseIniFile(
-        $filename,
-        $process_sections = false,
-        $scanner_mode = 1
+        string $filename,
+        bool $process_sections = false,
+        int $scanner_mode = 1
     ) {
         return parse_ini_file($filename, $process_sections, $scanner_mode);
     }
@@ -176,7 +176,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.unlink.php
      */
-    protected function phpUnlink($filename)
+    protected function phpUnlink(string $filename)
     {
         return unlink($filename);
     }

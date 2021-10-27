@@ -31,7 +31,7 @@ trait InfoTrait
      *
      * @link https://php.net/manual/en/function.extension-loaded.php
      */
-    protected function phpExtensionLoaded($name)
+    protected function phpExtensionLoaded(string $name)
     {
         return extension_loaded($name);
     }
@@ -45,7 +45,7 @@ trait InfoTrait
      *
      * @link https://php.net/manual/en/function.function-exists.php
      */
-    protected function phpFunctionExists($function)
+    protected function phpFunctionExists(string $function)
     {
         return function_exists($function);
     }
@@ -60,7 +60,7 @@ trait InfoTrait
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
      */
-    protected function phpIniGet($varname): string
+    protected function phpIniGet(string $varname): string
     {
         return ini_get($varname);
     }

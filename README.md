@@ -13,3 +13,4 @@ application with relevant tests.
 [![codecov](https://codecov.io/gh/phalcon/traits/branch/1.x/graph/badge.svg?token=I4bgs0E168)](https://codecov.io/gh/phalcon/traits)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
+[Documentation](docs/general.md)

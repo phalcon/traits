@@ -1,0 +1,139 @@
+name: Phalcon CI
+
+on:
+  schedule:
+    - cron: '0 2 * * *' # Daily at 02:00 runs only on default branch
+  push:
+    paths-ignore:
+      - '**.md'
+      - '**.txt'
+  pull_request:
+
+env:
+  LANG: en_US.UTF-8
+  LANGUAGE: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
+
+jobs:
+  phpcs:
+    name: Validate Tests code style
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run PHP_CodeSniffer
+        run: docker run --rm -v $(pwd):/data cytopia/phpcs --standard=./phpcs.xml
+
+#  stubs:
+#    name: PHP ${{ matrix.php-versions }} Stubs validation
+#    if: "!contains(github.event.head_commit.message, 'ci skip')"
+#
+#    runs-on: ubuntu-20.04
+#
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        php-versions: ['7.4', '8.0']
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#
+#      - name: Validate stubs
+#        if: always()
+#        run: vendor/bin/psalm ide/
+#
+  generate:
+    name: Setup Environments
+    # To prevent build a particular commit use
+    #     git commit -m "......... [ci skip]"
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          extensions: mbstring, intl, json, psr
+          tools: pecl
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup APT Repositories
+        run: |
+          # We don't need this at all, and our
+          # builds often fails because Microsoft
+          # servers are unstable or even offline.
+          sudo rm -f /etc/apt/sources.list.d/dotnetdev.list
+          sudo rm -f /etc/apt/sources.list.d/azure*.list
+
+      - name: Install System Dependencies
+        run: |
+          sudo apt-get update --quiet --yes 1>/dev/null
+
+  build-and-test-linux:
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
+    # To prevent build a particular commit use
+    #     git commit -m "......... [ci skip]"
+    #     git commit -m "......... [linux skip] - to skip only linux builds"
+    if: "!contains(github.event.head_commit.message, '[linux skip]') || !contains(github.event.head_commit.message, 'ci skip')"
+
+    needs: [generate]
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-20.04]
+        php-versions: ['7.4', '8.0']
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Validate composer
+        run: composer validate --no-check-all --no-check-publish
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Setup Composer Cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          extensions: mbstring, json, yaml
+          ini-values: apc.enable_cli=on, session.save_path=/tmp
+          tools: pecl
+        env:
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Composer Packages
+        run: composer install --prefer-dist
+
+      - name: Setup Tests
+        run: |
+          cp config/.env.example .env
+          vendor/bin/codecept build
+
+      - name: Run Unit Tests
+        if: always()
+        run: vendor/bin/codecept run --coverage-xml=coverage-unit-${{ matrix.php-versions }}.xml --ext DotReporter unit
+
+      - name: Upload Code Coverage on ${{ matrix.php-versions }} for unit
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./tests/_output/

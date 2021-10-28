@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * This file is part of the Phalcon Framework.
+ *
+ * (c) Phalcon Team <team@phalcon.io>
+ *
+ * For the full copyright and license information, please view the LICENSE.txt
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace Phalcon\Traits\Factory;
+
+use Exception;
+
+use function array_merge;
+
+/**
+ * Methods allowing a mapper based factory to operate. Supports injected
+ * services, getting a service by name (key), initialization and setting of
+ * the exception class (when exceptions are needed to be thrown)
+ *
+ * @property string $exceptionClass
+ * @property array  $mapper
+ */
+trait FactoryTrait
+{
+    /**
+     * @var array
+     */
+    private array $mapper = [];
+
+    /**
+     * @param array $services
+     */
+    public function __construct(array $services = [])
+    {
+        $this->init($services);
+    }
+
+    /**
+     * Returns a service based on the name; throws exception if it does not
+     * exist
+     *
+     * @param string $name
+     *
+     * @return mixed
+     * @throws Exception
+     */
+    protected function getService(string $name)
+    {
+        if (true !== isset($this->mapper[$name])) {
+            $exceptionClass = $this->getExceptionClass();
+            throw new $exceptionClass('Service ' . $name . ' is not registered');
+        }
+
+        return $this->mapper[$name];
+    }
+
+    /**
+     * Returns the services for the factory
+     *
+     * @return array
+     */
+    abstract protected function getServices(): array;
+
+    /**
+     * Initializes services
+     *
+     * @param array $services
+     */
+    protected function init(array $services = []): void
+    {
+        $this->mapper = array_merge($this->getServices(), $services);
+    }
+
+    /**
+     * Returns the exception class for the factory
+     *
+     * @return string
+     */
+    abstract protected function getExceptionClass(): string;
+}

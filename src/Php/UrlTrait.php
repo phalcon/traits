@@ -21,8 +21,6 @@ use function rawurlencode;
 use function rtrim;
 use function strlen;
 use function substr;
-use function urldecode;
-use function urlencode;
 
 /**
  * URL based wrapper methods.

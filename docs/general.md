@@ -473,20 +473,127 @@ protected function phpJsonDecode(
 ```
 [json_decode][json-decode]
 
-[psr-3]: https://www.php-fig.org/psr/psr-3/
+
+##### JsonTrait
+JSON wrapper methods
+
+**doBase64DecodeUrl**
+```php
+/**
+ * @param string $input
+ * @param bool   $strict
+ *
+ * @return string
+ */
+protected function doBase64DecodeUrl(string $input, bool $strict = false): string
+```
+Decodes a URL using `base64_decode`. The decoding takes into account 
+replacements that occur during encoding.
+
+**doBase64EncodeUrl**
+```php
+/**
+ * @param string $input
+ *
+ * @return string
+ */
+protected function doBase64EncodeUrl(string $input): string
+```
+Encodes a URL using `base64_encode`. The encoding replaces `-` and `_` characters
+with `+` and `/`.
+
+**phpBase64Decode**
+```php
+/**
+ * @param string $input
+ * @param bool   $strict
+ *
+ * @return string|false
+ *
+ * @link https://www.php.net/manual/en/function.base64-decode.php
+ */
+protected function phpBase64Decode(string $input, bool $strict = false)
+```
+[base64-decode][base64-decode]
+
+**phpBase64Encode**
+```php
+/**
+ * @param string $input
+ *
+ * @return string
+ *
+ * @link https://www.php.net/manual/en/function.base64-encode.php
+ */
+protected function phpBase64Encode(string $input): string
+```
+[base64-encode][base64-encode]
+
+**phpParseUrl**
+```php
+/**
+ * @param string $url
+ * @param int    $component
+ *
+ * @return array|false|int|string|null
+ *
+ * @link https://www.php.net/manual/en/function.parse-url.php
+ */
+protected function phpParseUrl(string $url, int $component = -1)
+```
+[parse-url][parse-url]
+
+**phpRawUrlDecode**
+```php
+/**
+ * @param string $string
+ *
+ * @return string
+ *
+ * @link https://www.php.net/manual/en/function.rawurldecode.php
+ */
+protected function phpRawUrlDecode(string $string): string
+```
+[rawurldecode][rawurldecode]
+
+**phpRawUrlEncode**
+```php
+/**
+ * @param string $string
+ *
+ * @return string
+ *
+ * @link https://www.php.net/manual/en/function.rawurlencode.php
+ */
+protected function phpRawUrlEncode(string $string): string
+```
+[rawurlencode][rawurlencode]
+
+
+
+
+
+
+
+[base64-decode]: https://www.php.net/manual/en/function.base64-decode.php
+[base64-encode]: https://www.php.net/manual/en/function.base64-encode.php
+[extension-loaded]: https://php.net/manual/en/function.extension-loaded.php
+[json-decode]: https://php.net/manual/en/function.json-decode.php
+[json-encode]: https://php.net/manual/en/function.json-encode.php
+[fclose]: https://php.net/manual/en/function.fclose.php
+[fgetcsv]: https://php.net/manual/en/function.fgetcsv.php
 [file-exists]: https://php.net/manual/en/function.file-exists.php
 [file-get-contents]: https://php.net/manual/en/function.file-get-contents.php
 [file-put-contents]: https://php.net/manual/en/function.file-put-contents.php
-[fclose]: https://php.net/manual/en/function.fclose.php
-[fgetcsv]: https://php.net/manual/en/function.fgetcsv.php
 [fopen]: https://php.net/manual/en/function.fopen.php
+[function-exists]: https://php.net/manual/en/function.function-exists.php
 [fwrite]: https://php.net/manual/en/function.fwrite.php
+[ini-get]: https://php.net/manual/en/function.ini-get.php
+[ini-list]: https://php.net/manual/en/ini.list.php
 [is-writable]: https://php.net/manual/en/function.is-writable.php
 [parse-ini-file]: https://php.net/manual/en/function.parse-ini-file.php
+[parse-url]: https://www.php.net/manual/en/function.parse-url.php
+[psr-3]: https://www.php-fig.org/psr/psr-3/
+[rawurldecode]: https://www.php.net/manual/en/function.rawurldecode.php
+[rawurlencode]: https://www.php.net/manual/en/function.rawurlencode.php
 [unlink]: https://php.net/manual/en/function.unlink.php
-[extension-loaded]: https://php.net/manual/en/function.extension-loaded.php
-[function-exists]: https://php.net/manual/en/function.function-exists.php
-[ini-get]: https://php.net/manual/en/function.ini-get.php
-[json-encode]: https://php.net/manual/en/function.json-encode.php
-[json-decode]: https://php.net/manual/en/function.json-decode.php
-[ini-list]: https://php.net/manual/en/ini.list.php

@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Tests\Unit\Factory;
+namespace Phalcon\Tests\Unit\Helper\Arr;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Arr\FilterFixture;

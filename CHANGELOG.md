@@ -1,3 +1,10 @@
+## 1.1.0 (2021-10-30)
+
+### Feat
+
+- **php/urltrait**: added url trait and relevant tests
+- **public**: added public folder (pds structure)
+
 ## 1.0.0 (2021-10-27)
 
 ### Fix

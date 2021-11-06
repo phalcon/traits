@@ -79,7 +79,7 @@ trait FileTrait
      *
      * @return bool
      */
-    public function phpFclose($handle)
+    protected function phpFclose($handle)
     {
         return fclose($handle);
     }

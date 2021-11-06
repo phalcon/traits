@@ -33,14 +33,6 @@ trait FactoryTrait
     private array $mapper = [];
 
     /**
-     * @param array $services
-     */
-    public function __construct(array $services = [])
-    {
-        $this->init($services);
-    }
-
-    /**
      * Returns a service based on the name; throws exception if it does not
      * exist
      *

@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run PHP_CodeSniffer
-        run: docker run --rm -v $(pwd):/data cytopia/phpcs --standard=./phpcs.xml
+        run: docker run --rm -v $(pwd):/data cytopia/phpcs --standard=./config/phpcs.xml
 
 #  stubs:
 #    name: PHP ${{ matrix.php-versions }} Stubs validation

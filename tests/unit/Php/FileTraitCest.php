@@ -34,7 +34,7 @@ class FileTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpFileTrait(UnitTester $I)
+    public function phpFileTrait(UnitTester $I): void
     {
         $I->wantToTest('Php\FileTrait');
 

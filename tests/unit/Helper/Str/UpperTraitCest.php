@@ -33,7 +33,7 @@ class UpperTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrUpperFilter(UnitTester $I, Example $example)
+    public function helperStrUpperFilter(UnitTester $I, Example $example): void
     {
         $I->wantToTest('Str\UpperTrait - ' . $example['label']);
 

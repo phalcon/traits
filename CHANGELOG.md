@@ -1,3 +1,11 @@
+## 1.2.1 (2021-11-17)
+
+## 1.2.0 (2021-11-06)
+
+### Fix
+
+- removed constructor for factory; made phpFclose protected
+
 ## 1.1.0 (2021-10-30)
 
 ### Feat

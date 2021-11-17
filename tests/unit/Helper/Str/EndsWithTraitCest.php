@@ -33,7 +33,7 @@ class EndsWithTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrEndsWithFilter(UnitTester $I, Example $example)
+    public function helperStrEndsWithFilter(UnitTester $I, Example $example): void
     {
         $I->wantToTest('Str\EndsWithTrait - ' . $example['label']);
 

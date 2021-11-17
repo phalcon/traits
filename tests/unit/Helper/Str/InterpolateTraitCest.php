@@ -33,7 +33,7 @@ class InterpolateTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrInterpolateFilter(UnitTester $I, Example $example)
+    public function helperStrInterpolateFilter(UnitTester $I, Example $example): void
     {
         $I->wantToTest('Str\InterpolateTrait - ' . $example['label']);
 

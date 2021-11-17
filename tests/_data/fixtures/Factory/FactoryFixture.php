@@ -20,6 +20,14 @@ class FactoryFixture
     use FactoryTrait;
 
     /**
+     * @param array $services
+     */
+    public function __construct(array $services = [])
+    {
+        $this->init($services);
+    }
+
+    /**
      * Create a new instance of the adapter
      *
      * @param string $name

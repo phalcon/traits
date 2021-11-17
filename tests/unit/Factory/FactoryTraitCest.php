@@ -32,7 +32,7 @@ class FactoryTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstance(UnitTester $I)
+    public function factoryFactoryTraitNewInstance(UnitTester $I): void
     {
         $I->wantToTest('Arr\FactoryTrait - newInstance()');
 
@@ -51,7 +51,7 @@ class FactoryTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstanceWithInit(UnitTester $I)
+    public function factoryFactoryTraitNewInstanceWithInit(UnitTester $I): void
     {
         $I->wantToTest('Arr\FactoryTrait - newInstance() with init');
 
@@ -75,7 +75,7 @@ class FactoryTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstanceException(UnitTester $I)
+    public function factoryFactoryTraitNewInstanceException(UnitTester $I): void
     {
         $I->wantToTest('Arr\FactoryTrait - newInstance() - exception');
 

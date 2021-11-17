@@ -29,7 +29,7 @@ class JsonTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpJsonTrait(UnitTester $I)
+    public function phpJsonTrait(UnitTester $I): void
     {
         $I->wantToTest('Php\JsonTrait');
 

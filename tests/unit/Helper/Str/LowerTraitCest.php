@@ -33,7 +33,7 @@ class LowerTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrLowerFilter(UnitTester $I, Example $example)
+    public function helperStrLowerFilter(UnitTester $I, Example $example): void
     {
         $I->wantToTest('Str\LowerTrait - ' . $example['label']);
 

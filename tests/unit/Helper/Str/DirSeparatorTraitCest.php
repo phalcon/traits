@@ -33,7 +33,7 @@ class DirSeparatorTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrDirFromFileTrait(UnitTester $I, Example $example)
+    public function helperStrDirFromFileTrait(UnitTester $I, Example $example): void
     {
         $I->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
 

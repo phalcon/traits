@@ -33,7 +33,7 @@ class StartsWithTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrStartsWithFilter(UnitTester $I, Example $example)
+    public function helperStrStartsWithFilter(UnitTester $I, Example $example): void
     {
         $I->wantToTest('Str\StartsWithTrait - ' . $example['label']);
 

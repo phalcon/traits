@@ -30,7 +30,7 @@ class UrlTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */
-    public function phpUrlTrait(UnitTester $I)
+    public function phpUrlTrait(UnitTester $I): void
     {
         $I->wantToTest('Php\UrlTrait');
 
@@ -87,7 +87,7 @@ class UrlTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */
-    public function phpUrlTraitBase64DecodeError(UnitTester $I)
+    public function phpUrlTraitBase64DecodeError(UnitTester $I): void
     {
         $I->wantToTest('Php\UrlTrait :: base64_decode error');
 

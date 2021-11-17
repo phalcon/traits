@@ -29,7 +29,7 @@ class InfoTraitCest
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpInfoTrait(UnitTester $I)
+    public function phpInfoTrait(UnitTester $I): void
     {
         $I->wantToTest('Php\InfoTrait');
 

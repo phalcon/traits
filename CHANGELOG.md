@@ -1,3 +1,10 @@
+## 1.3.0 (2022-10-04)
+
+### Feat
+
+- **helper/str/camelize**: added camelizeTrait and relevant tests
+- **helper/str/uncamelize**: added uncamelizeTrait and relevant tests
+
 ## 1.2.1 (2021-11-17)
 
 ## 1.2.0 (2021-11-06)

@@ -37,7 +37,7 @@ class CamelizeTraitCest
         $object    = new CamelizeFixture();
         $value     = $example[0];
         $expected  = $example[1];
-        $delimiter = $example[2];
+        $delimiter = $example[2] ?: '\-_';
         $lowercase = $example[3];
 
         $actual = $object->toCamelize($value, $delimiter, $lowercase);

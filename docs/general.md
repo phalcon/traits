@@ -88,6 +88,31 @@ $filtered = $this->toFilter(
 #### Str
 Namespace containing traits relevant to string manipulation and processing.
 
+##### CamelizeTrait
+
+```php
+/**
+ * @param string      $text
+ * @param string|null $delimiters
+ * @param bool        $lowerFirst
+ *
+ * @return string
+ */
+public function toCamelize(
+    string $text,
+    string $delimiters = '\-_',
+    bool $lowerFirst = false
+): string
+```
+Accepts a string and camelizes it based on the passed delimiter (or the 
+default one). It also allows the developer to lowercase the first character.
+
+**Example**
+```php
+echo $this->toCamelize('came_li_ze');
+// CameLiZe
+```
+
 ##### DirFromFileTrait
 
 ```php
@@ -227,6 +252,29 @@ protected function toStartsWith(
 var_dump($this->toStartsWith('Hello', 'h', true);
 // true
 ````
+
+##### UncamelizeTrait
+
+```php
+/**
+ * @param string $text
+ * @param string $delimiters
+ *
+ * @return string
+ */
+public function toUncamelize(
+    string $text,
+    string $delimiter = '_'
+): string
+```
+Accepts a string and uncamelizes it based on the passed delimiter (or the
+default one)
+
+**Example**
+```php
+echo $this->toUncamelize('CameLiZe');
+// came_li_ze
+```
 
 ##### UpperTrait
 Converts the passed string to uppercase using the `mbstring` extension.

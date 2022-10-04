@@ -29,15 +29,15 @@ use const PREG_SPLIT_NO_EMPTY;
 trait CamelizeTrait
 {
     /**
-     * @param string      $text
-     * @param string|null $delimiters
-     * @param bool        $lowerFirst
+     * @param string $text
+     * @param string $delimiters
+     * @param bool   $lowerFirst
      *
      * @return string
      */
     public function toCamelize(
         string $text,
-        string $delimiters = null,
+        string $delimiters = '\-_',
         bool $lowerFirst = false
     ): string {
         $exploded = $this->processArray($text, $delimiters);
@@ -64,9 +64,8 @@ trait CamelizeTrait
      *
      * @return array
      */
-    protected function processArray(string $text, string $delimiters = null): array
+    protected function processArray(string $text, string $delimiters = '\-_'): array
     {
-        $delimiters = $delimiters ?: '\-_';
         /**
          * Escape the `-` if it exists so that it does not get interpreted
          * as a range. First remove any escaping for the `-` if present and then

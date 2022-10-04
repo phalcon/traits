@@ -22,15 +22,15 @@ class CamelizeFixture
     /**
      * Camelizes a string
      *
-     * @param string      $text
-     * @param string|null $delimiters
-     * @param bool        $lowerFirst
+     * @param string $text
+     * @param string $delimiters
+     * @param bool   $lowerFirst
      *
      * @return string
      */
     public function camelize(
         string $text,
-        ?string $delimiters,
+        string $delimiters,
         bool $lowerFirst
     ): string {
         return $this->toCamelize($text, $delimiters, $lowerFirst);

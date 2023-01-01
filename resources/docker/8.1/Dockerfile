@@ -1,9 +1,5 @@
 FROM composer:latest as composer
-FROM php:7.4-fpm
-
-# Compilation parameters
-RUN CPU_CORES="$(getconf _NPROCESSORS_ONLN)";
-ENV MAKEFLAGS="-j${CPU_CORES}"
+FROM php:8.1-fpm
 
 ADD extra.ini /usr/local/etc/php/conf.d/
 
@@ -12,7 +8,7 @@ ENV MY_USER="phalcon" \
 	MY_GROUP="phalcon" \
 	MY_UID="1000" \
 	MY_GID="1000" \
-	PHP_VERSION="7.4"
+	PHP_VERSION="8.1"
 
 # User and Group
 RUN set -eux && \

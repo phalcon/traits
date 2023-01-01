@@ -88,7 +88,7 @@ jobs:
       fail-fast: false
       matrix:
         operating-system: [ubuntu-20.04]
-        php-versions: ['7.4', '8.0', '8.1']
+        php-versions: ['8.0', '8.1', '8.2']
 
     steps:
       - name: Checkout Code
@@ -137,4 +137,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: ./tests/_output/
-          files: coverage-unit-7.4.xml,coverage-unit-8.0.xml,coverage-unit-8.1.xml
+          files: coverage-unit-8.0.xml,coverage-unit-8.1.xml,coverage-unit-8.2.xml

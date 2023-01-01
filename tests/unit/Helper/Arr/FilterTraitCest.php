@@ -33,8 +33,10 @@ class FilterTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-25
      */
-    public function factoryFilterTraitToFilter(UnitTester $I, Example $example): void
-    {
+    public function factoryFilterTraitToFilter(
+        UnitTester $I,
+        Example $example
+    ): void {
         $I->wantToTest('Arr\FilterTrait - ' . $example['label']);
 
         $filter = new FilterFixture();

@@ -17,6 +17,8 @@ use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\DirSeparatorFixture;
 use UnitTester;
 
+use const DIRECTORY_SEPARATOR;
+
 /**
  * Tests the DirSeparator trait
  */
@@ -33,8 +35,10 @@ class DirSeparatorTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrDirFromFileTrait(UnitTester $I, Example $example): void
-    {
+    public function helperStrDirFromFileTrait(
+        UnitTester $I,
+        Example $example
+    ): void {
         $I->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
 
         $directory = $example['directory'];
@@ -50,26 +54,31 @@ class DirSeparatorTraitCest
      */
     private function getExamples(): array
     {
+        $directory = DIRECTORY_SEPARATOR
+            . 'home'
+            . DIRECTORY_SEPARATOR
+            . 'phalcon';
+
         return [
             [
                 'label'     => 'without trailing slash',
-                'directory' => '/home/phalcon',
-                'expected'  => '/home/phalcon/',
+                'directory' => $directory,
+                'expected'  => $directory . DIRECTORY_SEPARATOR,
             ],
             [
                 'label'     => 'with trailing slash',
-                'directory' => '/home/phalcon/',
-                'expected'  => '/home/phalcon/',
+                'directory' => $directory . DIRECTORY_SEPARATOR,
+                'expected'  => $directory . DIRECTORY_SEPARATOR,
             ],
             [
                 'label'     => 'with double trailing slash',
-                'directory' => '/home/phalcon//',
-                'expected'  => '/home/phalcon/',
+                'directory' => $directory . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR,
+                'expected'  => $directory . DIRECTORY_SEPARATOR,
             ],
             [
                 'label'     => 'empty directory',
                 'directory' => '',
-                'expected'  => '/',
+                'expected'  => DIRECTORY_SEPARATOR,
             ],
         ];
     }

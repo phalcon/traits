@@ -15,7 +15,6 @@ namespace Phalcon\Traits\Php;
 
 use function extension_loaded;
 use function function_exists;
-use function ini_get;
 
 /**
  * Information method wrappers
@@ -48,20 +47,5 @@ trait InfoTrait
     protected function phpFunctionExists(string $function)
     {
         return function_exists($function);
-    }
-
-    /**
-     * Gets the value of a configuration option
-     *
-     * @param string $varname
-     *
-     * @return string
-     *
-     * @link https://php.net/manual/en/function.ini-get.php
-     * @link https://php.net/manual/en/ini.list.php
-     */
-    protected function phpIniGet(string $varname): string
-    {
-        return ini_get($varname);
     }
 }

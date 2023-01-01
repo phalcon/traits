@@ -44,9 +44,9 @@ class FileFixture
     }
 
     /**
-     * @param string   $filename
-     * @param mixed    $data
-     * @param int      $flags
+     * @param string $filename
+     * @param mixed $data
+     * @param int $flags
      * @param resource $context
      *
      * @return int|false
@@ -96,7 +96,13 @@ class FileFixture
         $enclosure = '"',
         $escape = '\\'
     ) {
-        return $this->phpFgetCsv($stream, $length, $separator, $enclosure, $escape);
+        return $this->phpFgetCsv(
+            $stream,
+            $length,
+            $separator,
+            $enclosure,
+            $escape
+        );
     }
 
 
@@ -140,25 +146,6 @@ class FileFixture
     public function isWritable($filename): bool
     {
         return $this->phpIsWritable($filename);
-    }
-
-    /**
-     * Parse a configuration file
-     *
-     * @param string $filename
-     * @param bool   $process_sections
-     * @param int    $scanner_mode
-     *
-     * @return array|false
-     *
-     * @link https://php.net/manual/en/function.parse-ini-file.php
-     */
-    public function parseIniFile(
-        $filename,
-        $process_sections = false,
-        $scanner_mode = 1
-    ) {
-        return $this->phpParseIniFile($filename, $process_sections, $scanner_mode);
     }
 
     /**

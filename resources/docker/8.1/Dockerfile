@@ -1,5 +1,5 @@
 FROM composer:latest as composer
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 COPY extra.ini /usr/local/etc/php/conf.d/
 
@@ -8,7 +8,7 @@ ENV MY_USER="phalcon" \
 	MY_GROUP="phalcon" \
 	MY_UID="1000" \
 	MY_GID="1000" \
-	PHP_VERSION="8.0"
+	PHP_VERSION="8.1"
 
 # User and Group
 RUN set -eux && \

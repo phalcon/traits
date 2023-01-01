@@ -40,9 +40,5 @@ class InfoTraitCest
 
         $actual = $info->functionExists('function_exists');
         $I->assertTrue($actual);
-
-        $expected = '/tmp';
-        $actual   = $info->iniGet('session.save_path');
-        $I->assertEquals($expected, $actual);
     }
 }

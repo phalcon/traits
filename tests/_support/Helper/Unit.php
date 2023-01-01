@@ -4,9 +4,9 @@ namespace Helper;
 
 use Codeception\Module;
 use PHPUnit\Framework\SkippedTestError;
-
 use ReflectionClass;
 use ReflectionException;
+
 use function array_slice;
 use function array_unshift;
 use function call_user_func_array;
@@ -39,7 +39,10 @@ class Unit extends Module
     {
         if (true !== extension_loaded($extension)) {
             $this->skipTest(
-                sprintf("Extension '%s' is not loaded. Skipping test", $extension)
+                sprintf(
+                    "Extension '%s' is not loaded. Skipping test",
+                    $extension
+                )
             );
         }
     }
@@ -104,7 +107,7 @@ class Unit extends Module
      * Calls private or protected method.
      *
      * @param string|object $obj
-     * @param string $method
+     * @param string        $method
      *
      * @return mixed
      * @throws ReflectionException

@@ -151,25 +151,6 @@ trait FileTrait
     }
 
     /**
-     * Parse a configuration file
-     *
-     * @param string $filename
-     * @param bool   $process_sections
-     * @param int    $scanner_mode
-     *
-     * @return array|false
-     *
-     * @link https://php.net/manual/en/function.parse-ini-file.php
-     */
-    protected function phpParseIniFile(
-        string $filename,
-        bool $process_sections = false,
-        int $scanner_mode = 1
-    ) {
-        return parse_ini_file($filename, $process_sections, $scanner_mode);
-    }
-
-    /**
      * @param string $filename
      *
      * @return bool

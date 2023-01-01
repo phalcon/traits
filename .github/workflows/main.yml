@@ -1,4 +1,11 @@
-name: Phalcon CI
+# This file is part of Phalcon.
+#
+# (c) Phalcon Team <team@phalcon.io>
+#
+# For the full copyright and license information, please view
+# the LICENSE file that was distributed with this source code.
+
+name: "Phalcon CI"
 
 on:
   schedule:
@@ -8,133 +15,191 @@ on:
       - '**.md'
       - '**.txt'
   pull_request:
+  workflow_dispatch:
 
 env:
+  fail-fast: true
+
+  # For tests
   LANG: en_US.UTF-8
   LANGUAGE: en_US.UTF-8
   LC_ALL: en_US.UTF-8
 
+  # Windows specific
+  TOOLS_DIR: 'C:\tools'
+
+  # PHP extensions required by Composer
+  EXTENSIONS: intl, json, mbstring, msgpack
+
+permissions: { }
 jobs:
+  # PHP CodeSniffer inspection
   phpcs:
-    name: Validate Tests code style
+    name: "Validate Tests code style"
     if: "!contains(github.event.head_commit.message, 'ci skip')"
 
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
+    #    needs: [ generate ]
 
-      - name: Run PHP_CodeSniffer
-        run: docker run --rm -v $(pwd):/data cytopia/phpcs --standard=./config/phpcs.xml
-
-#  stubs:
-#    name: PHP ${{ matrix.php-versions }} Stubs validation
-#    if: "!contains(github.event.head_commit.message, 'ci skip')"
-#
-#    runs-on: ubuntu-20.04
-#
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        php-versions: ['7.4', '8.0']
-#
-#    steps:
-#      - uses: actions/checkout@v3
-#
-#      - name: Validate stubs
-#        if: always()
-#        run: vendor/bin/psalm ide/
-#
-  generate:
-    name: Setup Environments
-    # To prevent build a particular commit use
-    #     git commit -m "......... [ci skip]"
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    permissions:
+      contents: read
 
     runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0'
-          extensions: mbstring, intl, json, psr
-          tools: pecl
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup APT Repositories
-        run: |
-          # We don't need this at all, and our
-          # builds often fails because Microsoft
-          # servers are unstable or even offline.
-          sudo rm -f /etc/apt/sources.list.d/dotnetdev.list
-          sudo rm -f /etc/apt/sources.list.d/azure*.list
-
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update --quiet --yes 1>/dev/null
-
-  build-and-test-linux:
-    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
-    # To prevent build a particular commit use
-    #     git commit -m "......... [ci skip]"
-    #     git commit -m "......... [linux skip] - to skip only linux builds"
-    if: "!contains(github.event.head_commit.message, '[linux skip]') || !contains(github.event.head_commit.message, 'ci skip')"
-
-    needs: [generate]
-    runs-on: ${{ matrix.operating-system }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        operating-system: [ubuntu-20.04]
-        php-versions: ['8.0', '8.1', '8.2']
-
+        php:
+          - '8.0'
+          - '8.1'
+          - '8.2'
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
+      - uses: actions/checkout@v3
 
-      - name: Validate composer
-        run: composer validate --no-check-all --no-check-publish
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Setup Composer Cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Setup PHP
+      - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, json, yaml
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.EXTENSIONS }}
           ini-values: apc.enable_cli=on, session.save_path=/tmp
           tools: pecl
         env:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PHALCON_PATH: ext
 
-      - name: Install Composer Packages
-        run: composer install --prefer-dist
+      - name: "Install development dependencies with Composer"
+        uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--prefer-dist"
 
-      - name: Setup Tests
+      - name: "PHPCS"
         run: |
-          cp config/.env.example .env
+          vendor/bin/phpcs --standard=./phpcs.xml
+
+
+  unit-tests:
+    needs: phpcs
+
+    permissions:
+      contents: read # to fetch code (actions/checkout)
+
+    name: Unit tests / PHP-${{ matrix.php }}-${{ matrix.ts }}-${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        php:
+          - '8.0'
+          - '8.1'
+          - '8.2'
+        ts:
+          - 'nts'
+          - 'ts'
+        name:
+          - ubuntu-gcc
+          - macos-clang
+        # matrix names should be in next format:
+        #     {php}-{ts}-{os.name}-{compiler}-{arch}
+        include:
+          # Linux
+          - { name: ubuntu-gcc, os: ubuntu-20.04, compiler: gcc }
+          # macOS
+          - { name: macos-clang, os: macos-11, compiler: clang }
+          # Windows
+          - { php: '8.0', ts: 'ts',  arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
+          - { php: '8.0', ts: 'nts', arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
+          - { php: '8.1', ts: 'ts',  arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
+          - { php: '8.1', ts: 'nts', arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Setup platform specific environment"
+        shell: pwsh
+        run: |
+          git config --global core.autocrlf false
+          $SessionSavePath = if ("${{ runner.os }}" -eq "Windows") { 'C:\temp' } else { '/tmp' }
+          Write-Output "SESSION_SAVE_PATH=$SessionSavePath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.EXTENSIONS }}
+          ini-values: apc.enable_cli=on, session.save_path=${{ env.SESSION_SAVE_PATH }}
+          tools: pecl, phpize, php-config, composer:v2
+          coverage: pcov
+        env:
+          PHPTS: ${{ matrix.ts }}
+          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PHALCON_PATH: ext
+
+      - name: "Validate composer"
+        run: composer validate --no-check-all --no-check-publish
+
+      - name: "Install development dependencies with Composer"
+        uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--prefer-dist"
+
+      - name: "Setup Tests"
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Linux" ]; then
+            ./config/ci/linux-setup-locales.sh
+          fi
+
+          cp tests/_config/.env.default .env
           vendor/bin/codecept build
 
-      - name: Run Unit Tests
+      - name: "Run Unit Tests"
         if: always()
-        run: vendor/bin/codecept run --coverage-xml=coverage-unit-${{ matrix.php-versions }}.xml --ext DotReporter unit
+        run: |
+          vendor/bin/codecept run --coverage-xml=coverage.xml --ext DotReporter unit
 
-      - name: Upload Code Coverage on ${{ matrix.php-versions }} for unit
-        uses: codecov/codecov-action@v3
+      - name: "Upload coverage file artifact"
+        uses: "actions/upload-artifact@v3"
+        with:
+          name: "unit-${{ matrix.php }}-${{ matrix.ts }}-${{ matrix.name }}.coverage"
+          path: "tests/_output/coverage.xml"
+
+  upload-coverage:
+    permissions:
+      contents: read
+
+    name: "Upload coverage to Codecov/Codacy"
+    runs-on: "ubuntu-22.04"
+    needs:
+      - "unit-tests"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+        with:
+          fetch-depth: 2
+
+      - name: "Display structure of downloaded files"
+        run: |
+          mkdir -p reports
+
+      - name: "Download coverage files"
+        uses: "actions/download-artifact@v3"
+        with:
+          path: "reports"
+
+      - name: "Display structure of downloaded files"
+        run: ls -R
+        working-directory: reports
+
+      - name: "Upload to Codecov"
+        uses: "codecov/codecov-action@v3"
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./tests/_output/
-          files: coverage-unit-8.0.xml,coverage-unit-8.1.xml,coverage-unit-8.2.xml
+          directory: reports
+          fail_ci_if_error: true
+          verbose: true
+
+      - name: "Upload to Codacy"
+        env:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        run: |
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
+            -l PHP $(find ./reports/ -name 'coverage.xml' -printf '-r %p ')

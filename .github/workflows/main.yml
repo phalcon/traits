@@ -192,8 +192,7 @@ jobs:
           verbose: true
 
       - name: "Upload to Codacy"
-        env:
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        run: |
-          bash <(curl -Ls https://coverage.codacy.com/get.sh) report \
-            -l PHP $(find ./reports/ -name 'coverage.xml' -printf '-r %p ')
+          coverage-reports: unit-8.0-ts-ubuntu-gcc.coverage, unit-8.1-ts-ubuntu-gcc.coverage, unit-8.2-ts-ubuntu-gcc.coverage

@@ -59,13 +59,15 @@ trait CamelizeTrait
     }
 
     /**
-     * @param string      $text
+     * @param string $text
      * @param string|null $delimiters
      *
      * @return array
      */
-    protected function processArray(string $text, string $delimiters = '\-_'): array
-    {
+    protected function processArray(
+        string $text,
+        string $delimiters = '\-_'
+    ): array {
         /**
          * Escape the `-` if it exists so that it does not get interpreted
          * as a range. First remove any escaping for the `-` if present and then

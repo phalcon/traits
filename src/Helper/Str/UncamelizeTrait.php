@@ -28,7 +28,7 @@ trait UncamelizeTrait
         string $text,
         string $delimiter = '_'
     ): string {
-        $text = (string) preg_replace(
+        $text = (string)preg_replace(
             '/[A-Z]/',
             $delimiter . '\\0',
             lcfirst($text)

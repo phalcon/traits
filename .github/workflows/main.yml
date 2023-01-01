@@ -195,4 +195,4 @@ jobs:
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: unit-8.0-ts-ubuntu-gcc.coverage, unit-8.1-ts-ubuntu-gcc.coverage, unit-8.2-ts-ubuntu-gcc.coverage
+          coverage-reports: reports/unit-8.0-ts-ubuntu-gcc.coverage/coverage.xml, reports/unit-8.1-ts-ubuntu-gcc.coverage/coverage.xml, reports/unit-8.2-ts-ubuntu-gcc.coverage/coverage.xml

@@ -67,7 +67,7 @@ class IniTraitCest
         $I->assertSame($expected, $actual);
 
         // Get Bool
-        $actual = $ini->iniGetBool('display_startup_errors');
+        $actual = $ini->iniGetBool('expose_php');
         $I->assertTrue($actual);
 
         // Unknown

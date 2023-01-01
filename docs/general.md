@@ -12,8 +12,8 @@ by the class is going to be interpreted.
 
 The available traits are:
 
-### Factory
-#### FactoryTrait
+## Factory
+### FactoryTrait
 This trait offers the skeleton for creating factories. It contains an array 
 where all the definitions are stored, which can be extended by passing 
 additional definitions as an array in the constructor. The string keys of the 
@@ -43,7 +43,7 @@ the full namespace).
 ```php
 protected function init(array $services = []): void
 ```
-Initializes services. Called in `__construct` and merges the passed services 
+Initialize services. Called in `__construct` and merges the passed services 
 with those set in the `getServices()` method.
 
 
@@ -54,11 +54,11 @@ abstract protected function getExceptionClass(): string;
 Returns the exception class for the factory (as a string with the full 
 namespace).
 
-### Helper
-#### Arr
+## Helper
+### Arr
 Namespace containing traits relevant to array manipulation and processing.
 
-##### FilterTrait
+#### FilterTrait
 ```php
 /**
  * @param array<array-key, mixed> $collection
@@ -85,10 +85,10 @@ $filtered = $this->toFilter(
 );
 ```
 
-#### Str
+### Str
 Namespace containing traits relevant to string manipulation and processing.
 
-##### CamelizeTrait
+#### CamelizeTrait
 
 ```php
 /**
@@ -113,7 +113,7 @@ echo $this->toCamelize('came_li_ze');
 // CameLiZe
 ```
 
-##### DirFromFileTrait
+#### DirFromFileTrait
 
 ```php
 /**
@@ -135,7 +135,7 @@ echo $this->toDirFromFile('abcdef12345.jpg');
 // 'ab/cd/ef/12/3/'
 ```
 
-##### DirSeparatorTrait
+#### DirSeparatorTrait
 ```php
 /**
  * @param string $directory
@@ -152,7 +152,7 @@ echo $this->toDirSeparator('/home/phalcon');
 // '/home/phalcon/'
 ```
 
-##### EndsWithTrait
+#### EndsWithTrait
 Checks if a string ends with a given string
 
 ```php
@@ -176,7 +176,7 @@ var_dump($this->toEndsWith('Hello', 'O', true);
 // true
 ````
 
-##### InterpolateTrait
+#### InterpolateTrait
 Interpolates context values into the message placeholders [link][psr-3]
 
 ```php
@@ -207,7 +207,7 @@ echo $this->toInterpolate($input, $context, '[', ']');
 // 2020-09-09 is the date AAA is context
 ````
 
-##### LowerTrait
+#### LowerTrait
 Converts the passed string to lowercase using the `mbstring` extension.
 
 ```php
@@ -229,7 +229,7 @@ echo $this->toEndsWith('PhAlcOn');
 // phalcon
 ````
 
-##### StartsWithTrait
+#### StartsWithTrait
 Checks if a string starts with a given string
 
 ```php
@@ -253,7 +253,7 @@ var_dump($this->toStartsWith('Hello', 'h', true);
 // true
 ````
 
-##### UncamelizeTrait
+#### UncamelizeTrait
 
 ```php
 /**
@@ -276,7 +276,7 @@ echo $this->toUncamelize('CameLiZe');
 // came_li_ze
 ```
 
-##### UpperTrait
+#### UpperTrait
 Converts the passed string to uppercase using the `mbstring` extension.
 ```php
 /**
@@ -293,17 +293,17 @@ protected function toUpper(
 
 **Example**
 ```php
-echo $this->toEndsWith('PhAlcOn');
+echo $this->toUpper('PhAlcOn');
 // PHALCON
 ````
 
-#### Php
+### Php
 PHP function wrappers. These are strongly typed (compared to the methods they 
 wrap). They are very useful when testing different paths of an application 
 that rely on these methods. The wrapper method can be easily mocked to ensure
 high code coverage.
 
-##### FileTrait
+#### FileTrait
 File based wrapper methods.
 
 **phpFileExists**
@@ -420,32 +420,13 @@ protected function phpIsWritable(string $filename): bool
 ```
 [is_writable][is-writable]
 
-**phpParseIniFile**
-```php
-/**
- * Parse a configuration file
- *
- * @param string $filename
- * @param bool   $process_sections
- * @param int    $scanner_mode
- *
- * @return array|false
- */
-protected function phpParseIniFile(
-  string $filename,
-  bool $process_sections = false,
-  int $scanner_mode = 1
-)
-```
-[parse_ini_file][parse-ini-file]
-
 **phpUnlink**
 ```php
 /**
- * @param string $filename
- *
- * @return bool
- */
+* @param string $filename
+*
+* @return bool
+*/
 protected function phpUnlink(string $filename)
 ```
 [unlink][unlink]
@@ -475,18 +456,67 @@ protected function phpFunctionExists(string $function)
 ```
 [function_exists][function-exists]
 
-**phpIniGet**
+
+#### IniTrait
+`ini` based wrapper methods.
+
+**iniGet**
 ```php
 /**
- * @param string $varname
+ * @param string $input
+ * @param string $defaultValue
  *
  * @return string
  */
-protected function phpIniGet(string $varname): string
+protected function phpIniGet(string $input, string $defaultValue = ""): bool
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-##### JsonTrait
+**iniGet**
+```php
+/**
+ * @param string $input
+ * @param bool   $defaultValue
+ *
+ * @return bool
+ */
+protected function phpIniGetBool(string $input, bool $defaultValue = false): bool
+```
+[ini_get][ini-get], [ini list][ini-list]
+
+**iniGet**
+```php
+/**
+ * @param string $input
+ * @param int    $defaultValue
+ *
+ * @return int
+ */
+protected function phpIniGetInt(string $input, int $defaultValue = 0): int
+```
+[ini_get][ini-get], [ini list][ini-list]
+
+**parseIniFile**
+```php
+/**
+ * Parse a configuration file
+ *
+ * @param string $filename
+ * @param bool   $process_sections
+ * @param int    $scanner_mode
+ *
+ * @return array|false
+ */
+protected function phpParseIniFile(
+  string $filename,
+  bool $process_sections = false,
+  int $scanner_mode = 1
+)
+```
+[parse_ini_file][parse-ini-file]
+
+
+#### JsonTrait
 JSON wrapper methods
 
 **phpJsonEncode**
@@ -522,8 +552,8 @@ protected function phpJsonDecode(
 [json_decode][json-decode]
 
 
-##### JsonTrait
-JSON wrapper methods
+#### UrlTrait
+Url wrapper methods
 
 **doBase64DecodeUrl**
 ```php

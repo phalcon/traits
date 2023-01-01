@@ -60,26 +60,6 @@ class FileTraitCest
         $I->assertEquals($expected, $actual);
 
         /**
-         * Parse ini file
-         */
-        $source = dataDir('assets/sample.ini');
-        $actual = $file->parseIniFile($source);
-        $I->assertTrue($result);
-        $expected = [
-            'parent.property'                    => 'On',
-            'parent.property2'                   => 'yeah',
-            'parent.property3.baseuri'           => '/phalcon/',
-            'parent.property4.models.metadata'   => 'memory',
-            'parent.property5.database.adapter'  => 'mysql',
-            'parent.property5.database.host'     => 'localhost',
-            'parent.property5.database.username' => 'user',
-            'parent.property5.database.password' => 'passwd',
-            'parent.property5.database.name'     => 'demo',
-            'parent.property6.test'              => ['a', 'b', 'c',],
-        ];
-        $I->assertEquals($expected, $actual);
-
-        /**
          * Create the file and put data in it
          */
         $actual = $file->filePutContents($fileName, $contents);

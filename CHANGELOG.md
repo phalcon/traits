@@ -1,3 +1,9 @@
+## 2.0.0 (2023-01-01)
+
+### Feat
+
+- **php/initrait**: added ini trait and relevant tests
+
 ## 1.3.0 (2022-10-04)
 
 ### Feat

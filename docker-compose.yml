@@ -3,18 +3,27 @@
 version: '3'
 
 services:
-  phalcon-traits-7.4:
-    container_name: phalcon-traits-7.4
-    hostname: phalcon-74
-    build: resources/docker/7.4
-    working_dir: /srv
-    volumes:
-      - .:/srv
 
   phalcon-traits-8.0:
     container_name: phalcon-traits-8.0
     hostname: phalcon-80
     build: resources/docker/8.0
+    working_dir: /srv
+    volumes:
+      - .:/srv
+
+  phalcon-traits-8.1:
+    container_name: phalcon-traits-8.1
+    hostname: phalcon-81
+    build: resources/docker/8.1
+    working_dir: /srv
+    volumes:
+      - .:/srv
+
+  phalcon-traits-8.2:
+    container_name: phalcon-traits-8.2
+    hostname: phalcon-82
+    build: resources/docker/8.2
     working_dir: /srv
     volumes:
       - .:/srv

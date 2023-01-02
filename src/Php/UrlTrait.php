@@ -33,8 +33,10 @@ trait UrlTrait
      *
      * @return string
      */
-    protected function doBase64DecodeUrl(string $input, bool $strict = false): string
-    {
+    protected function doBase64DecodeUrl(
+        string $input,
+        bool $strict = false
+    ): string {
         $input = strtr($input, "-_", "+/")
             . substr("===", (strlen($input) + 3) % 4);
 

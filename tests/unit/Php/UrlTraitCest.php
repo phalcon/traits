@@ -91,7 +91,7 @@ class UrlTraitCest
     {
         $I->wantToTest('Php\UrlTrait :: base64_decode error');
 
-        $url    = Stub::make(
+        $url = Stub::make(
             UrlFixture::class,
             [
                 'phpBase64Decode' => false,
@@ -99,7 +99,7 @@ class UrlTraitCest
         );
 
         $source = "Testing-Data/phalcon";
-        $actual   = $url->base64DecodeUrl($source);
+        $actual = $url->base64DecodeUrl($source);
         $I->assertEmpty($actual);
     }
 }

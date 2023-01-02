@@ -33,8 +33,10 @@ class InterpolateTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrInterpolateFilter(UnitTester $I, Example $example): void
-    {
+    public function helperStrInterpolateFilter(
+        UnitTester $I,
+        Example $example
+    ): void {
         $I->wantToTest('Str\InterpolateTrait - ' . $example['label']);
 
         $expected = $example['expected'];
@@ -70,7 +72,7 @@ class InterpolateTraitCest
                 'format'   => '%date% is the date %level% is the level',
                 'context'  => [
                     'date'  => '2020-09-09',
-                    'level' => 'CRITICAL'
+                    'level' => 'CRITICAL',
                 ],
                 'left'     => '%',
                 'right'    => '%',

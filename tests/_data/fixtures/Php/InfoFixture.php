@@ -46,19 +46,4 @@ class InfoFixture
     {
         return $this->phpFunctionExists($function);
     }
-
-    /**
-     * Gets the value of a configuration option
-     *
-     * @param string $varname
-     *
-     * @return string
-     *
-     * @link https://php.net/manual/en/function.ini-get.php
-     * @link https://php.net/manual/en/ini.list.php
-     */
-    public function iniGet($varname): string
-    {
-        return $this->phpIniGet($varname);
-    }
 }

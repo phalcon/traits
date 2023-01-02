@@ -45,7 +45,9 @@ trait FactoryTrait
     {
         if (true !== isset($this->mapper[$name])) {
             $exceptionClass = $this->getExceptionClass();
-            throw new $exceptionClass('Service ' . $name . ' is not registered');
+            throw new $exceptionClass(
+                'Service ' . $name . ' is not registered'
+            );
         }
 
         return $this->mapper[$name];

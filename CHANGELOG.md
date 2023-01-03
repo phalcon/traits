@@ -51,10 +51,10 @@
 
 ### Added
 
-- Added `Phalcon\Traits\Helper\Str\DirSeparatorTrait` [#29](https://github.com/phalcon/traits/issues/29)
-- Added `Phalcon\Traits\Helper\Str\DirFromFileTrait` [#28](https://github.com/phalcon/traits/issues/28)
-- Added `Phalcon\Traits\Php\InfoTrait` [#27](https://github.com/phalcon/traits/issues/27)
-- Added `Phalcon\Traits\Php\JsonTrait` [#26](https://github.com/phalcon/traits/issues/26)
+-  Added `Phalcon\Traits\Helper\Str\DirSeparatorTrait` [#29](https://github.com/phalcon/traits/issues/29)
+-   Added `Phalcon\Traits\Helper\Str\DirFromFileTrait` [#28](https://github.com/phalcon/traits/issues/28)
+ - Added `Phalcon\Traits\Php\InfoTrait` [#27](https://github.com/phalcon/traits/issues/27)
+  - Added `Phalcon\Traits\Php\JsonTrait` [#26](https://github.com/phalcon/traits/issues/26)
 - Added `Phalcon\Traits\Php\FileTrait` [#25](https://github.com/phalcon/traits/issues/25)
 - Added `Phalcon\Traits\Helper\Str\InterpolateTrait` [#24](https://github.com/phalcon/traits/issues/24)
 - Added `Phalcon\Traits\Helper\Str\UpperTrait` [#23](https://github.com/phalcon/traits/issues/23)

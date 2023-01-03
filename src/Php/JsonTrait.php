@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Traits\Php;
 
+use function json_encode;
 use function json_decode;
 
 /**

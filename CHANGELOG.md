@@ -1,8 +1,8 @@
 # [2.0.1](https://github.com/phalcon/traits/releases/tag/2.0.1) (2023-01-03)
 
 ## Fixed
-  - Minor optimization for `Phalcon\Traits\Php\JsonTrait` [#17](https://github.com/phalcon/traits/pull/17)
-  - Corrected `CHANGELOG.md` to an easier to read format [#35](https://github.com/phalcon/traits/issues/35)
+-  Minor optimization for `Phalcon\Traits\Php\JsonTrait` [#17](https://github.com/phalcon/traits/pull/17)
+-   Corrected `CHANGELOG.md` to an easier to read format [#35](https://github.com/phalcon/traits/issues/35)
 
 # [2.0.0](https://github.com/phalcon/traits/releases/tag/2.0.0) (2023-01-01)
 

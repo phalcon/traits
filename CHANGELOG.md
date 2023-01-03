@@ -15,8 +15,6 @@
 - Added `Phalcon\Traits\Helper\Str\CamelizeTrait` [#33][https://github.com/phalcon/traits/issues/33)
 - Added `Phalcon\Traits\Helper\Str\UncamelizeTrait` [#33][https://github.com/phalcon/traits/issues/33)
 
-- **helper/str/uncamelize**: added uncamelizeTrait and relevant tests
-
 # [1.2.1](https://github.com/phalcon/traits/releases/tag/1.2.1) (2021-11-17)
 
 # [1.2.0](https://github.com/phalcon/traits/releases/tag/1.2.0) (2021-11-06)

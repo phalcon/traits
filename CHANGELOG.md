@@ -1,49 +1,56 @@
-## 2.0.0 (2023-01-01)
+# [2.0.1](https://github.com/phalcon/traits/releases/tag/2.0.1) (2023-01-03)
 
-### Feat
+## Fixed
+- Minor optimization for `Phalcon\Traits\Php\JsonTrait` [#17][https://github.com/phalcon/traits/pull/17)
+- Corrected `CHANGELOG.md` to an easier to read format [#35][https://github.com/phalcon/traits/issues/35)
 
-- **php/initrait**: added ini trait and relevant tests
+# [2.0.0](https://github.com/phalcon/traits/releases/tag/2.0.0) (2023-01-01)
 
-## 1.3.0 (2022-10-04)
+## Added
+- Added `Phalcon\Traits\Php\IniTrait` [#34][https://github.com/phalcon/traits/issues/34)
 
-### Feat
+# [1.3.0](https://github.com/phalcon/traits/releases/tag/1.3.0) (2022-10-04)
 
-- **helper/str/camelize**: added camelizeTrait and relevant tests
+## Added
+- Added `Phalcon\Traits\Helper\Str\CamelizeTrait` [#33][https://github.com/phalcon/traits/issues/33)
+- Added `Phalcon\Traits\Helper\Str\UncamelizeTrait` [#33][https://github.com/phalcon/traits/issues/33)
+
 - **helper/str/uncamelize**: added uncamelizeTrait and relevant tests
 
-## 1.2.1 (2021-11-17)
+# [1.2.1](https://github.com/phalcon/traits/releases/tag/1.2.1) (2021-11-17)
 
-## 1.2.0 (2021-11-06)
+# [1.2.0](https://github.com/phalcon/traits/releases/tag/1.2.0) (2021-11-06)
 
-### Fix
+## Changed
+- Changed `Phalcon\Php\FileTrait::phpFclose` visibility to `protected` [#32][https://github.com/phalcon/traits/issues/32)
 
-- removed constructor for factory; made phpFclose protected
+## Removed
+- Removed `Phalcon\Factory\Factory` constructor [#32][https://github.com/phalcon/traits/issues/32)
 
-## 1.1.0 (2021-10-30)
+# [1.1.0](https://github.com/phalcon/traits/releases/tag/1.1.0) (2021-10-30)
 
-### Feat
+## Fixed
+- Corrected PDS structure by public folder [#30][https://github.com/phalcon/traits/issues/30)
 
-- **php/urltrait**: added url trait and relevant tests
-- **public**: added public folder (pds structure)
+## Added
+- Added `Phalcon\Traits\Php\UrlTrait` [#31][https://github.com/phalcon/traits/issues/31)
 
-## 1.0.0 (2021-10-27)
+# [1.0.0](https://github.com/phalcon/traits/releases/tag/1.0.0) (2021-10-27)
 
-### Fix
+## Fixed
+- Fixed `Phalcon\Traits\Php` added stricter types
+- Fixed `Phalcon\Traits\Php\FileTrait` corrected namespace
 
-- **php**: added stricter types to php based traits
-- **helper/php/filetrait**: corrected the namespace
-
-### Feat
-
-- **helper/str/dirseparator**: added dirSeparatorTrait and relevant tests
-- **helper/str/dirfromfile**: added dirFromFile trait and tests
-- **php/infotrait**: added infotrait and relevant tests
-- **php/jsontrait**: added json trait and relevant tests
-- **php/filetrait**: added file trait and relevant tests with testing assets
-- **helper/str/interpolate**: added interpolate trait and relevant tests
-- **helper/str/upper**: added upper trait and relevant tests
-- **helper/str/lower**: added lower trait and relevant tests
-- **helper/str/startswith**: added startsWith trait and relevant tests
-- **helper/str/endswith**: added endsWith trait and relevant tests
-- **helper/arr/filter**: added filter trait and relevant tests
-- **factory/factory**: added factory trait
+## Added
+- Added `Phalcon\Traits\Helper\Str\DirSeparatorTrait` [#29][https://github.com/phalcon/traits/issues/29)
+- Added `Phalcon\Traits\Helper\Str\DirFromFileTrait` [#28][https://github.com/phalcon/traits/issues/28)
+- Added `Phalcon\Traits\Php\InfoTrait` [#27][https://github.com/phalcon/traits/issues/27)
+- Added `Phalcon\Traits\Php\JsonTrait` [#26][https://github.com/phalcon/traits/issues/26)
+- Added `Phalcon\Traits\Php\FileTrait` [#25][https://github.com/phalcon/traits/issues/25)
+- Added `Phalcon\Traits\Helper\Str\InterpolateTrait` [#24][https://github.com/phalcon/traits/issues/24)
+- Added `Phalcon\Traits\Helper\Str\UpperTrait` [#23][https://github.com/phalcon/traits/issues/23)
+- Added `Phalcon\Traits\Helper\Str\LowerTrait` [#22][https://github.com/phalcon/traits/issues/22)
+- Added `Phalcon\Traits\Helper\Str\StartsWithTrait` [#21][https://github.com/phalcon/traits/issues/21)
+- Added `Phalcon\Traits\Helper\Str\EndsWithTrait` [#20][https://github.com/phalcon/traits/issues/20)
+- Added `Phalcon\Traits\Arr\FilterTrait` [#19][https://github.com/phalcon/traits/issues/19)
+- Added `Phalcon\Traits\Factory\FactoryTrait` [#18][https://github.com/phalcon/traits/issues/18)

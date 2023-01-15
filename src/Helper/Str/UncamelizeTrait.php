@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace Phalcon\Traits\Helper\Str;
 
+use function preg_replace;
+use function mb_convert_case;
+use function lcfirst;
+
+use const MB_CASE_LOWER;
+
 /**
  * Converts strings to non camelized style
  */

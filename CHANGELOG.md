@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.2](https://github.com/phalcon/traits/releases/tag/2.0.2) (2023-01-15)
+
+### Fixed
+
+-   Added missing `use` statements [#40](https://github.com/phalcon/traits/pull/40)
+
 ## [2.0.1](https://github.com/phalcon/traits/releases/tag/2.0.1) (2023-01-03)
 
 ### Fixed

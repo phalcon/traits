@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Traits\Helper\Str;
 
+use function strtr;
+
 /**
  * Interpolates context values into the message placeholders
  *

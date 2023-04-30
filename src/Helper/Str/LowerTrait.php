@@ -32,6 +32,19 @@ trait LowerTrait
         string $text,
         string $encoding = 'UTF-8'
     ): string {
+        return self::staticToLower($text, $encoding);
+    }
+
+    /**
+     * @param string $text
+     * @param string $encoding
+     *
+     * @return string
+     */
+    protected static function staticToLower(
+        string $text,
+        string $encoding = 'UTF-8'
+    ): string {
         return mb_convert_case($text, MB_CASE_LOWER, $encoding);
     }
 }

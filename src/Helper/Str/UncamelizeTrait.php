@@ -34,6 +34,19 @@ trait UncamelizeTrait
         string $text,
         string $delimiter = '_'
     ): string {
+        return self::staticToUncamelize($text, $delimiter);
+    }
+
+    /**
+     * @param string $text
+     * @param string $delimiters
+     *
+     * @return string
+     */
+    public static function staticToUncamelize(
+        string $text,
+        string $delimiter = '_'
+    ): string {
         $text = (string)preg_replace(
             '/[A-Z]/',
             $delimiter . '\\0',

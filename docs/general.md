@@ -113,6 +113,8 @@ echo $this->toCamelize('came_li_ze');
 // CameLiZe
 ```
 
+The trait also exposes `staticToCamelize()` for calling the method statically.
+
 #### DirFromFileTrait
 
 ```php
@@ -229,6 +231,8 @@ echo $this->toEndsWith('PhAlcOn');
 // phalcon
 ````
 
+The trait also exposes `staticToLower()` for calling the method statically.
+
 #### StartsWithTrait
 Checks if a string starts with a given string
 
@@ -276,6 +280,8 @@ echo $this->toUncamelize('CameLiZe');
 // came_li_ze
 ```
 
+The trait also exposes `staticToUncamelize()` for calling the method statically.
+
 #### UpperTrait
 Converts the passed string to uppercase using the `mbstring` extension.
 ```php
@@ -296,6 +302,8 @@ protected function toUpper(
 echo $this->toUpper('PhAlcOn');
 // PHALCON
 ````
+
+The trait also exposes `staticToUpper()` for calling the method statically.
 
 ### Php
 PHP function wrappers. These are strongly typed (compared to the methods they 

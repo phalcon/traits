@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.0.3](https://github.com/phalcon/traits/releases/tag/2.0.3) (2023-05-01)
+
+### Fixed
+
+-   Added missing `use` statements [#40](https://github.com/phalcon/traits/pull/40)
+-   Added `staticToCamelize()` for calling `toCamelize()` statically.
+-   Added `staticToLower()` for calling `toLower()` statically.
+-   Added `staticToUncamelize()` for calling `toUncamelize()` statically.
+-   Added `staticToUpper()` for calling `toUpper()` statically.
+-   Added `phpStaticIniGet()` for calling `phpIniGet()` statically.
+-   Added `phpStaticIniGetBool()` for calling `tphpIniGetBool()` statically.
+-   Added `phpStaticIniGetInt()` for calling `phpIniGetInt()` statically.
+-   Added `phpStaticParseIniFile()` for calling `phpParseIniFile()` statically.
+
 ## [2.0.2](https://github.com/phalcon/traits/releases/tag/2.0.2) (2023-01-15)
 
 ### Fixed

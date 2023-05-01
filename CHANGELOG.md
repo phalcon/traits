@@ -4,15 +4,14 @@
 
 ### Fixed
 
--   Added missing `use` statements [#40](https://github.com/phalcon/traits/pull/40)
--   Added `staticToCamelize()` for calling `toCamelize()` statically.
--   Added `staticToLower()` for calling `toLower()` statically.
--   Added `staticToUncamelize()` for calling `toUncamelize()` statically.
--   Added `staticToUpper()` for calling `toUpper()` statically.
--   Added `phpStaticIniGet()` for calling `phpIniGet()` statically.
--   Added `phpStaticIniGetBool()` for calling `tphpIniGetBool()` statically.
--   Added `phpStaticIniGetInt()` for calling `phpIniGetInt()` statically.
--   Added `phpStaticParseIniFile()` for calling `phpParseIniFile()` statically.
+-   Added `staticToCamelize()` for calling `toCamelize()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticToLower()` for calling `toLower()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticToUncamelize()` for calling `toUncamelize()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticToUpper()` for calling `toUpper()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `phpStaticIniGet()` for calling `phpIniGet()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `phpStaticIniGetBool()` for calling `tphpIniGetBool()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `phpStaticIniGetInt()` for calling `phpIniGetInt()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `phpStaticParseIniFile()` for calling `phpParseIniFile()` statically. [#41](https://github.com/phalcon/traits/pull/41)
 
 ## [2.0.2](https://github.com/phalcon/traits/releases/tag/2.0.2) (2023-01-15)
 

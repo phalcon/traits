@@ -480,7 +480,9 @@ protected function phpIniGet(string $input, string $defaultValue = ""): bool
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-**iniGet**
+The trait also exposes `phpStaticIniGet()` for calling the method statically.
+
+**iniGetBool**
 ```php
 /**
  * @param string $input
@@ -492,7 +494,9 @@ protected function phpIniGetBool(string $input, bool $defaultValue = false): boo
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-**iniGet**
+The trait also exposes `phpStaticIniGetBool()` for calling the method statically.
+
+**iniGetInt**
 ```php
 /**
  * @param string $input
@@ -503,6 +507,8 @@ protected function phpIniGetBool(string $input, bool $defaultValue = false): boo
 protected function phpIniGetInt(string $input, int $defaultValue = 0): int
 ```
 [ini_get][ini-get], [ini list][ini-list]
+
+The trait also exposes `phpStaticIniGetInt()` for calling the method statically.
 
 **parseIniFile**
 ```php
@@ -523,6 +529,7 @@ protected function phpParseIniFile(
 ```
 [parse_ini_file][parse-ini-file]
 
+The trait also exposes `phpStaticParseIniFile()` for calling the method statically.
 
 #### JsonTrait
 JSON wrapper methods

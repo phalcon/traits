@@ -86,7 +86,7 @@ trait IniTrait
         string $filename,
         bool $processSections = false,
         int $scannerMode = 1
-    ) {
+    ): array|false {
         return self::phpStaticParseIniFile($filename, $processSections, $scannerMode);
     }
 
@@ -178,7 +178,7 @@ trait IniTrait
         string $filename,
         bool $processSections = false,
         int $scannerMode = 1
-    ) {
+    ): array|false {
         return parse_ini_file($filename, $processSections, $scannerMode);
     }
 }

@@ -80,7 +80,7 @@ trait UrlTrait
     protected function phpBase64Decode(
         string $input,
         bool $strict = false
-    ): string|false {
+    ): string | false {
         return base64_decode($input, $strict);
     }
 
@@ -104,7 +104,7 @@ trait UrlTrait
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */
-    protected function phpParseUrl(string $url, int $component = -1): array|false|int|string|null
+    protected function phpParseUrl(string $url, int $component = -1): array | false | int | string | null
     {
         return parse_url($url, $component);
     }

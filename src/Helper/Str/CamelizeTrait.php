@@ -60,9 +60,9 @@ trait CamelizeTrait
 
     /**
      * @param string $text
-     * @param string|null $delimiters
+     * @param string $delimiters
      *
-     * @return array
+     * @return array<array-key, string>
      */
     protected function processArray(
         string $text,

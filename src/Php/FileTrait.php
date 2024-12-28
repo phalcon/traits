@@ -42,11 +42,11 @@ trait FileTrait
     /**
      * @param string $filename
      *
-     * @return string|false
+     * @return false|string
      *
      * @link https://php.net/manual/en/function.file-get-contents.php
      */
-    protected function phpFileGetContents(string $filename)
+    protected function phpFileGetContents(string $filename): false|string
     {
         return file_get_contents($filename);
     }
@@ -57,7 +57,7 @@ trait FileTrait
      * @param int      $flags
      * @param resource $context
      *
-     * @return int|false
+     * @return false|int
      *
      * @link https://php.net/manual/en/function.file-put-contents.php
      */
@@ -66,7 +66,7 @@ trait FileTrait
         $data,
         int $flags = 0,
         $context = null
-    ) {
+    ): false|int {
         return file_put_contents($filename, $data, $flags, $context);
     }
 
@@ -93,7 +93,7 @@ trait FileTrait
      * @param string   $enclosure
      * @param string   $escape
      *
-     * @return array|null|false
+     * @return array<array-key, mixed>|null|false
      *
      * @link https://php.net/manual/en/function.fgetcsv.php
      */

@@ -24,6 +24,17 @@ use function substr;
 
 /**
  * URL based wrapper methods.
+ *
+ * @phpstan-type TParseUrl = array{
+ *       scheme: string,
+ *       host: string,
+ *       port: int,
+ *       user: string,
+ *       pass: string,
+ *       query: string,
+ *       path: string,
+ *       fragment: string
+ *  }
  */
 trait UrlTrait
 {
@@ -90,7 +101,7 @@ trait UrlTrait
      * @param string $url
      * @param int    $component
      *
-     * @return array|false|int|string|null
+     * @return TParseUrl|false|int|string|null
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */

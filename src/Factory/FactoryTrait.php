@@ -28,7 +28,7 @@ use function array_merge;
 trait FactoryTrait
 {
     /**
-     * @var array
+     * @var string[]
      */
     private array $mapper = [];
 
@@ -56,14 +56,14 @@ trait FactoryTrait
     /**
      * Returns the services for the factory
      *
-     * @return array
+     * @return string[]
      */
     abstract protected function getServices(): array;
 
     /**
      * Initializes services
      *
-     * @param array $services
+     * @param string[] $services
      */
     protected function init(array $services = []): void
     {

@@ -171,15 +171,10 @@ jobs:
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v4.2.1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ./
           args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.python.coverage.reportPaths=cv/01.xml,cv/02.xml,cv/03.xml,cv/04.xml
-            -Dsonar.tests=tests/
-            -Dsonar.test.exclusions=vendor/**,cv/**,tests/**
-            -Dsonar.language=php
-            -Dsonar.verbose=true
+            -Dsonar.organization=niden-code
+            -Dsonar.projectKey=niden-code_traits

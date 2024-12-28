@@ -134,7 +134,7 @@ jobs:
       - name: "Setup Tests"
         shell: bash
         run: |
-          cp -v tests/support/config/.env.example .env
+          cp -v config/.env.example .env
 
       - name: "Run Unit Tests"
         if: always()

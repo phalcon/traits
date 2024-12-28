@@ -40,11 +40,11 @@
         "vlucas/phpdotenv": "^5.5"
     },
     "scripts": {
-        "analyze": "vendor/bin/phpstan analyse -c phpstan.neon",
-        "cs": "vendor/bin/phpcs --standard=phpcs.xml",
-        "cs-fix": "vendor/bin/phpcbf --standard=phpcs.xml",
-        "test-unit": "vendor/bin/phpunit -c phpunit.xml.dist",
-        "test-unit-coverage": "vendor/bin/phpunit  -c phpunit.xml.dist --coverage-clover tests/_output/coverage.xml",
-        "test-unit-coverage-html": "vendor/bin/phpunit  -c phpunit.xml.dist --coverage-html tests/_output/coverage/"
+        "analyze": "vendor/bin/phpstan analyse -c config/phpstan.neon",
+        "cs": "vendor/bin/phpcs --standard=./config/phpcs.xml",
+        "cs-fix": "vendor/bin/phpcbf --standard=./config/phpcs.xml",
+        "test-unit": "vendor/bin/phpunit -c ./config/phpunit.xml.dist",
+        "test-unit-coverage": "vendor/bin/phpunit  -c ./config/phpunit.xml.dist --coverage-clover tests/_output/coverage.xml",
+        "test-unit-coverage-html": "vendor/bin/phpunit  -c ./config/phpunit.xml.dist --coverage-html tests/_output/coverage/"
     }
 }

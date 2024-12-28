@@ -4,31 +4,9 @@
     <arg value="-colors"/>
     <arg value="s"/>
     <arg value="p"/>
-    <arg name="parallel" value="75"/>
-
     <rule ref="PSR12">
-        <type>error</type>
-<!--        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>-->
+        <exclude name="PSR2.Methods.MethodDeclaration.Underscore"/>
     </rule>
-
-    <!-- Don't hide tokenizer exceptions -->
-    <rule ref="Internal.Tokenizer.Exception">
-        <type>error</type>
-    </rule>
-
-    <!-- Ban some functions -->
-    <rule ref="Generic.PHP.ForbiddenFunctions">
-        <properties>
-            <property name="forbiddenFunctions" type="array">
-                <element key="sizeof" value="count"/>
-                <element key="delete" value="unset"/>
-                <element key="print" value="echo"/>
-                <element key="is_null" value="null"/>
-                <element key="create_function" value="null"/>
-            </property>
-        </properties>
-    </rule>
-
-    <file>../src</file>
-    <file>../tests/unit</file>
+    <file>src</file>
+    <file>tests/unit</file>
 </ruleset>

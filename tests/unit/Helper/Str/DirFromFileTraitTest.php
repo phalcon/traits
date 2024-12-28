@@ -15,36 +15,36 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\DirFromFileFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the DirFromFile trait
  */
-class DirFromFileTraitCest
+final class DirFromFileTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Str\DirFromFileTrait
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrDirFromFileTrait(
-        UnitTester $I,
+    public function testHelperStrDirFromFileTrait(
+        ,
         Example $example
     ): void {
-        $I->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
+        $this->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
 
         $fileName = $example['fileName'];
         $expected = $example['expected'];
 
         $object = new DirFromFileFixture();
         $actual = $object->dirFromFile($fileName);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

@@ -15,38 +15,38 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\DirSeparatorFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 use const DIRECTORY_SEPARATOR;
 
 /**
  * Tests the DirSeparator trait
  */
-class DirSeparatorTraitCest
+final class DirSeparatorTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Str\DirFromFileTrait
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
     public function helperStrDirFromFileTrait(
-        UnitTester $I,
+        ,
         Example $example
     ): void {
-        $I->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
+        $this->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
 
         $directory = $example['directory'];
         $expected  = $example['expected'];
 
         $object = new DirSeparatorFixture();
         $actual = $object->dirSeparator($directory);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

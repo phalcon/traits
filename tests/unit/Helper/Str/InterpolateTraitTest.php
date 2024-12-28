@@ -15,29 +15,29 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\InterpolateFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Interpolate trait
  */
-class InterpolateTraitCest
+final class InterpolateTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
     public function helperStrInterpolateFilter(
-        UnitTester $I,
+        ,
         Example $example
     ): void {
-        $I->wantToTest('Str\InterpolateTrait - ' . $example['label']);
+        $this->wantToTest('Str\InterpolateTrait - ' . $example['label']);
 
         $expected = $example['expected'];
         $format   = $example['format'];
@@ -47,7 +47,7 @@ class InterpolateTraitCest
 
         $object = new InterpolateFixture();
         $actual = $object->interpolate($format, $context, $left, $right);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

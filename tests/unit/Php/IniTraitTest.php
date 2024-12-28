@@ -14,26 +14,26 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\IniFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 use function dataDir;
 
 /**
  * Tests the Ini trait
  */
-class IniTraitCest
+final class IniTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Php\IniTrait
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2023-01-01
      */
-    public function phpInfoTrait(UnitTester $I): void
+    public function phpInfoTrait(): void
     {
-        $I->wantToTest('Php\IniTrait');
+        $this->wantToTest('Php\IniTrait');
 
         $ini = new IniFixture();
 
@@ -54,34 +54,34 @@ class IniTraitCest
             'parent.property5.database.name'     => 'demo',
             'parent.property6.test'              => ['a', 'b', 'c',],
         ];
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         // Unknown
         $expected = '1234';
         $actual   = $ini->iniGet('unknown', '1234');
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
 
         // Get - This is set in codeception.yml
         $expected = '256M';
         $actual   = $ini->iniGet('memory_limit');
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
 
         // Get Bool
         $actual = $ini->iniGetBool('expose_php');
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
         // Unknown
         $actual = $ini->iniGetBool('unknown', true);
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
         // Get Int
         $expected = 256;
         $actual   = $ini->iniGetInt('memory_limit');
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
 
         // Unknown
         $expected = 1234;
         $actual   = $ini->iniGetInt('unknown', 1234);
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 }

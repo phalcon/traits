@@ -15,29 +15,29 @@ namespace Phalcon\Tests\Unit\Helper\Arr;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Arr\FilterFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Filter trait
  */
-class FilterTraitCest
+final class FilterTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-25
      */
     public function factoryFilterTraitToFilter(
-        UnitTester $I,
+        ,
         Example $example
     ): void {
-        $I->wantToTest('Arr\FilterTrait - ' . $example['label']);
+        $this->wantToTest('Arr\FilterTrait - ' . $example['label']);
 
         $filter = new FilterFixture();
 
@@ -46,7 +46,7 @@ class FilterTraitCest
         $method   = $example['method'];
         $actual   = $filter->filter($source, $method);
 
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

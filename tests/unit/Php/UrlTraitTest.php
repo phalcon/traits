@@ -15,54 +15,54 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Codeception\Stub;
 use Phalcon\Tests\Fixtures\Php\UrlFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the URL trait
  */
-class UrlTraitCest
+final class UrlTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Php\UrlTrait
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */
-    public function phpUrlTrait(UnitTester $I): void
+    public function phpUrlTrait(): void
     {
-        $I->wantToTest('Php\UrlTrait');
+        $this->wantToTest('Php\UrlTrait');
 
         $url    = new UrlFixture();
         $source = "Testing-Data/phalcon";
 
         $expected = 'VGVzdGluZy1EYXRhL3BoYWxjb24=';
         $actual   = $url->base64Encode($source);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $expected = $source;
         $data     = $actual;
         $actual   = $url->base64Decode($data);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $expected = 'VGVzdGluZy1EYXRhL3BoYWxjb24';
         $actual   = $url->base64EncodeUrl($source);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $expected = $source;
         $data     = $actual;
         $actual   = $url->base64DecodeUrl($data);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $expected = 'Testing-Data%2Fphalcon';
         $actual   = $url->rawUrlEncode($source);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $expected = $source;
         $data     = $actual;
         $actual   = $url->rawUrlDecode($data);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $source   = 'https://phalcon:secret@dev.phalcon.ld:8000/action?param=value#frag';
         $expected = [
@@ -76,20 +76,20 @@ class UrlTraitCest
             'fragment' => 'frag',
         ];
         $actual   = $url->parseUrl($source);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
      * Tests Phalcon\Traits\Php\UrlTrait - base64_decode error
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */
-    public function phpUrlTraitBase64DecodeError(UnitTester $I): void
+    public function phpUrlTraitBase64DecodeError(): void
     {
-        $I->wantToTest('Php\UrlTrait :: base64_decode error');
+        $this->wantToTest('Php\UrlTrait :: base64_decode error');
 
         $url = Stub::make(
             UrlFixture::class,
@@ -100,6 +100,6 @@ class UrlTraitCest
 
         $source = "Testing-Data/phalcon";
         $actual = $url->base64DecodeUrl($source);
-        $I->assertEmpty($actual);
+        $this->assertEmpty($actual);
     }
 }

@@ -15,24 +15,24 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\CamelizeFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
-class CamelizeTraitCest
+final class CamelizeTraitTest extends TestCase
 {
     /**
      * Tests Str\CamelizeTrait
      *
      * @dataProvider getSources
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09
      */
-    public function helperStrStrCamelize(UnitTester $I, Example $example)
+    public function helperStrStrCamelize(, Example $example)
     {
-        $I->wantToTest('Str\DirFromFileTrait - ' . $example[0]);
+        $this->wantToTest('Str\DirFromFileTrait - ' . $example[0]);
 
         $object    = new CamelizeFixture();
         $value     = $example[0];
@@ -41,7 +41,7 @@ class CamelizeTraitCest
         $lowercase = $example[3];
 
         $actual = $object->toCamelize($value, $delimiter, $lowercase);
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**

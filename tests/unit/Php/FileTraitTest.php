@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\FileFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 use function dataDir;
 use function is_resource;
@@ -24,21 +24,21 @@ use function uniqid;
 /**
  * Tests the File trait
  */
-class FileTraitCest
+final class FileTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Php\FileTrait
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpFileTrait(UnitTester $I): void
+    public function phpFileTrait(): void
     {
-        $I->wantToTest('Php\FileTrait');
+        $this->wantToTest('Php\FileTrait');
 
-        $name     = $I->getNewFileName('file', 'txt');
+        $name     = $this->getNewFileName('file', 'txt');
         $contents = uniqid('contents-');
         $fileName = outputDir($name);
 
@@ -51,65 +51,65 @@ class FileTraitCest
         $handle = $file->fopen($source, 'r');
         $actual = $file->fgetCsv($handle, 0, ';');
         $result = $file->fclose($handle);
-        $I->assertTrue($result);
+        $this->assertTrue($result);
 
         $expected = [
             0 => 'hi',
             1 => 'Hello',
         ];
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         /**
          * Create the file and put data in it
          */
         $actual = $file->filePutContents($fileName, $contents);
-        $I->assertGreaterThan(0, $actual);
+        $this->assertGreaterThan(0, $actual);
 
         /**
          * Check if it exists
          */
         $actual = $file->fileExists($fileName);
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
         /**
          * Check if it is writable
          */
         $actual = $file->isWritable($fileName);
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
         /**
          * Check the contents
          */
         $expected = $contents;
         $actual   = $file->fileGetContents($fileName);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         /**
          * Delete it
          */
         $actual = $file->unlink($fileName);
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
         /**
          * Use fopen
          */
         $handle = $file->fopen($fileName, 'ab');
         $actual = is_resource($handle);
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
         /**
          * fwrite
          */
         $actual = $file->fwrite($handle, $contents);
-        $I->assertGreaterThan(0, $actual);
+        $this->assertGreaterThan(0, $actual);
 
         /**
          * fclose
          */
         $actual = $file->fclose($handle);
-        $I->assertTrue($actual);
+        $this->assertTrue($actual);
 
-        $I->seeFileFound($name, outputDir());
-        $I->safeDeleteFile($fileName);
+        $this->seeFileFound($name, outputDir());
+        $this->safeDeleteFile($fileName);
     }
 }

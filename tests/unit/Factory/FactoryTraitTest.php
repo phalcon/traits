@@ -17,22 +17,22 @@ use Phalcon\Tests\Fixtures\Factory\FactoryExceptionFixture;
 use Phalcon\Tests\Fixtures\Factory\FactoryFixture;
 use Phalcon\Tests\Fixtures\Factory\FactoryOneFixture;
 use Phalcon\Tests\Fixtures\Factory\FactoryThreeFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the factory trait
  */
-class FactoryTraitCest
+final class FactoryTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance()
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstance(UnitTester $I): void
+    public function factoryFactoryTraitNewInstance(): void
     {
         $I->wantToTest('Arr\FactoryTrait - newInstance()');
 
@@ -46,12 +46,12 @@ class FactoryTraitCest
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() with init
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstanceWithInit(UnitTester $I): void
+    public function factoryFactoryTraitNewInstanceWithInit(): void
     {
         $I->wantToTest('Arr\FactoryTrait - newInstance() with init');
 
@@ -70,12 +70,12 @@ class FactoryTraitCest
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() - exception
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstanceException(UnitTester $I): void
+    public function factoryFactoryTraitNewInstanceException(): void
     {
         $I->wantToTest('Arr\FactoryTrait - newInstance() - exception');
 

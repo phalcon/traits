@@ -15,12 +15,12 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\UncamelizeFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
- * Class UncamelizeTraitCest
+ * Class UncamelizeTraitTest extends TestCase
  */
-class UncamelizeTraitCest
+final class UncamelizeTraitTest extends TestCase
 {
     /**
      * Tests Str\CamelizeTrait
@@ -30,9 +30,9 @@ class UncamelizeTraitCest
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09
      */
-    public function textUncamelize(UnitTester $I, Example $example)
+    public function textUncamelize(, Example $example)
     {
-        $I->wantToTest('Str\UncamelizeTrait - ' . $example[0]);
+        $this->wantToTest('Str\UncamelizeTrait - ' . $example[0]);
 
         $object    = new UncamelizeFixture();
         $value     = $example[0];
@@ -40,7 +40,7 @@ class UncamelizeTraitCest
         $delimiter = $example[2];
         $actual    = $object->toUncamelize($value, $delimiter);
 
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**

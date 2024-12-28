@@ -15,27 +15,27 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\UpperFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Upper trait
  */
-class UpperTraitCest
+final class UpperTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrUpperFilter(UnitTester $I, Example $example): void
+    public function helperStrUpperFilter(, Example $example): void
     {
-        $I->wantToTest('Str\UpperTrait - ' . $example['label']);
+        $this->wantToTest('Str\UpperTrait - ' . $example['label']);
 
         $text     = $example['text'];
         $encoding = $example['encoding'];
@@ -43,7 +43,7 @@ class UpperTraitCest
 
         $object = new UpperFixture();
         $actual = $object->upper($text, $encoding);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

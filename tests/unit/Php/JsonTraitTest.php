@@ -14,24 +14,24 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\JsonFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Json trait
  */
-class JsonTraitCest
+final class JsonTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Php\JsonTrait
      *
-     * @param UnitTester $I
+     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpJsonTrait(UnitTester $I): void
+    public function phpJsonTrait(): void
     {
-        $I->wantToTest('Php\JsonTrait');
+        $this->wantToTest('Php\JsonTrait');
 
         $json = new JsonFixture();
         $data = [
@@ -41,7 +41,7 @@ class JsonTraitCest
 
         $expected = '{"one":"two","0":"three"}';
         $actual   = $json->jsonEncode($data);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
 
         $data     = '{"one":"two","0":"three"}';
         $expected = [
@@ -49,6 +49,6 @@ class JsonTraitCest
             'three',
         ];
         $actual   = $json->jsonDecode($data, true);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 }

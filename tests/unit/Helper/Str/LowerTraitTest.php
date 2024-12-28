@@ -15,27 +15,27 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\LowerFixture;
-use UnitTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Lower trait
  */
-class LowerTraitCest
+final class LowerTraitTest extends TestCase
 {
     /**
      * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
+     * @return void
      * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrLowerFilter(UnitTester $I, Example $example): void
+    public function helperStrLowerFilter(, Example $example): void
     {
-        $I->wantToTest('Str\LowerTrait - ' . $example['label']);
+        $this->wantToTest('Str\LowerTrait - ' . $example['label']);
 
         $text     = $example['text'];
         $encoding = $example['encoding'];
@@ -43,7 +43,7 @@ class LowerTraitCest
 
         $object = new LowerFixture();
         $actual = $object->lower($text, $encoding);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

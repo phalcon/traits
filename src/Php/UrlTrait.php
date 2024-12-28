@@ -24,6 +24,17 @@ use function substr;
 
 /**
  * URL based wrapper methods.
+ *
+ * @phpstan-type TParseUrl = array{
+ *       scheme: string,
+ *       host: string,
+ *       port: int,
+ *       user: string,
+ *       pass: string,
+ *       query: string,
+ *       path: string,
+ *       fragment: string
+ *  }
  */
 trait UrlTrait
 {
@@ -41,11 +52,8 @@ trait UrlTrait
             . substr("===", (strlen($input) + 3) % 4);
 
         $result = $this->phpBase64Decode($input, $strict);
-        if (false === $result) {
-            return "";
-        }
 
-        return $result;
+        return false !== $result ? $result : '';
     }
 
     /**
@@ -69,8 +77,10 @@ trait UrlTrait
      *
      * @link https://www.php.net/manual/en/function.base64-decode.php
      */
-    protected function phpBase64Decode(string $input, bool $strict = false)
-    {
+    protected function phpBase64Decode(
+        string $input,
+        bool $strict = false
+    ): string | false {
         return base64_decode($input, $strict);
     }
 
@@ -90,11 +100,11 @@ trait UrlTrait
      * @param string $url
      * @param int    $component
      *
-     * @return array|false|int|string|null
+     * @return TParseUrl|false|int|string|null
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */
-    protected function phpParseUrl(string $url, int $component = -1)
+    protected function phpParseUrl(string $url, int $component = -1): array | false | int | string | null
     {
         return parse_url($url, $component);
     }

@@ -28,11 +28,11 @@ trait UpperTrait
      *
      * @return string
      */
-    protected function toUpper(
+    protected static function staticToUpper(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
-        return self::staticToUpper($text, $encoding);
+        return mb_convert_case($text, MB_CASE_UPPER, $encoding);
     }
 
     /**
@@ -41,10 +41,10 @@ trait UpperTrait
      *
      * @return string
      */
-    protected static function staticToUpper(
+    protected function toUpper(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
-        return mb_convert_case($text, MB_CASE_UPPER, $encoding);
+        return self::staticToUpper($text, $encoding);
     }
 }

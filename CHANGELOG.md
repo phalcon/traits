@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.4](https://github.com/phalcon/traits/releases/tag/2.0.4) (2024-12-28)
+
+
+### Fixed
+
+-   Added return types to all methods
+-   Enabled PHP Codesniffer in the CI run
+-   Enabled PHPStan with max configuration and made necessary adjustments
+-   Enabled Sonarqube in the CI run
+-   Added quality badges from Sonarqube
+
 ## [2.0.3](https://github.com/phalcon/traits/releases/tag/2.0.3) (2023-05-01)
 
 ### Fixed

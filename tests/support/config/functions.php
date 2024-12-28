@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the Phalcon Framework.
  *
@@ -11,16 +9,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 /*******************************************************************************
  * Directories
  *******************************************************************************/
 /**
- * Returns the output logs folder
+ * Returns the root dir
  */
-if (!function_exists('cacheDir')) {
-    function cacheDir(string $fileName = ''): string
+if (!function_exists('rootDir')) {
+    function rootDir(string $fileName = ''): string
     {
-        return codecept_output_dir() . 'cache/' . $fileName;
+        return dirname(dirname(dirname(dirname(__FILE__))))
+            . DIRECTORY_SEPARATOR
+            . $fileName;
     }
 }
 
@@ -30,7 +32,10 @@ if (!function_exists('cacheDir')) {
 if (!function_exists('dataDir')) {
     function dataDir(string $fileName = ''): string
     {
-        return codecept_data_dir() . $fileName;
+        return rootDir()
+            . 'tests' . DIRECTORY_SEPARATOR
+            . 'support' . DIRECTORY_SEPARATOR
+            . $fileName;
     }
 }
 
@@ -40,7 +45,10 @@ if (!function_exists('dataDir')) {
 if (!function_exists('outputDir')) {
     function outputDir(string $fileName = ''): string
     {
-        return codecept_output_dir() . $fileName;
+        return rootDir()
+            . 'tests' . DIRECTORY_SEPARATOR
+            . '_output' . DIRECTORY_SEPARATOR
+            . $fileName;
     }
 }
 
@@ -54,7 +62,11 @@ if (!function_exists('env')) {
             return constant($key);
         }
 
-        return getenv($key) ?: $default;
+        if (getenv($key) !== false) {
+            return getenv($key);
+        }
+
+        return $_ENV[$key] ?? $default;
     }
 }
 
@@ -65,9 +77,6 @@ if (!function_exists('defineFromEnv')) {
             return;
         }
 
-        define(
-            $name,
-            env($name)
-        );
+        define($name, env($name));
     }
 }

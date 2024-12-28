@@ -28,8 +28,18 @@ trait DirSeparatorTrait
      *
      * @return string
      */
-    protected function toDirSeparator(string $directory): string
+    protected static function staticToDirSeparator(string $directory): string
     {
         return rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * @param string $directory
+     *
+     * @return string
+     */
+    protected function toDirSeparator(string $directory): string
+    {
+        return self::staticToDirSeparator($directory);
     }
 }

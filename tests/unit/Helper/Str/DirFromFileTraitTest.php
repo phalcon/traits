@@ -15,53 +15,46 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\DirFromFileFixture;
-use UnitTester;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the DirFromFile trait
  */
-class DirFromFileTraitCest
+final class DirFromFileTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Str\DirFromFileTrait
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
-     * @param Example    $example
+     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrDirFromFileTrait(
-        UnitTester $I,
-        Example $example
+    public function testHelperStrDirFromFileTrait(
+        string $fileName,
+        string $expected
     ): void {
-        $I->wantToTest('Str\DirFromFileTrait - ' . $example['label']);
-
-        $fileName = $example['fileName'];
-        $expected = $example['expected'];
-
         $object = new DirFromFileFixture();
         $actual = $object->dirFromFile($fileName);
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
      * @return array[]
      */
-    private function getExamples(): array
+    public static function getExamples(): array
     {
         return [
             [
-                'label'    => 'long file name',
-                'fileName' => 'abcdef12345.jpg',
-                'expected' => 'ab/cd/ef/12/3/',
+                'abcdef12345.jpg',
+                'ab/cd/ef/12/3/',
             ],
             [
-                'label'    => 'empty file name',
-                'fileName' => '',
-                'expected' => '/',
+                '',
+                '/',
             ],
         ];
     }

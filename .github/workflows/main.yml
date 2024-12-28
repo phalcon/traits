@@ -110,15 +110,13 @@ jobs:
         shell: pwsh
         run: |
           git config --global core.autocrlf false
-          $SessionSavePath = if ("${{ runner.os }}" -eq "Windows") { 'C:\temp' } else { '/tmp' }
-          Write-Output "SESSION_SAVE_PATH=$SessionSavePath" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           extensions: ${{ env.EXTENSIONS }}
-          ini-values: apc.enable_cli=on, session.save_path=${{ env.SESSION_SAVE_PATH }}
+          ini-values: apc.enable_cli=on
           tools: pecl, composer:v2
           coverage: pcov
         env:
@@ -137,12 +135,11 @@ jobs:
         shell: bash
         run: |
           cp -v tests/support/config/.env.example .env
-          composer tests-unit-coverage
 
       - name: "Run Unit Tests"
         if: always()
         run: |
-          vendor/bin/codecept run --coverage-xml=coverage.xml --ext DotReporter unit
+          composer tests-unit-coverage
 
       - name: "Upload coverage file artifact"
         uses: "actions/upload-artifact@v4"

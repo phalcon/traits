@@ -41,7 +41,7 @@ trait FactoryTrait
      * @return mixed
      * @throws Exception
      */
-    protected function getService(string $name)
+    protected function getService(string $name): string
     {
         if (true !== isset($this->mapper[$name])) {
             $exceptionClass = $this->getExceptionClass();

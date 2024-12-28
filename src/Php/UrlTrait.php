@@ -52,9 +52,8 @@ trait UrlTrait
             . substr("===", (strlen($input) + 3) % 4);
 
         $result = $this->phpBase64Decode($input, $strict);
-        $result = false !== $result ? $result : '';
 
-        return $result;
+        return false !== $result ? $result : '';
     }
 
     /**

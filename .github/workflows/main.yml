@@ -38,8 +38,6 @@ jobs:
     name: "Validate Tests code style"
     if: "!contains(github.event.head_commit.message, 'ci skip')"
 
-    #    needs: [ generate ]
-
     permissions:
       contents: read
 
@@ -49,11 +47,13 @@ jobs:
       fail-fast: true
       matrix:
         php:
-          - '8.0'
           - '8.1'
           - '8.2'
+          - '8.3'
+          - '8.4'
+
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
@@ -66,13 +66,17 @@ jobs:
           COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Install development dependencies with Composer"
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--prefer-dist"
 
-      - name: "PHPCS"
+      - name: "Code Sniffer"
         run: |
-          vendor/bin/phpcs --standard=./phpcs.xml
+          composer cs
+
+      - name: "Code Analysis"
+        run: |
+          composer cs
 
 
   unit-tests:
@@ -95,22 +99,12 @@ jobs:
           - 'ts'
         name:
           - ubuntu-gcc
-          - macos-clang
-        # matrix names should be in next format:
-        #     {php}-{ts}-{os.name}-{compiler}-{arch}
         include:
           # Linux
           - { name: ubuntu-gcc, os: ubuntu-20.04, compiler: gcc }
-          # macOS
-          - { name: macos-clang, os: macos-11, compiler: clang }
-          # Windows
-          - { php: '8.0', ts: 'ts',  arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
-          - { php: '8.0', ts: 'nts', arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
-          - { php: '8.1', ts: 'ts',  arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
-          - { php: '8.1', ts: 'nts', arch: 'x64', name: 'windows2019-vs16', os: 'windows-2019', compiler: 'vs16' }
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Setup platform specific environment"
         shell: pwsh
         run: |
@@ -134,15 +128,15 @@ jobs:
         run: composer validate --no-check-all --no-check-publish
 
       - name: "Install development dependencies with Composer"
-        uses: "ramsey/composer-install@v2"
+        uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--prefer-dist"
 
       - name: "Setup Tests"
         shell: bash
         run: |
-          cp config/.env.example .env
-          vendor/bin/codecept build
+          cp -v tests/support/config/.env.example .env
+          composer tests-unit-coverage
 
       - name: "Run Unit Tests"
         if: always()
@@ -150,7 +144,7 @@ jobs:
           vendor/bin/codecept run --coverage-xml=coverage.xml --ext DotReporter unit
 
       - name: "Upload coverage file artifact"
-        uses: "actions/upload-artifact@v3"
+        uses: "actions/upload-artifact@v4"
         with:
           name: "unit-${{ matrix.php }}-${{ matrix.ts }}-${{ matrix.name }}.coverage"
           path: "tests/_output/coverage.xml"
@@ -159,40 +153,41 @@ jobs:
     permissions:
       contents: read
 
-    name: "Upload coverage to Codecov/Codacy"
+    name: "Upload coverage to Sonarcloud"
     runs-on: "ubuntu-22.04"
     needs:
       - "unit-tests"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: "Display structure of downloaded files"
         run: |
-          mkdir -p reports
+          mkdir -p cv
 
       - name: "Download coverage files"
-        uses: "actions/download-artifact@v3"
+        uses: "actions/download-artifact@v4"
         with:
-          path: "reports"
+          path: "cv"
 
       - name: "Display structure of downloaded files"
-        run: ls -R
-        working-directory: reports
+        run: |
+          mv cv/unit-8.1.coverage/coverage.xml      cv/01.xml
+          mv cv/unit-8.2.coverage/coverage.xml      cv/02.xml
+          mv cv/unit-8.3.coverage/coverage.xml      cv/03.xml
+          mv cv/unit-8.4.coverage/coverage.xml      cv/04.xml
+          ls -la cv/
 
-      - name: "Upload to Codecov"
-        uses: "codecov/codecov-action@v3"
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: reports
-          fail_ci_if_error: true
-          verbose: true
-
-      - name: "Upload to Codacy"
-        uses: codacy/codacy-coverage-reporter-action@v1
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: reports/unit-8.0-ts-ubuntu-gcc.coverage/coverage.xml, reports/unit-8.1-ts-ubuntu-gcc.coverage/coverage.xml, reports/unit-8.2-ts-ubuntu-gcc.coverage/coverage.xml
+          projectBaseDir: ./
+          args: >
+            -Dsonar.organization=niden
+            -Dsonar.projectKey=niden-code_phalcon

@@ -50,7 +50,7 @@ final class FactoryTraitTest extends AbstractUnitTestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstanceWithInit(): void
+    public function testFactoryFactoryTraitNewInstanceWithInit(): void
     {
         $options = ['three' => FactoryThreeFixture::class];
         $factory = new FactoryFixture($options);
@@ -72,7 +72,7 @@ final class FactoryTraitTest extends AbstractUnitTestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function factoryFactoryTraitNewInstanceException(): void
+    public function testFactoryFactoryTraitNewInstanceException(): void
     {
         $this->expectException(FactoryExceptionFixture::class);
         $this->expectExceptionMessage("Service unknown is not registered");

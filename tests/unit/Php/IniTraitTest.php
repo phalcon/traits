@@ -70,6 +70,10 @@ final class IniTraitTest extends AbstractUnitTestCase
         $actual = $ini->iniGetBool('expose_php');
         $this->assertTrue($actual);
 
+        // Get Bool
+        $actual = $ini->iniGetBool('log_errors');
+        $this->assertFalse($actual);
+
         // Unknown
         $actual = $ini->iniGetBool('unknown', true);
         $this->assertTrue($actual);

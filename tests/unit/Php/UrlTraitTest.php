@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Codeception\Stub;
+use Phalcon\Tests\Fixtures\Php\UrlFailFixture;
 use Phalcon\Tests\Fixtures\Php\UrlFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
@@ -86,16 +87,9 @@ final class UrlTraitTest extends AbstractUnitTestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */
-    public function phpUrlTraitBase64DecodeError(): void
+    public function testHelperPhpUrlTraitBase64DecodeError(): void
     {
-        $this->wantToTest('Php\UrlTrait :: base64_decode error');
-
-        $url = Stub::make(
-            UrlFixture::class,
-            [
-                'phpBase64Decode' => false,
-            ]
-        );
+        $url = new UrlFailFixture();
 
         $source = "Testing-Data/phalcon";
         $actual = $url->base64DecodeUrl($source);

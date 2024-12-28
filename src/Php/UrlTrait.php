@@ -52,9 +52,7 @@ trait UrlTrait
             . substr("===", (strlen($input) + 3) % 4);
 
         $result = $this->phpBase64Decode($input, $strict);
-        if (false === $result) {
-            return "";
-        }
+        $result = false !== $result ? $result : '';
 
         return $result;
     }
@@ -80,8 +78,10 @@ trait UrlTrait
      *
      * @link https://www.php.net/manual/en/function.base64-decode.php
      */
-    protected function phpBase64Decode(string $input, bool $strict = false)
-    {
+    protected function phpBase64Decode(
+        string $input,
+        bool $strict = false
+    ): string|false {
         return base64_decode($input, $strict);
     }
 
@@ -105,7 +105,7 @@ trait UrlTrait
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */
-    protected function phpParseUrl(string $url, int $component = -1)
+    protected function phpParseUrl(string $url, int $component = -1): array|false|int|string|null
     {
         return parse_url($url, $component);
     }

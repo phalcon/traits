@@ -36,7 +36,7 @@ trait FileTrait
      *
      * @return bool
      */
-    protected function phpFclose($handle)
+    protected function phpFclose($handle): bool
     {
         return fclose($handle);
     }
@@ -50,7 +50,7 @@ trait FileTrait
      * @param string   $enclosure
      * @param string   $escape
      *
-     * @return array<array-key, mixed>|null|false
+     * @return array<array-key, mixed>|false
      *
      * @link https://php.net/manual/en/function.fgetcsv.php
      */
@@ -60,7 +60,7 @@ trait FileTrait
         string $separator = ',',
         string $enclosure = '"',
         string $escape = '\\'
-    ) {
+    ): array|false {
         return fgetcsv($stream, $length, $separator, $enclosure, $escape);
     }
 
@@ -71,7 +71,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.file-exists.php
      */
-    protected function phpFileExists(string $filename)
+    protected function phpFileExists(string $filename): bool
     {
         return file_exists($filename);
     }
@@ -128,9 +128,9 @@ trait FileTrait
      * @param resource $handle
      * @param string   $data
      *
-     * @return int|false
+     * @return false|int
      */
-    protected function phpFwrite($handle, string $data)
+    protected function phpFwrite($handle, string $data): false|int
     {
         return fwrite($handle, $data);
     }
@@ -156,7 +156,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.unlink.php
      */
-    protected function phpUnlink(string $filename)
+    protected function phpUnlink(string $filename): bool
     {
         return unlink($filename);
     }

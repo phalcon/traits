@@ -87,11 +87,7 @@ trait IniTrait
         bool $processSections = false,
         int $scannerMode = 1
     ): array | false {
-        return self::staticPhpParseIniFile(
-            $filename,
-            $processSections,
-            $scannerMode
-        );
+        return self::staticPhpParseIniFile($filename, $processSections, $scannerMode);
     }
 
     /**

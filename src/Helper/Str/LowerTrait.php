@@ -28,7 +28,7 @@ trait LowerTrait
      *
      * @return string
      */
-    protected static function staticLower(
+    protected static function staticToLower(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
@@ -45,6 +45,6 @@ trait LowerTrait
         string $text,
         string $encoding = 'UTF-8'
     ): string {
-        return self::staticLower($text, $encoding);
+        return self::staticToLower($text, $encoding);
     }
 }

@@ -28,11 +28,11 @@ trait LowerTrait
      *
      * @return string
      */
-    protected function toLower(
+    protected static function staticToLower(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
-        return self::staticToLower($text, $encoding);
+        return mb_convert_case($text, MB_CASE_LOWER, $encoding);
     }
 
     /**
@@ -41,10 +41,10 @@ trait LowerTrait
      *
      * @return string
      */
-    protected static function staticToLower(
+    protected function toLower(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
-        return mb_convert_case($text, MB_CASE_LOWER, $encoding);
+        return self::staticToLower($text, $encoding);
     }
 }

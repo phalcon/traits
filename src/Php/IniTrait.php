@@ -34,7 +34,7 @@ trait IniTrait
         string $input,
         string $defaultValue = ""
     ): string {
-        return self::phpStaticIniGet($input, $defaultValue);
+        return self::staticPhpIniGet($input, $defaultValue);
     }
 
     /**
@@ -52,7 +52,7 @@ trait IniTrait
         string $input,
         bool $defaultValue = false
     ): bool {
-        return self::phpStaticIniGetBool($input, $defaultValue);
+        return self::staticPhpIniGetBool($input, $defaultValue);
     }
 
     /**
@@ -68,7 +68,7 @@ trait IniTrait
      */
     protected function phpIniGetInt(string $input, int $defaultValue = 0): int
     {
-        return self::phpStaticIniGetInt($input, $defaultValue);
+        return self::staticPhpIniGetInt($input, $defaultValue);
     }
 
     /**
@@ -86,8 +86,8 @@ trait IniTrait
         string $filename,
         bool $processSections = false,
         int $scannerMode = 1
-    ): array|false {
-        return self::phpStaticParseIniFile($filename, $processSections, $scannerMode);
+    ): array | false {
+        return self::staticPhpParseIniFile($filename, $processSections, $scannerMode);
     }
 
     /**
@@ -101,7 +101,7 @@ trait IniTrait
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
      */
-    protected static function phpStaticIniGet(
+    protected static function staticPhpIniGet(
         string $input,
         string $defaultValue = ""
     ): string {
@@ -124,7 +124,7 @@ trait IniTrait
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
      */
-    protected static function phpStaticIniGetBool(
+    protected static function staticPhpIniGetBool(
         string $input,
         bool $defaultValue = false
     ): bool {
@@ -133,16 +133,14 @@ trait IniTrait
             return $defaultValue;
         }
 
-        $value = match (strtolower($value)) {
+        return match (strtolower($value)) {
             'true',
             'on',
             'yes',
             'y',
-            '1' => true,
+            '1'     => true,
             default => false,
         };
-
-        return $value;
     }
 
     /**
@@ -156,11 +154,11 @@ trait IniTrait
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
      */
-    protected static function phpStaticIniGetInt(
+    protected static function staticPhpIniGetInt(
         string $input,
         int $defaultValue = 0
     ): int {
-        return (int) self::phpStaticIniGet($input, (string)$defaultValue);
+        return (int)self::staticPhpIniGet($input, (string)$defaultValue);
     }
 
     /**
@@ -174,11 +172,11 @@ trait IniTrait
      *
      * @link https://php.net/manual/en/function.parse-ini-file.php
      */
-    protected static function phpStaticParseIniFile(
+    protected static function staticPhpParseIniFile(
         string $filename,
         bool $processSections = false,
         int $scannerMode = 1
-    ): array|false {
+    ): array | false {
         return parse_ini_file($filename, $processSections, $scannerMode);
     }
 }

@@ -13,30 +13,11 @@ declare(strict_types=1);
 
 namespace Phalcon\Traits\Helper\Str;
 
-use function preg_replace;
-use function mb_convert_case;
-use function lcfirst;
-
-use const MB_CASE_LOWER;
-
 /**
  * Converts strings to non camelized style
  */
 trait UncamelizeTrait
 {
-    /**
-     * @param string $text
-     * @param string $delimiters
-     *
-     * @return string
-     */
-    public function toUncamelize(
-        string $text,
-        string $delimiter = '_'
-    ): string {
-        return self::staticToUncamelize($text, $delimiter);
-    }
-
     /**
      * @param string $text
      * @param string $delimiters
@@ -54,5 +35,18 @@ trait UncamelizeTrait
         );
 
         return mb_convert_case($text, MB_CASE_LOWER, 'UTF-8');
+    }
+
+    /**
+     * @param string $text
+     * @param string $delimiter
+     *
+     * @return string
+     */
+    public function toUncamelize(
+        string $text,
+        string $delimiter = '_'
+    ): string {
+        return self::staticToUncamelize($text, $delimiter);
     }
 }

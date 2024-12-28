@@ -31,7 +31,7 @@ trait DirFromFileTrait
      *
      * @return string
      */
-    protected function toDirFromFile(string $file): string
+    protected static function staticToDirFromFile(string $file): string
     {
         $name  = pathinfo($file, PATHINFO_FILENAME);
         $start = mb_substr($name, 0, -2);
@@ -41,5 +41,15 @@ trait DirFromFileTrait
         }
 
         return implode('/', mb_str_split($start, 2)) . '/';
+    }
+
+    /**
+     * @param string $file
+     *
+     * @return string
+     */
+    protected function toDirFromFile(string $file): string
+    {
+        return self::staticToDirFromFile($file);
     }
 }

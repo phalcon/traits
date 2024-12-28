@@ -28,10 +28,23 @@ trait LowerTrait
      *
      * @return string
      */
-    protected function toLower(
+    protected static function staticLower(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
         return mb_convert_case($text, MB_CASE_LOWER, $encoding);
+    }
+
+    /**
+     * @param string $text
+     * @param string $encoding
+     *
+     * @return string
+     */
+    protected function toLower(
+        string $text,
+        string $encoding = 'UTF-8'
+    ): string {
+        return self::staticLower($text, $encoding);
     }
 }

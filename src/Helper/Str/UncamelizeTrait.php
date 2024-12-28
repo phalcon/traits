@@ -24,7 +24,7 @@ trait UncamelizeTrait
      *
      * @return string
      */
-    public function toUncamelize(
+    public static function staticUncamelize(
         string $text,
         string $delimiter = '_'
     ): string {
@@ -35,5 +35,18 @@ trait UncamelizeTrait
         );
 
         return mb_convert_case($text, MB_CASE_LOWER, 'UTF-8');
+    }
+
+    /**
+     * @param string $text
+     * @param string $delimiter
+     *
+     * @return string
+     */
+    public function toUncamelize(
+        string $text,
+        string $delimiter = '_'
+    ): string {
+        return self::staticUncamelize($text, $delimiter);
     }
 }

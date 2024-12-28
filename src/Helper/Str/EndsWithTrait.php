@@ -38,11 +38,11 @@ trait EndsWithTrait
         }
 
         return 0 === substr_compare(
-            $haystack,
-            $needle,
-            -mb_strlen($needle),
-            mb_strlen($needle),
-            $ignoreCase
-        );
+                $haystack,
+                $needle,
+                -mb_strlen($needle),
+                mb_strlen($needle),
+                $ignoreCase
+            );
     }
 }

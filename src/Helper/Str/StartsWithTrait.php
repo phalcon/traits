@@ -38,11 +38,11 @@ trait StartsWithTrait
         }
 
         return 0 === substr_compare(
-            $haystack,
-            $needle,
-            0,
-            mb_strlen($needle),
-            $ignoreCase
-        );
+                $haystack,
+                $needle,
+                0,
+                mb_strlen($needle),
+                $ignoreCase
+            );
     }
 }

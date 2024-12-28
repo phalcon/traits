@@ -28,7 +28,7 @@ trait InterpolateTrait
      *
      * @return string
      */
-    protected function toInterpolate(
+    protected static function staticToInterpolate(
         string $input,
         array $context = [],
         string $left = '%',
@@ -44,5 +44,22 @@ trait InterpolateTrait
         }
 
         return strtr($input, $replace);
+    }
+
+    /**
+     * @param string   $input
+     * @param string[] $context
+     * @param string   $left
+     * @param string   $right
+     *
+     * @return string
+     */
+    protected function toInterpolate(
+        string $input,
+        array $context = [],
+        string $left = '%',
+        string $right = '%'
+    ): string {
+        return self::staticToInterpolate($input, $context, $left, $right);
     }
 }

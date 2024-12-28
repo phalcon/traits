@@ -2,6 +2,10 @@
 
 ## [3.0.0](https://github.com/phalcon/traits/releases/tag/3.0.0) (2024-12-28)
 
+### Added
+
+-   Added static methods for `Str` and `Arr` traits [#41](https://github.com/phalcon/traits/issues/41)
+
 ### Fixed
 
 -   Added return types to all methods

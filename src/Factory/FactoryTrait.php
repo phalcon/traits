@@ -33,6 +33,13 @@ trait FactoryTrait
     private array $mapper = [];
 
     /**
+     * Returns the exception class for the factory
+     *
+     * @return string
+     */
+    abstract protected function getExceptionClass(): string;
+
+    /**
      * Returns a service based on the name; throws exception if it does not
      * exist
      *
@@ -69,11 +76,4 @@ trait FactoryTrait
     {
         $this->mapper = array_merge($this->getServices(), $services);
     }
-
-    /**
-     * Returns the exception class for the factory
-     *
-     * @return string
-     */
-    abstract protected function getExceptionClass(): string;
 }

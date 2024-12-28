@@ -2,8 +2,8 @@
 
 [![Phalcon CI](https://github.com/phalcon/traits/actions/workflows/main.yml/badge.svg?branch=1.x)](https://github.com/phalcon/traits/actions/workflows/main.yml)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg?style=flat-square)](https://github.com/php-pds/skeleton)
-[![codecov](https://codecov.io/gh/phalcon/traits/branch/1.x/graph/badge.svg?token=I4bgs0E168)](https://codecov.io/gh/phalcon/traits)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/049cb6c1c06342579ebffb8e78ab9dd1)](https://www.codacy.com/gh/phalcon/traits/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=phalcon/traits&amp;utm_campaign=Badge_Grade)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=phalcon_traits&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=phalcon_traits)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=phalcon_traits&metric=coverage)](https://sonarcloud.io/summary/new_code?id=phalcon_traits)
 
 This package contains traits with methods that are used for Phalcon v6 onward.
 

@@ -28,7 +28,7 @@ trait FilterTrait
      *
      * @return array<array-key, mixed>
      */
-    protected function toFilter(
+    protected function staticToFilter(
         array $collection,
         callable $method = null,
         int $mode = 0
@@ -38,5 +38,20 @@ trait FilterTrait
         }
 
         return array_filter($collection, $method, $mode);
+    }
+
+    /**
+     * @param array<array-key, mixed> $collection
+     * @param callable|null           $method
+     * @param int                     $mode
+     *
+     * @return array<array-key, mixed>
+     */
+    protected function toFilter(
+        array $collection,
+        callable $method = null,
+        int $mode = 0
+    ): array {
+        return self::staticToFilter($collection, $method, $mode);
     }
 }

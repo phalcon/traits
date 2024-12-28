@@ -28,10 +28,23 @@ trait UpperTrait
      *
      * @return string
      */
-    protected function toUpper(
+    protected static function staticUpper(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
         return mb_convert_case($text, MB_CASE_UPPER, $encoding);
+    }
+
+    /**
+     * @param string $text
+     * @param string $encoding
+     *
+     * @return string
+     */
+    protected function toUpper(
+        string $text,
+        string $encoding = 'UTF-8'
+    ): string {
+        return self::staticUpper($text, $encoding);
     }
 }

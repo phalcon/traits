@@ -28,49 +28,6 @@ use function unlink;
 trait FileTrait
 {
     /**
-     * @param string $filename
-     *
-     * @return bool
-     *
-     * @link https://php.net/manual/en/function.file-exists.php
-     */
-    protected function phpFileExists(string $filename)
-    {
-        return file_exists($filename);
-    }
-
-    /**
-     * @param string $filename
-     *
-     * @return false|string
-     *
-     * @link https://php.net/manual/en/function.file-get-contents.php
-     */
-    protected function phpFileGetContents(string $filename): false|string
-    {
-        return file_get_contents($filename);
-    }
-
-    /**
-     * @param string   $filename
-     * @param mixed    $data
-     * @param int      $flags
-     * @param resource $context
-     *
-     * @return false|int
-     *
-     * @link https://php.net/manual/en/function.file-put-contents.php
-     */
-    protected function phpFilePutContents(
-        string $filename,
-        $data,
-        int $flags = 0,
-        $context = null
-    ): false|int {
-        return file_put_contents($filename, $data, $flags, $context);
-    }
-
-    /**
      * Closes an open file pointer
      *
      * @link https://php.net/manual/en/function.fclose.php
@@ -107,6 +64,48 @@ trait FileTrait
         return fgetcsv($stream, $length, $separator, $enclosure, $escape);
     }
 
+    /**
+     * @param string $filename
+     *
+     * @return bool
+     *
+     * @link https://php.net/manual/en/function.file-exists.php
+     */
+    protected function phpFileExists(string $filename)
+    {
+        return file_exists($filename);
+    }
+
+    /**
+     * @param string $filename
+     *
+     * @return false|string
+     *
+     * @link https://php.net/manual/en/function.file-get-contents.php
+     */
+    protected function phpFileGetContents(string $filename): false | string
+    {
+        return file_get_contents($filename);
+    }
+
+    /**
+     * @param string   $filename
+     * @param mixed    $data
+     * @param int      $flags
+     * @param resource $context
+     *
+     * @return false|int
+     *
+     * @link https://php.net/manual/en/function.file-put-contents.php
+     */
+    protected function phpFilePutContents(
+        string $filename,
+        $data,
+        int $flags = 0,
+        $context = null
+    ): false | int {
+        return file_put_contents($filename, $data, $flags, $context);
+    }
 
     /**
      * @param string $filename

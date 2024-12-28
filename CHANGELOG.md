@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.0](https://github.com/phalcon/traits/releases/tag/3.0.0) (2024-12-28)
+
+### Added
+
+-   Added static methods for `Str` and `Arr` traits [#41](https://github.com/phalcon/traits/issues/41)
+
+### Fixed
+
+-   Added return types to all methods
+-   Enabled PHP Codesniffer in the CI run
+-   Enabled PHPStan with max configuration and made necessary adjustments
+-   Enabled Sonarqube in the CI run
+-   Added quality badges from Sonarqube
+
 ## [2.0.1](https://github.com/phalcon/traits/releases/tag/2.0.1) (2023-01-03)
 
 ### Fixed

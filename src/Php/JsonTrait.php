@@ -13,31 +13,14 @@ declare(strict_types=1);
 
 namespace Phalcon\Traits\Php;
 
-use function json_encode;
 use function json_decode;
+use function json_encode;
 
 /**
  * JSON wrapper methods
  */
 trait JsonTrait
 {
-    /**
-     * @param mixed $value
-     * @param int   $flags
-     * @param int   $depth
-     *
-     * @return false|string
-     *
-     * @link https://php.net/manual/en/function.json-encode.php
-     */
-    protected function phpJsonEncode(
-        mixed $value,
-        int $flags = 0,
-        int $depth = 512
-    ): false|string {
-        return json_encode($value, $flags, $depth);
-    }
-
     /**
      * @param string    $json
      * @param bool|null $associative
@@ -55,5 +38,22 @@ trait JsonTrait
         int $flags = 0
     ): mixed {
         return json_decode($json, $associative, $flags, $depth);
+    }
+
+    /**
+     * @param mixed $value
+     * @param int   $flags
+     * @param int   $depth
+     *
+     * @return false|string
+     *
+     * @link https://php.net/manual/en/function.json-encode.php
+     */
+    protected function phpJsonEncode(
+        mixed $value,
+        int $flags = 0,
+        int $depth = 512
+    ): false | string {
+        return json_encode($value, $flags, $depth);
     }
 }

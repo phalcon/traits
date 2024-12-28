@@ -25,9 +25,6 @@ env:
   LANGUAGE: en_US.UTF-8
   LC_ALL: en_US.UTF-8
 
-  # Windows specific
-  TOOLS_DIR: 'C:\tools'
-
   # PHP extensions required by Composer
   EXTENSIONS: intl, json, mbstring, msgpack
 
@@ -127,6 +124,9 @@ jobs:
         shell: bash
         run: |
           cp -v config/.env.example .env
+          cat .env
+          echo "${{ XDEBUG_MODE }}"
+          echo "${{ TEST_TOKEN }}"
 
       - name: "Run Unit Tests"
         if: always()
@@ -172,12 +172,17 @@ jobs:
           ls -la cv/
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v4.2.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: ./
           args: >
-            -Dsonar.organization=niden
-            -Dsonar.projectKey=niden-code_phalcon
+            -Dsonar.organization=
+            -Dsonar.projectKey=
+            -Dsonar.python.coverage.reportPaths=cv/01.xml,cv/02.xml,cv/03.xml,cv/04.xml
+            -Dsonar.tests=tests/
+            -Dsonar.test.exclusions=vendor/**,cv/**,tests/**
+            -Dsonar.language=php
+            -Dsonar.verbose=true

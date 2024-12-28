@@ -15,12 +15,13 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\UpperFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Upper trait
  */
-final class UpperTraitTest extends TestCase
+final class UpperTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
@@ -28,19 +29,15 @@ final class UpperTraitTest extends TestCase
      * @dataProvider getExamples
      *
      * @return void
-     * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrUpperFilter(, Example $example): void
-    {
-        $this->wantToTest('Str\UpperTrait - ' . $example['label']);
-
-        $text     = $example['text'];
-        $encoding = $example['encoding'];
-        $expected = $example['expected'];
-
+    public function testHelperStrUpperFilter(
+        string $text,
+        string $encoding,
+        string $expected
+    ): void {
         $object = new UpperFixture();
         $actual = $object->upper($text, $encoding);
         $this->assertEquals($expected, $actual);
@@ -49,98 +46,83 @@ final class UpperTraitTest extends TestCase
     /**
      * @return array[]
      */
-    private function getExamples(): array
+    public static function getExamples(): array
     {
         return [
             [
-                'label'    => 'english string mixed',
-                'text'     => 'HeLLo',
-                'encoding' => 'UTF-8',
-                'expected' => 'HELLO',
+                'HeLLo',
+                'UTF-8',
+                'HELLO',
             ],
             [
-                'label'    => 'english string all uppercase',
-                'text'     => 'HELLO',
-                'encoding' => 'UTF-8',
-                'expected' => 'HELLO',
+                'HELLO',
+                'UTF-8',
+                'HELLO',
             ],
             [
-                'label'    => 'english string all lowercase',
-                'text'     => 'hello',
-                'encoding' => 'UTF-8',
-                'expected' => 'HELLO',
+                'hello',
+                'UTF-8',
+                'HELLO',
             ],
             [
-                'label'    => 'string number',
-                'text'     => '1234',
-                'encoding' => 'UTF-8',
-                'expected' => '1234',
+                '1234',
+                'UTF-8',
+                '1234',
             ],
             [
-                'label'    => 'string number',
-                'text'     => '1234',
-                'encoding' => 'UTF-8',
-                'expected' => '1234',
+                '1234',
+                'UTF-8',
+                '1234',
             ],
             [
-                'label'    => 'russian string mixed',
-                'text'     => 'ПриВЕт Мир!',
-                'encoding' => 'UTF-8',
-                'expected' => 'ПРИВЕТ МИР!',
+                'ПриВЕт Мир!',
+                'UTF-8',
+                'ПРИВЕТ МИР!',
             ],
             [
-                'label'    => 'russian string all uppercase',
-                'text'     => 'ПРИВЕТ МИР!',
-                'encoding' => 'UTF-8',
-                'expected' => 'ПРИВЕТ МИР!',
+                'ПРИВЕТ МИР!',
+                'UTF-8',
+                'ПРИВЕТ МИР!',
             ],
             [
-                'label'    => 'russian string all lowercase',
-                'text'     => 'привет мир!',
-                'encoding' => 'UTF-8',
-                'expected' => 'ПРИВЕТ МИР!',
+                'привет мир!',
+                'UTF-8',
+                'ПРИВЕТ МИР!',
             ],
             [
-                'label'    => 'german string mixed',
-                'text'     => 'mÄnnER',
-                'encoding' => 'UTF-8',
-                'expected' => 'MÄNNER',
+                'mÄnnER',
+                'UTF-8',
+                'MÄNNER',
             ],
             [
-                'label'    => 'german string all uppercase',
-                'text'     => 'MÄNNER',
-                'encoding' => 'UTF-8',
-                'expected' => 'MÄNNER',
+                'MÄNNER',
+                'UTF-8',
+                'MÄNNER',
             ],
             [
-                'label'    => 'german string all lowercase',
-                'text'     => 'männer',
-                'encoding' => 'UTF-8',
-                'expected' => 'MÄNNER',
+                'männer',
+                'UTF-8',
+                'MÄNNER',
             ],
             [
-                'label'    => 'greek string mixed',
-                'text'     => 'ΚαλΗμέΡΑ',
-                'encoding' => 'UTF-8',
-                'expected' => 'ΚΑΛΗΜΈΡΑ',
+                'ΚαλΗμέΡΑ',
+                'UTF-8',
+                'ΚΑΛΗΜΈΡΑ',
             ],
             [
-                'label'    => 'greek string all uppercase',
-                'text'     => 'ΚΑΛΗΜΕΡΑ',
-                'encoding' => 'UTF-8',
-                'expected' => 'ΚΑΛΗΜΕΡΑ',
+                'ΚΑΛΗΜΕΡΑ',
+                'UTF-8',
+                'ΚΑΛΗΜΕΡΑ',
             ],
             [
-                'label'    => 'greek string all lowercase',
-                'text'     => 'καλημέρα',
-                'encoding' => 'UTF-8',
-                'expected' => 'ΚΑΛΗΜΈΡΑ',
+                'καλημέρα',
+                'UTF-8',
+                'ΚΑΛΗΜΈΡΑ',
             ],
             [
-                'label'    => 'greek string EUC-JP encoding',
-                'text'     => 'καλημέρα',
-                'encoding' => 'EUC-JP',
-                'expected' => 'καλημέ?α',
+                'καλημέρα',
+                'EUC-JP',
+                'καλημέ?α',
             ],
         ];
     }

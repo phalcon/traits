@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\JsonFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Json trait
  */
-final class JsonTraitTest extends TestCase
+final class JsonTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Php\JsonTrait
@@ -29,10 +30,8 @@ final class JsonTraitTest extends TestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpJsonTrait(): void
+    public function testHelperPhpJsonTrait(): void
     {
-        $this->wantToTest('Php\JsonTrait');
-
         $json = new JsonFixture();
         $data = [
             'one' => 'two',

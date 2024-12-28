@@ -15,12 +15,13 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Codeception\Stub;
 use Phalcon\Tests\Fixtures\Php\UrlFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the URL trait
  */
-final class UrlTraitTest extends TestCase
+final class UrlTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Php\UrlTrait
@@ -30,10 +31,8 @@ final class UrlTraitTest extends TestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */
-    public function phpUrlTrait(): void
+    public function testHelperPhpUrlTrait(): void
     {
-        $this->wantToTest('Php\UrlTrait');
-
         $url    = new UrlFixture();
         $source = "Testing-Data/phalcon";
 

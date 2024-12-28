@@ -15,12 +15,13 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\StartsWithFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the StartsWith trait
  */
-final class StartsWithTraitTest extends TestCase
+final class StartsWithTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Str\StartsWithTrait :: toStartsWith()
@@ -28,22 +29,16 @@ final class StartsWithTraitTest extends TestCase
      * @dataProvider getExamples
      *
      * @return void
-     * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrStartsWithFilter(
-        ,
-        Example $example
+    public function testHelperStrStartsWithFilter(
+        string $haystack,
+        string $needle,
+        bool $insensitive,
+        bool $expected
     ): void {
-        $this->wantToTest('Str\StartsWithTrait - ' . $example['label']);
-
-        $haystack    = $example['haystack'];
-        $needle      = $example['needle'];
-        $insensitive = $example['insensitive'];
-        $expected    = $example['expected'];
-
         $object = new StartsWithFixture();
         $actual = $object->startsWith($haystack, $needle, $insensitive);
         $this->assertEquals($expected, $actual);
@@ -52,78 +47,68 @@ final class StartsWithTraitTest extends TestCase
     /**
      * @return array[]
      */
-    private function getExamples(): array
+    public static function getExamples(): array
     {
         return [
             [
-                'label'       => 'string one character',
-                'haystack'    => 'Hello',
-                'needle'      => 'H',
-                'insensitive' => true,
-                'expected'    => true,
+                'Hello',
+                'H',
+                true,
+                true,
             ],
             [
-                'label'       => 'string two character',
-                'haystack'    => 'Hello',
-                'needle'      => 'He',
-                'insensitive' => true,
-                'expected'    => true,
+                'Hello',
+                'He',
+                true,
+                true,
             ],
             [
-                'label'       => 'string full word',
-                'haystack'    => 'Hello',
-                'needle'      => 'Hello',
-                'insensitive' => true,
-                'expected'    => true,
+                'Hello',
+                'Hello',
+                true,
+                true,
             ],
             [
-                'label'       => 'empty strings',
-                'haystack'    => '',
-                'needle'      => '',
-                'insensitive' => true,
-                'expected'    => false,
+                '',
+                '',
+                true,
+                false,
             ],
             [
-                'label'       => 'empty haystack',
-                'haystack'    => '',
-                'needle'      => 'Hello',
-                'insensitive' => true,
-                'expected'    => false,
+                '',
+                'Hello',
+                true,
+                false,
             ],
             [
-                'label'       => 'string one character case insensitive',
-                'haystack'    => 'Hello',
-                'needle'      => 'h',
-                'insensitive' => true,
-                'expected'    => true,
+                'Hello',
+                'h',
+                true,
+                true,
             ],
             [
-                'label'       => 'string two character case insensitive',
-                'haystack'    => 'Hello',
-                'needle'      => 'he',
-                'insensitive' => true,
-                'expected'    => true,
+                'Hello',
+                'he',
+                true,
+                true,
             ],
             [
-                'label'       => 'string full word case insensitive',
-                'haystack'    => 'Hello',
-                'needle'      => 'hello',
-                'insensitive' => true,
-                'expected'    => true,
+                'Hello',
+                'hello',
+                true,
+                true,
             ],
             [
-                'label'       => 'string full word case sensitive',
-                'haystack'    => 'Hello',
-                'needle'      => 'hello',
-                'insensitive' => false,
-                'expected'    => false,
+                'Hello',
+                'hello',
+                false,
+                false,
             ],
             [
-                'label'       => 'string one character case sensitive',
-                'haystack'    => 'Hello',
-                'needle'      => 'h',
-                'insensitive' => false,
-                'expected'    => false,
+                'Hello',
+                'h',
+                false,
+                false,
             ],
         ];
     }

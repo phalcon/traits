@@ -14,12 +14,13 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\InfoFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Info trait
  */
-final class InfoTraitTest extends TestCase
+final class InfoTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Php\InfoTrait
@@ -29,10 +30,8 @@ final class InfoTraitTest extends TestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpInfoTrait(): void
+    public function testHelperPhpInfoTrait(): void
     {
-        $this->wantToTest('Php\InfoTrait');
-
         $info = new InfoFixture();
 
         $actual = $info->extensionLoaded('mbstring');

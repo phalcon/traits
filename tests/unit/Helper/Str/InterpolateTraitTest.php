@@ -15,12 +15,13 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\InterpolateFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Interpolate trait
  */
-final class InterpolateTraitTest extends TestCase
+final class InterpolateTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
@@ -28,23 +29,17 @@ final class InterpolateTraitTest extends TestCase
      * @dataProvider getExamples
      *
      * @return void
-     * @param Example    $example
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
      */
-    public function helperStrInterpolateFilter(
-        ,
-        Example $example
+    public function testHelperStrInterpolateFilter(
+        string $expected,
+        string $format,
+        array $context,
+        string $left,
+        string $right
     ): void {
-        $this->wantToTest('Str\InterpolateTrait - ' . $example['label']);
-
-        $expected = $example['expected'];
-        $format   = $example['format'];
-        $context  = $example['context'];
-        $left     = $example['left'];
-        $right    = $example['right'];
-
         $object = new InterpolateFixture();
         $actual = $object->interpolate($format, $context, $left, $right);
         $this->assertEquals($expected, $actual);
@@ -53,79 +48,72 @@ final class InterpolateTraitTest extends TestCase
     /**
      * @return array[]
      */
-    private function getExamples(): array
+    public static function getExamples(): array
     {
         return [
             [
-                'label'    => 'date',
-                'expected' => '2020-09-09 is the date',
-                'format'   => '%date% is the date',
-                'context'  => [
-                    'date' => '2020-09-09',
+                '2020-09-08 is the date',
+                '%date% is the date',
+                [
+                    'date' => '2020-09-08',
                 ],
-                'left'     => '%',
-                'right'    => '%',
+                '%',
+                '%',
             ],
             [
-                'label'    => 'date/level',
-                'expected' => '2020-09-09 is the date CRITICAL is the level',
-                'format'   => '%date% is the date %level% is the level',
-                'context'  => [
+                '2020-09-09 is the date CRITICAL is the level',
+                '%date% is the date %level% is the level',
+                [
                     'date'  => '2020-09-09',
                     'level' => 'CRITICAL',
                 ],
-                'left'     => '%',
-                'right'    => '%',
+                '%',
+                '%',
             ],
             [
-                'label'    => 'empty',
-                'expected' => 'no format',
-                'format'   => 'no format',
-                'context'  => [
+                'no format',
+                'no format',
+                [
                     'date' => '2020-09-09',
                 ],
-                'left'     => '%',
-                'right'    => '%',
+                '%',
+                '%',
             ],
             [
-                'label'    => 'date',
-                'expected' => '2020-09-09 is the date',
-                'format'   => '%date% is the date',
-                'context'  => [
+                '2020-09-09 is the date',
+                '%date% is the date',
+                [
                     'date' => '2020-09-09',
                 ],
-                'left'     => '%',
-                'right'    => '%',
+                '%',
+                '%',
             ],
             [
-                'label'    => 'date and context',
-                'expected' => '2020-09-09 is the date AAA is context',
-                'format'   => '%date% is the date %stub% is context',
-                'context'  => [
+                '2020-09-09 is the date AAA is context',
+                '%date% is the date %stub% is context',
+                [
                     'date' => '2020-09-09',
                     'stub' => 'AAA',
                 ],
-                'left'     => '%',
-                'right'    => '%',
+                '%',
+                '%',
             ],
             [
-                'label'    => 'date and context different placeholders',
-                'expected' => '2020-09-09 is the date AAA is context',
-                'format'   => '[date] is the date [stub] is context',
-                'context'  => [
+                '2020-09-09 is the date AAA is context',
+                '[date] is the date [stub] is context',
+                [
                     'date' => '2020-09-09',
                     'stub' => 'AAA',
                 ],
-                'left'     => '[',
-                'right'    => ']',
+                '[',
+                ']',
             ],
             [
-                'label'    => 'empty context',
-                'expected' => '[date] is the date [stub] is context',
-                'format'   => '[date] is the date [stub] is context',
-                'context'  => [],
-                'left'     => '[',
-                'right'    => ']',
+                '[date] is the date [stub] is context',
+                '[date] is the date [stub] is context',
+                [],
+                '[',
+                ']',
             ],
         ];
     }

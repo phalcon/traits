@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\FileFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 use function dataDir;
@@ -24,7 +25,7 @@ use function uniqid;
 /**
  * Tests the File trait
  */
-final class FileTraitTest extends TestCase
+final class FileTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Php\FileTrait
@@ -34,10 +35,8 @@ final class FileTraitTest extends TestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
-    public function phpFileTrait(): void
+    public function testHelperPhpFileTrait(): void
     {
-        $this->wantToTest('Php\FileTrait');
-
         $name     = $this->getNewFileName('file', 'txt');
         $contents = uniqid('contents-');
         $fileName = outputDir($name);
@@ -109,7 +108,7 @@ final class FileTraitTest extends TestCase
         $actual = $file->fclose($handle);
         $this->assertTrue($actual);
 
-        $this->seeFileFound($name, outputDir());
+        $this->assertFileExists(outputDir($name));
         $this->safeDeleteFile($fileName);
     }
 }

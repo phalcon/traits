@@ -14,14 +14,16 @@ declare(strict_types=1);
 namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\IniFixture;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
 use function dataDir;
+use function ini_get;
 
 /**
  * Tests the Ini trait
  */
-final class IniTraitTest extends TestCase
+final class IniTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Php\IniTrait
@@ -31,10 +33,8 @@ final class IniTraitTest extends TestCase
      * @author Phalcon Team <team@phalcon.io>
      * @since  2023-01-01
      */
-    public function phpInfoTrait(): void
+    public function testHelperPhpInfoTrait(): void
     {
-        $this->wantToTest('Php\IniTrait');
-
         $ini = new IniFixture();
 
         /**
@@ -61,8 +61,8 @@ final class IniTraitTest extends TestCase
         $actual   = $ini->iniGet('unknown', '1234');
         $this->assertSame($expected, $actual);
 
-        // Get - This is set in codeception.yml
-        $expected = '256M';
+        // Get
+        $expected = ini_get('memory_limit');
         $actual   = $ini->iniGet('memory_limit');
         $this->assertSame($expected, $actual);
 
@@ -75,7 +75,7 @@ final class IniTraitTest extends TestCase
         $this->assertTrue($actual);
 
         // Get Int
-        $expected = 256;
+        $expected = (int)ini_get('memory_limit');
         $actual   = $ini->iniGetInt('memory_limit');
         $this->assertSame($expected, $actual);
 

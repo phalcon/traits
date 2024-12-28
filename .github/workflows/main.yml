@@ -178,3 +178,9 @@ jobs:
           args: >
             -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.sources=src/
+            -Dsonar.exclusions=vendor/**,cv/**,tests/**
+            -Dsonar.sourceEncoding=UTF-8
+            -Dsonar.language=php
+            -Dsonar.tests=tests/
+            -Dsonar.php.coverage.reportPaths=cv/01.xml,cv/02.xml,cv/03.xml,cv/04.xml

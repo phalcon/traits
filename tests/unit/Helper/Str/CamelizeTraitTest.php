@@ -15,39 +15,38 @@ namespace Phalcon\Tests\Unit\Helper\Str;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\CamelizeFixture;
-use UnitTester;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
+use PHPUnit\Framework\TestCase;
 
-class CamelizeTraitCest
+final class CamelizeTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Str\CamelizeTrait
      *
      * @dataProvider getSources
      *
-     * @param UnitTester $I
-     * @param Example    $example
+     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09
      */
-    public function helperStrStrCamelize(UnitTester $I, Example $example)
-    {
-        $I->wantToTest('Str\DirFromFileTrait - ' . $example[0]);
-
+    public function testHelperStrCamelize(
+        string $value,
+        string $expected,
+        ?string $delimiter,
+        bool $lowercase
+    ): void {
         $object    = new CamelizeFixture();
-        $value     = $example[0];
-        $expected  = $example[1];
-        $delimiter = $example[2] ?: '\-_';
-        $lowercase = $example[3];
+        $delimiter = $delimiter ?: '\-_';
 
         $actual = $object->toCamelize($value, $delimiter, $lowercase);
-        $I->assertSame($expected, $actual);
+        $this->assertSame($expected, $actual);
     }
 
     /**
      * @return array
      */
-    private function getSources(): array
+    public static function getSources(): array
     {
         return [
             ['camelize', 'Camelize', null, false],

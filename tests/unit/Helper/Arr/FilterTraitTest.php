@@ -15,99 +15,92 @@ namespace Phalcon\Tests\Unit\Helper\Arr;
 
 use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Arr\FilterFixture;
-use UnitTester;
+use Phalcon\Tests\Unit\AbstractUnitTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Filter trait
  */
-class FilterTraitCest
+final class FilterTraitTest extends AbstractUnitTestCase
 {
     /**
      * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
      *
      * @dataProvider getExamples
      *
-     * @param UnitTester $I
-     * @param Example    $example
+     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-25
      */
-    public function factoryFilterTraitToFilter(
-        UnitTester $I,
-        Example $example
+    public function testHelperArrFilterTraitToFilter(
+        array $source,
+        array $expected,
+        ?callable $method
     ): void {
-        $I->wantToTest('Arr\FilterTrait - ' . $example['label']);
-
         $filter = new FilterFixture();
 
-        $expected = $example['expected'];
-        $source   = $example['source'];
-        $method   = $example['method'];
         $actual   = $filter->filter($source, $method);
 
-        $I->assertEquals($expected, $actual);
+        $this->assertEquals($expected, $actual);
     }
 
     /**
      * @return array<array-key, array<string, mixed>>
      */
-    private function getExamples(): array
+    public static function getExamples(): array
     {
         return [
             [
-                'label'    => 'array greater than',
-                'source'   => [
+                [
                     0 => 1,
                     1 => 2,
                     2 => 3,
                     3 => 4,
                     4 => 5,
                 ],
-                'expected' => [
+                [
                     2 => 3,
                     3 => 4,
                     4 => 5,
                 ],
-                'method'   => function ($element) {
+                function ($element) {
                     return $element > 2;
                 },
             ],
             [
-                'label'    => 'array not false or null',
-                'source'   => [
+                [
                     0 => "one",
                     1 => "two",
                     2 => null,
                     3 => false,
                     4 => 4,
                 ],
-                'expected' => [
+                [
                     0 => "one",
                     1 => "two",
                     4 => 4,
                 ],
-                'method'   => function ($element) {
+                function ($element) {
                     return null !== $element && false !== $element;
                 },
             ],
             [
-                'label'    => 'no callback',
-                'source'   => [
+                [
                     0 => "one",
                     1 => "two",
                     2 => null,
                     3 => false,
                     4 => 4,
                 ],
-                'expected' => [
+                [
                     0 => "one",
                     1 => "two",
                     2 => null,
                     3 => false,
                     4 => 4,
                 ],
-                'method'   => null,
+                null,
             ],
         ];
     }

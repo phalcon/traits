@@ -26,7 +26,7 @@ trait FilterTrait
      * @param callable|null           $method
      * @param int                     $mode
      *
-     * @return array<int|string,mixed>
+     * @return array<array-key, mixed>
      */
     protected function toFilter(
         array $collection,

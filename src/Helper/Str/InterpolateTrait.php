@@ -21,10 +21,10 @@ namespace Phalcon\Traits\Helper\Str;
 trait InterpolateTrait
 {
     /**
-     * @param string $input
-     * @param array  $context
-     * @param string $left
-     * @param string $right
+     * @param string   $input
+     * @param string[] $context
+     * @param string   $left
+     * @param string   $right
      *
      * @return string
      */

@@ -30,8 +30,11 @@ trait JsonTrait
      *
      * @link https://php.net/manual/en/function.json-encode.php
      */
-    protected function phpJsonEncode($value, int $flags = 0, int $depth = 512)
-    {
+    protected function phpJsonEncode(
+        mixed $value,
+        int $flags = 0,
+        int $depth = 512
+    ): false|string {
         return json_encode($value, $flags, $depth);
     }
 
@@ -50,7 +53,7 @@ trait JsonTrait
         ?bool $associative = null,
         int $depth = 512,
         int $flags = 0
-    ) {
+    ): mixed {
         return json_decode($json, $associative, $flags, $depth);
     }
 }

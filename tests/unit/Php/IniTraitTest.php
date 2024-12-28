@@ -71,7 +71,7 @@ final class IniTraitTest extends AbstractUnitTestCase
         $this->assertTrue($actual);
 
         // Get Bool
-        $actual = $ini->iniGetBool('log_errors');
+        $actual = $ini->iniGetBool('xmlrpc_errors');
         $this->assertFalse($actual);
 
         // Unknown

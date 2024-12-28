@@ -85,8 +85,8 @@ jobs:
     permissions:
       contents: read # to fetch code (actions/checkout)
 
-    name: Unit tests / PHP-${{ matrix.php }}-${{ matrix.ts }}-${{ matrix.name }}
-    runs-on: ${{ matrix.os }}
+    name: Unit tests / PHP-${{ matrix.php }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -95,14 +95,6 @@ jobs:
           - '8.2'
           - '8.3'
           - '8.4'
-        ts:
-          - 'nts'
-          - 'ts'
-        name:
-          - ubuntu-gcc
-        include:
-          # Linux
-          - { name: ubuntu-gcc, os: ubuntu-latest, compiler: gcc }
 
     steps:
       - uses: actions/checkout@v4
@@ -144,7 +136,7 @@ jobs:
       - name: "Upload coverage file artifact"
         uses: "actions/upload-artifact@v4"
         with:
-          name: "unit-${{ matrix.php }}-${{ matrix.ts }}-${{ matrix.name }}.coverage"
+          name: "unit-${{ matrix.php }}.coverage"
           path: "tests/_output/coverage.xml"
 
   upload-coverage:

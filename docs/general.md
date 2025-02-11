@@ -24,6 +24,14 @@ if they have the same name.
 
 The methods offered are:
 
+**getCachedInstance**
+```php
+protected function getCachedInstance(string $name, mixed ...$arguments): object
+```
+Returns a instance based on its name. The instance is stored in an internal
+array and the method returns the same instance once initialized.
+(see `getService()` and `getExceptionClass()` method)
+
 **getService**
 ```php
 protected function getService(string $name)

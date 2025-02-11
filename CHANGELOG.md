@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/phalcon/traits/releases/tag/3.0.0) (2025-02-11)
+
+
+### Changed
+
+-   Changed minimum PHP version to 8.1
+
+### Added
+
+-   Added `getCachedInstance` to the FactoryTrait to return the same object once instantiated
+
 ## [2.0.4](https://github.com/phalcon/traits/releases/tag/2.0.4) (2024-12-28)
 
 

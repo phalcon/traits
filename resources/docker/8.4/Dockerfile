@@ -1,5 +1,5 @@
 FROM composer:2.8.5 AS composer
-FROM php:8.1-fpm
+FROM php:8.4-fpm
 
 COPY extra.ini /usr/local/etc/php/conf.d/
 

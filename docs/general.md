@@ -24,6 +24,14 @@ if they have the same name.
 
 The methods offered are:
 
+**getCachedInstance**
+```php
+protected function getCachedInstance(string $name, mixed ...$arguments): object
+```
+Returns a instance based on its name. The instance is stored in an internal
+array and the method returns the same instance once initialized.
+(see `getService()` and `getExceptionClass()` method)
+
 **getService**
 ```php
 protected function getService(string $name)
@@ -112,6 +120,8 @@ default one). It also allows the developer to lowercase the first character.
 echo $this->toCamelize('came_li_ze');
 // CameLiZe
 ```
+
+The trait also exposes `staticToCamelize()` for calling the method statically.
 
 #### DirFromFileTrait
 
@@ -229,6 +239,8 @@ echo $this->toEndsWith('PhAlcOn');
 // phalcon
 ````
 
+The trait also exposes `staticToLower()` for calling the method statically.
+
 #### StartsWithTrait
 Checks if a string starts with a given string
 
@@ -276,6 +288,8 @@ echo $this->toUncamelize('CameLiZe');
 // came_li_ze
 ```
 
+The trait also exposes `staticToUncamelize()` for calling the method statically.
+
 #### UpperTrait
 Converts the passed string to uppercase using the `mbstring` extension.
 ```php
@@ -296,6 +310,8 @@ protected function toUpper(
 echo $this->toUpper('PhAlcOn');
 // PHALCON
 ````
+
+The trait also exposes `staticToUpper()` for calling the method statically.
 
 ### Php
 PHP function wrappers. These are strongly typed (compared to the methods they 
@@ -472,7 +488,9 @@ protected function phpIniGet(string $input, string $defaultValue = ""): bool
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-**iniGet**
+The trait also exposes `phpStaticIniGet()` for calling the method statically.
+
+**iniGetBool**
 ```php
 /**
  * @param string $input
@@ -484,7 +502,9 @@ protected function phpIniGetBool(string $input, bool $defaultValue = false): boo
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-**iniGet**
+The trait also exposes `phpStaticIniGetBool()` for calling the method statically.
+
+**iniGetInt**
 ```php
 /**
  * @param string $input
@@ -495,6 +515,8 @@ protected function phpIniGetBool(string $input, bool $defaultValue = false): boo
 protected function phpIniGetInt(string $input, int $defaultValue = 0): int
 ```
 [ini_get][ini-get], [ini list][ini-list]
+
+The trait also exposes `phpStaticIniGetInt()` for calling the method statically.
 
 **parseIniFile**
 ```php
@@ -515,6 +537,7 @@ protected function phpParseIniFile(
 ```
 [parse_ini_file][parse-ini-file]
 
+The trait also exposes `phpStaticParseIniFile()` for calling the method statically.
 
 #### JsonTrait
 JSON wrapper methods

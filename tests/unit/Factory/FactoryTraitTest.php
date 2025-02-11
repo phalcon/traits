@@ -20,6 +20,8 @@ use Phalcon\Tests\Fixtures\Factory\FactoryThreeFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use PHPUnit\Framework\TestCase;
 
+use function spl_object_hash;
+
 /**
  * Tests the factory trait
  */
@@ -62,6 +64,46 @@ final class FactoryTraitTest extends AbstractUnitTestCase
         $class  = FactoryThreeFixture::class;
         $actual = $factory->newInstance('three');
         $this->assertInstanceOf($class, $actual);
+    }
+
+    /**
+     * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() with init
+     *
+     * @return void
+     *
+     * @author Phalcon Team <team@phalcon.io>
+     * @since  2021-10-25
+     */
+    public function testFactoryFactoryTraitCachedInstance(): void
+    {
+        $factory = new FactoryFixture();
+
+        $class = FactoryOneFixture::class;
+        $one   = $factory->newInstance('one');
+        $this->assertInstanceOf($class, $one);
+
+        /**
+         * Get it again, it should not be the same
+         */
+        $two = $factory->newInstance('one');
+        $oneHash = spl_object_hash($one);
+        $twoHash = spl_object_hash($two);
+        $this->assertNotSame($oneHash, $twoHash);
+
+        /**
+         * Cached
+         */
+        $class = FactoryOneFixture::class;
+        $one   = $factory->getInstance('one');
+        $this->assertInstanceOf($class, $one);
+
+        /**
+         * Get it again, it should not be the same
+         */
+        $two = $factory->getInstance('one');
+        $oneHash = spl_object_hash($one);
+        $twoHash = spl_object_hash($two);
+        $this->assertSame($oneHash, $twoHash);
     }
 
     /**

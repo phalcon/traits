@@ -28,7 +28,7 @@ trait UpperTrait
      *
      * @return string
      */
-    protected static function staticUpper(
+    protected static function staticToUpper(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
@@ -45,6 +45,6 @@ trait UpperTrait
         string $text,
         string $encoding = 'UTF-8'
     ): string {
-        return self::staticUpper($text, $encoding);
+        return self::staticToUpper($text, $encoding);
     }
 }

@@ -1,10 +1,18 @@
 # Changelog
 
-## [3.0.0](https://github.com/phalcon/traits/releases/tag/3.0.0) (2024-12-28)
+## [3.0.0](https://github.com/phalcon/traits/releases/tag/3.0.0) (2025-02-11)
+
+
+### Changed
+
+-   Changed minimum PHP version to 8.1
 
 ### Added
 
--   Added static methods for `Str` and `Arr` traits [#41](https://github.com/phalcon/traits/issues/41)
+-   Added `getCachedInstance` to the FactoryTrait to return the same object once instantiated
+
+## [2.0.4](https://github.com/phalcon/traits/releases/tag/2.0.4) (2024-12-28)
+
 
 ### Fixed
 
@@ -13,6 +21,25 @@
 -   Enabled PHPStan with max configuration and made necessary adjustments
 -   Enabled Sonarqube in the CI run
 -   Added quality badges from Sonarqube
+
+## [2.0.3](https://github.com/phalcon/traits/releases/tag/2.0.3) (2023-05-01)
+
+### Fixed
+
+-   Added `staticToCamelize()` for calling `toCamelize()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticToLower()` for calling `toLower()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticToUncamelize()` for calling `toUncamelize()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticToUpper()` for calling `toUpper()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticPhpIniGet()` for calling `phpIniGet()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticPhpIniGetBool()` for calling `phpIniGetBool()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticPhpIniGetInt()` for calling `phpIniGetInt()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+-   Added `staticPhpParseIniFile()` for calling `phpParseIniFile()` statically. [#41](https://github.com/phalcon/traits/pull/41)
+
+## [2.0.2](https://github.com/phalcon/traits/releases/tag/2.0.2) (2023-01-15)
+
+### Fixed
+
+-   Added missing `use` statements [#40](https://github.com/phalcon/traits/pull/40)
 
 ## [2.0.1](https://github.com/phalcon/traits/releases/tag/2.0.1) (2023-01-03)
 

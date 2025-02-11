@@ -35,12 +35,12 @@ trait CamelizeTrait
      *
      * @return string
      */
-    public static function staticCamelize(
+    public static function staticToCamelize(
         string $text,
         string $delimiters = '\-_',
         bool $lowerFirst = false
     ): string {
-        $exploded = self::processArray($text, $delimiters);
+        $exploded = self::staticProcessArray($text, $delimiters);
 
         $output = array_map(
             function ($element) {
@@ -70,16 +70,16 @@ trait CamelizeTrait
         string $delimiters = '\-_',
         bool $lowerFirst = false
     ): string {
-        return self::staticCamelize($text, $delimiters, $lowerFirst);
+        return self::staticToCamelize($text, $delimiters, $lowerFirst);
     }
 
     /**
-     * @param string $text
-     * @param string $delimiters
+     * @param string      $text
+     * @param string|null $delimiters
      *
      * @return array<array-key, string>
      */
-    protected static function processArray(
+    protected static function staticProcessArray(
         string $text,
         string $delimiters = '\-_'
     ): array {

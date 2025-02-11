@@ -24,7 +24,7 @@ trait UncamelizeTrait
      *
      * @return string
      */
-    public static function staticUncamelize(
+    public static function staticToUncamelize(
         string $text,
         string $delimiter = '_'
     ): string {
@@ -47,6 +47,6 @@ trait UncamelizeTrait
         string $text,
         string $delimiter = '_'
     ): string {
-        return self::staticUncamelize($text, $delimiter);
+        return self::staticToUncamelize($text, $delimiter);
     }
 }

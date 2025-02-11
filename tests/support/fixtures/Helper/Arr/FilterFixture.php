@@ -30,7 +30,7 @@ class FilterFixture
      */
     public function filter(
         array $collection,
-        callable $method = null,
+        callable|null $method = null,
         int $mode = 0
     ): array {
         return $this->toFilter($collection, $method, $mode);

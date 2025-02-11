@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Fixtures\Factory;
 
+use Exception;
 use Phalcon\Traits\Factory\FactoryTrait;
 
 class FactoryFixture
@@ -40,6 +41,20 @@ class FactoryFixture
         $definition = $this->getService($name);
 
         return new $definition($options);
+    }
+
+    /**
+     * Return an object from the instances pool. If it does not exist, create it
+     *
+     * @param string $name
+     * @param mixed  ...$arguments
+     *
+     * @return object|mixed
+     * @throws Exception
+     */
+    public function getInstance(string $name, mixed ...$arguments): object
+    {
+        return $this->getCachedInstance($name, ...$arguments);
     }
 
     /**

@@ -1,4 +1,4 @@
-FROM composer:2.5 as composer
+FROM composer:2.8.5 AS composer
 FROM php:8.2-fpm
 
 COPY extra.ini /usr/local/etc/php/conf.d/
@@ -8,15 +8,13 @@ ENV MY_USER="phalcon" \
 	MY_GROUP="phalcon" \
 	MY_UID="1000" \
 	MY_GID="1000" \
-	PHP_VERSION="8.0"
+	PHP_VERSION="8.1"
 
 # User and Group
 RUN set -eux && \
 	groupadd -g ${MY_GID} -r ${MY_GROUP} && \
-	useradd -u ${MY_UID} -m -s /bin/bash -g ${MY_GROUP} ${MY_USER}
-
-# Update
-RUN apt update -y && \
+	useradd -u ${MY_UID} -m -s /bin/bash -g ${MY_GROUP} ${MY_USER}  && \
+    apt update -y && \
     apt install -y \
         apt-utils \
         git \
@@ -24,16 +22,12 @@ RUN apt update -y && \
         nano \
         sudo \
         wget \
-        zip
-
-# PECL Packages
-RUN pecl install xdebug
-
-RUN docker-php-ext-install \
-        zip
-
-# Install PHP extensions
-RUN docker-php-ext-enable \
+        zip && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* && \
+    pecl install xdebug && \
+    docker-php-ext-install \
+        zip && \
+    docker-php-ext-enable \
         xdebug
 
 # Composer

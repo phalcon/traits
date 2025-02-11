@@ -28,6 +28,11 @@ use function array_merge;
 trait FactoryTrait
 {
     /**
+     * @var array<string, object>
+     */
+    private array $instances = [];
+
+    /**
      * @var string[]
      */
     private array $mapper = [];
@@ -58,6 +63,25 @@ trait FactoryTrait
         }
 
         return $this->mapper[$name];
+    }
+
+    /**
+     * Return an object from the instances pool. If it does not exist, create it
+     *
+     * @param string $name
+     * @param mixed  ...$arguments
+     *
+     * @return object|mixed
+     * @throws Exception
+     */
+    protected function getCachedInstance(string $name, mixed ...$arguments): object
+    {
+        if (true !== isset($this->instances[$name])) {
+            $definition = $this->getService($name);
+            $this->instances[$name] = new $definition(...$arguments);
+        }
+
+        return $this->instances[$name];
     }
 
     /**

@@ -30,7 +30,7 @@ trait FilterTrait
      */
     protected function staticToFilter(
         array $collection,
-        callable $method = null,
+        callable|null $method = null,
         int $mode = 0
     ): array {
         if (null === $method || !is_callable($method)) {
@@ -49,7 +49,7 @@ trait FilterTrait
      */
     protected function toFilter(
         array $collection,
-        callable $method = null,
+        callable|null $method = null,
         int $mode = 0
     ): array {
         return self::staticToFilter($collection, $method, $mode);

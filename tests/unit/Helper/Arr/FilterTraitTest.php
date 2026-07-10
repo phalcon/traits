@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Arr;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Arr\FilterFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Filter trait

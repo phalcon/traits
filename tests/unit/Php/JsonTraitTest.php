@@ -15,7 +15,6 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\JsonFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Json trait

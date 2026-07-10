@@ -15,7 +15,6 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\FileFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 use function dataDir;
 use function is_resource;

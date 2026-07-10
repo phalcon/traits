@@ -15,7 +15,6 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\InfoFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Info trait

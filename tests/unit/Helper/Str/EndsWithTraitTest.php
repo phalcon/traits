@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\EndsWithFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the EndsWith trait

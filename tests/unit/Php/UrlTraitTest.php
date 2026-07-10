@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Php;
 
-use Codeception\Stub;
 use Phalcon\Tests\Fixtures\Php\UrlFailFixture;
 use Phalcon\Tests\Fixtures\Php\UrlFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the URL trait

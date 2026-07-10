@@ -18,7 +18,6 @@ use Phalcon\Tests\Fixtures\Factory\FactoryFixture;
 use Phalcon\Tests\Fixtures\Factory\FactoryOneFixture;
 use Phalcon\Tests\Fixtures\Factory\FactoryThreeFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 use function spl_object_hash;
 

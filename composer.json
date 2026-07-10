@@ -38,7 +38,7 @@
         "infection/infection": "^0.29.9",
         "pds/composer-script-names": "^1.0",
         "pds/skeleton": "^1.0",
-        "phalcon/talon": "^0.6",
+        "phalcon/talon": "^0.7",
         "phpstan/phpstan": "^2.2",
         "phpunit/phpunit": "^10.5",
         "squizlabs/php_codesniffer": "^4.0"
@@ -64,7 +64,10 @@
         "psr-4": {
             "Phalcon\\Tests\\Fixtures\\": "tests/support/fixtures/",
             "Phalcon\\Tests\\Unit\\": "tests/unit/"
-        }
+        },
+        "files": [
+            "tests/support/config/functions.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

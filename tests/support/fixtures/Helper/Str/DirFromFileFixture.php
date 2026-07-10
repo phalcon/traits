@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Fixtures\Helper\Str;
 
-use Phalcon\Traits\Helper\Str\DirFromFileTrait;
+use Phalcon\Traits\Support\Helper\Str\DirFromFileTrait;
 
 /**
  * Accepts a file name (without extension) and returns a calculated
@@ -25,11 +25,12 @@ class DirFromFileFixture
 
     /**
      * @param string $file
+     * @param bool   $filesystemSafe
      *
      * @return string
      */
-    public function dirFromFile(string $file): string
+    public function dirFromFile(string $file, bool $filesystemSafe = false): string
     {
-        return $this->toDirFromFile($file);
+        return $this->toDirFromFile($file, $filesystemSafe);
     }
 }

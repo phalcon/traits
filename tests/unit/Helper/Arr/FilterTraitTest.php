@@ -26,6 +26,9 @@ final class FilterTraitTest extends AbstractUnitTestCase
      *
      * @dataProvider getExamples
      *
+     * @param array<array-key, mixed> $source
+     * @param array<array-key, mixed> $expected
+     *
      * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
@@ -44,7 +47,7 @@ final class FilterTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @return array<array-key, array<string, mixed>>
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {

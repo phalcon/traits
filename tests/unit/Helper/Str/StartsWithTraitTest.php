@@ -43,7 +43,7 @@ final class StartsWithTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @return array[]
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {

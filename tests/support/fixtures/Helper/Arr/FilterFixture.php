@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Fixtures\Helper\Arr;
 
-use Phalcon\Traits\Helper\Arr\FilterTrait;
+use Phalcon\Traits\Support\Helper\Arr\FilterTrait;
 
 class FilterFixture
 {
@@ -24,15 +24,13 @@ class FilterFixture
      *
      * @param array<int|string,mixed> $collection
      * @param callable|null           $method
-     * @param int                     $mode
      *
      * @return array<int|string,mixed>
      */
     public function filter(
         array $collection,
-        callable|null $method = null,
-        int $mode = 0
+        callable|null $method = null
     ): array {
-        return $this->toFilter($collection, $method, $mode);
+        return $this->toFilter($collection, $method);
     }
 }

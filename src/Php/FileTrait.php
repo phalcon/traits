@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Phalcon\Traits\Php;
 
 use function fclose;
+use function fgetcsv;
 use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
@@ -36,7 +37,7 @@ trait FileTrait
      *
      * @return bool
      */
-    protected function phpFclose($handle): bool
+    protected static function phpFclose($handle): bool
     {
         return fclose($handle);
     }
@@ -45,7 +46,7 @@ trait FileTrait
      * Gets line from file pointer and parse for CSV fields
      *
      * @param resource $stream
-     * @param int      $length
+     * @param int<0, max> $length
      * @param string   $separator
      * @param string   $enclosure
      * @param string   $escape
@@ -54,13 +55,21 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.fgetcsv.php
      */
-    protected function phpFgetCsv(
+    protected static function phpFgetCsv(
         $stream,
         int $length = 0,
         string $separator = ',',
-        string $enclosure = '"',
-        string $escape = '\\'
-    ): array|false {
+        ?string $enclosure = null,
+        ?string $escape = null
+    ): array | false {
+        if (null === $enclosure) {
+            $enclosure = '"';
+        }
+
+        if (null === $escape) {
+            $escape = '\\';
+        }
+
         return fgetcsv($stream, $length, $separator, $enclosure, $escape);
     }
 
@@ -71,21 +80,34 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.file-exists.php
      */
-    protected function phpFileExists(string $filename): bool
+    protected static function phpFileExists(string $filename): bool
     {
         return file_exists($filename);
     }
 
     /**
-     * @param string $filename
+     * @param string        $filename
+     * @param bool          $useIncludePath
+     * @param resource|null $context
+     * @param int           $offset
+     * @param int<0, max>|null $length
      *
      * @return false|string
      *
      * @link https://php.net/manual/en/function.file-get-contents.php
      */
-    protected function phpFileGetContents(string $filename): false | string
-    {
-        return file_get_contents($filename);
+    protected static function phpFileGetContents(
+        string $filename,
+        bool $useIncludePath = false,
+        $context = null,
+        int $offset = 0,
+        ?int $length = null
+    ): false | string {
+        if (null === $length) {
+            return file_get_contents($filename, $useIncludePath, $context, $offset);
+        }
+
+        return file_get_contents($filename, $useIncludePath, $context, $offset, $length);
     }
 
     /**
@@ -98,7 +120,7 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.file-put-contents.php
      */
-    protected function phpFilePutContents(
+    protected static function phpFilePutContents(
         string $filename,
         $data,
         int $flags = 0,
@@ -108,16 +130,22 @@ trait FileTrait
     }
 
     /**
-     * @param string $filename
-     * @param string $mode
+     * @param string        $filename
+     * @param string        $mode
+     * @param bool          $useIncludePath
+     * @param resource|null $context
      *
      * @return resource|false
      *
      * @link https://php.net/manual/en/function.fopen.php
      */
-    protected function phpFopen(string $filename, string $mode)
-    {
-        return fopen($filename, $mode);
+    protected static function phpFopen(
+        string $filename,
+        string $mode,
+        bool $useIncludePath = false,
+        $context = null
+    ) {
+        return fopen($filename, $mode, $useIncludePath, $context);
     }
 
     /**
@@ -127,12 +155,17 @@ trait FileTrait
      *
      * @param resource $handle
      * @param string   $data
+     * @param int<0, max>|null $length
      *
      * @return false|int
      */
-    protected function phpFwrite($handle, string $data): false|int
+    protected static function phpFwrite($handle, string $data, ?int $length = null): false | int
     {
-        return fwrite($handle, $data);
+        if (null === $length) {
+            return fwrite($handle, $data);
+        }
+
+        return fwrite($handle, $data, $length);
     }
 
     /**
@@ -144,20 +177,21 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.is-writable.php
      */
-    protected function phpIsWritable(string $filename): bool
+    protected static function phpIsWritable(string $filename): bool
     {
         return is_writable($filename);
     }
 
     /**
-     * @param string $filename
+     * @param string        $filename
+     * @param resource|null $context
      *
      * @return bool
      *
      * @link https://php.net/manual/en/function.unlink.php
      */
-    protected function phpUnlink(string $filename): bool
+    protected static function phpUnlink(string $filename, $context = null): bool
     {
-        return unlink($filename);
+        return unlink($filename, $context);
     }
 }

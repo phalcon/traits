@@ -74,7 +74,7 @@ class IniFixture
      * @param bool   $processSections
      * @param int    $scannerMode
      *
-     * @return array|false
+     * @return array<array-key, mixed>|false
      *
      * @link https://php.net/manual/en/function.parse-ini-file.php
      */

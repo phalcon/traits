@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Traits\Helper\Str;
+namespace Phalcon\Traits\Support\Helper\Str;
 
 use function mb_convert_case;
 
@@ -28,23 +28,10 @@ trait UpperTrait
      *
      * @return string
      */
-    protected static function staticToUpper(
+    protected static function toUpper(
         string $text,
         string $encoding = 'UTF-8'
     ): string {
         return mb_convert_case($text, MB_CASE_UPPER, $encoding);
-    }
-
-    /**
-     * @param string $text
-     * @param string $encoding
-     *
-     * @return string
-     */
-    protected function toUpper(
-        string $text,
-        string $encoding = 'UTF-8'
-    ): string {
-        return self::staticToUpper($text, $encoding);
     }
 }

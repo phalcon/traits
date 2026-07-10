@@ -35,14 +35,14 @@ final class CamelizeTraitTest extends AbstractUnitTestCase
         bool $lowercase
     ): void {
         $object    = new CamelizeFixture();
-        $delimiter = $delimiter ?: '\-_';
+        $delimiter = $delimiter ?: '-_';
 
-        $actual = $object->toCamelize($value, $delimiter, $lowercase);
+        $actual = $object->camelize($value, $delimiter, $lowercase);
         $this->assertSame($expected, $actual);
     }
 
     /**
-     * @return array
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getSources(): array
     {

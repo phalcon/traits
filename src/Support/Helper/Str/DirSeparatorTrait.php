@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Traits\Helper\Str;
+namespace Phalcon\Traits\Support\Helper\Str;
 
 use function rtrim;
 
@@ -28,18 +28,8 @@ trait DirSeparatorTrait
      *
      * @return string
      */
-    protected static function staticToDirSeparator(string $directory): string
+    protected static function toDirSeparator(string $directory): string
     {
         return rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-    }
-
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
-    protected function toDirSeparator(string $directory): string
-    {
-        return self::staticToDirSeparator($directory);
     }
 }

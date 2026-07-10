@@ -47,6 +47,10 @@ final class FileTraitTest extends AbstractUnitTestCase
          */
         $source = dataDir('assets/sample.csv');
         $handle = $file->fopen($source, 'r');
+        if (false === $handle) {
+            $this->fail('Could not open file: ' . $source);
+        }
+
         $actual = $file->fgetCsv($handle, 0, ';');
         $result = $file->fclose($handle);
         $this->assertTrue($result);

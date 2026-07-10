@@ -11,12 +11,13 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Traits\Helper\Str;
+namespace Phalcon\Traits\Support\Helper\Str;
 
 use function implode;
 use function mb_str_split;
 use function mb_substr;
 use function pathinfo;
+use function str_replace;
 
 use const PATHINFO_FILENAME;
 
@@ -28,28 +29,23 @@ trait DirFromFileTrait
 {
     /**
      * @param string $file
+     * @param bool   $filesystemSafe
      *
      * @return string
      */
-    protected static function staticToDirFromFile(string $file): string
+    protected static function toDirFromFile(string $file, bool $filesystemSafe = false): string
     {
         $name  = pathinfo($file, PATHINFO_FILENAME);
         $start = mb_substr($name, 0, -2);
+
+        if (true === $filesystemSafe && !empty($start)) {
+            $start = str_replace('.', '-', $start);
+        }
 
         if (!$start) {
             $start = mb_substr($name, 0, 1);
         }
 
         return implode('/', mb_str_split($start, 2)) . '/';
-    }
-
-    /**
-     * @param string $file
-     *
-     * @return string
-     */
-    protected function toDirFromFile(string $file): string
-    {
-        return self::staticToDirFromFile($file);
     }
 }

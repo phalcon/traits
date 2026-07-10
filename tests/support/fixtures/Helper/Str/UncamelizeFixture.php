@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Fixtures\Helper\Str;
 
-use Phalcon\Traits\Helper\Str\UncamelizeTrait;
+use Phalcon\Traits\Support\Helper\Str\UncamelizeTrait;
 
 class UncamelizeFixture
 {
@@ -23,11 +23,10 @@ class UncamelizeFixture
      * Uncamelizes a string
      *
      * @param string $text
-     * @param string $delimiters
      *
      * @return string
      */
-    public function Uncamelize(
+    public function uncamelize(
         string $text,
         string $delimiter = '_'
     ): string {

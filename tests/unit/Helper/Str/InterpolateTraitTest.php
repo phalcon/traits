@@ -26,6 +26,8 @@ final class InterpolateTraitTest extends AbstractUnitTestCase
      *
      * @dataProvider getExamples
      *
+     * @param array<string, string> $context
+     *
      * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
@@ -44,7 +46,7 @@ final class InterpolateTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @return array[]
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {

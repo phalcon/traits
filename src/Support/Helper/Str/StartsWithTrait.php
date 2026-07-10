@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Traits\Helper\Str;
+namespace Phalcon\Traits\Support\Helper\Str;
 
-use function mb_strlen;
-use function substr_compare;
+use function mb_strtolower;
+use function str_starts_with;
 
 /**
- * Check if a string ends with a given string
+ * Check if a string starts with a given string
  */
-trait EndsWithTrait
+trait StartsWithTrait
 {
     /**
      * @param string $haystack
@@ -28,21 +28,20 @@ trait EndsWithTrait
      *
      * @return bool
      */
-    protected function toEndsWith(
+    protected static function toStartsWith(
         string $haystack,
         string $needle,
         bool $ignoreCase = true
     ): bool {
-        if ('' === $haystack) {
+        if ('' === $haystack || '' === $needle) {
             return false;
         }
 
-        return 0 === substr_compare(
-            $haystack,
-            $needle,
-            -mb_strlen($needle),
-            mb_strlen($needle),
-            $ignoreCase
-        );
+        if ($ignoreCase) {
+            $needle   = mb_strtolower($needle);
+            $haystack = mb_strtolower($haystack);
+        }
+
+        return str_starts_with($haystack, $needle);
     }
 }

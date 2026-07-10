@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Fixtures\Helper\Str;
 
-use Phalcon\Traits\Helper\Str\InterpolateTrait;
+use Phalcon\Traits\Support\Helper\Str\InterpolateTrait;
 
 class InterpolateFixture
 {
@@ -24,10 +24,10 @@ class InterpolateFixture
      *
      * @see http://www.php-fig.org/psr/psr-3/ Section 1.2 Message
      *
-     * @param string $input
-     * @param array  $context
-     * @param string $left
-     * @param string $right
+     * @param string                $input
+     * @param array<string, string> $context
+     * @param string                $left
+     * @param string                $right
      *
      * @return string
      */

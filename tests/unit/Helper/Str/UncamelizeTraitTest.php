@@ -35,13 +35,13 @@ final class UncamelizeTraitTest extends AbstractUnitTestCase
         string $delimiter
     ): void {
         $object = new UncamelizeFixture();
-        $actual = $object->toUncamelize($value, $delimiter);
+        $actual = $object->uncamelize($value, $delimiter);
 
         $this->assertSame($expected, $actual);
     }
 
     /**
-     * @return array
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getSources(): array
     {

@@ -79,13 +79,13 @@ class FileFixture
     /**
      * Gets line from file pointer and parse for CSV fields
      *
-     * @param resource $stream
-     * @param int      $length
-     * @param string   $separator
-     * @param string   $enclosure
-     * @param string   $escape
+     * @param resource    $stream
+     * @param int<0, max> $length
+     * @param string      $separator
+     * @param string      $enclosure
+     * @param string      $escape
      *
-     * @return array|null|false
+     * @return array<array-key, mixed>|false
      *
      * @link https://php.net/manual/en/function.fgetcsv.php
      */

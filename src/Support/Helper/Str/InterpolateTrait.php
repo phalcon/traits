@@ -11,7 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Traits\Helper\Str;
+namespace Phalcon\Traits\Support\Helper\Str;
+
+use function strpos;
+use function strtr;
 
 /**
  * Interpolates context values into the message placeholders
@@ -28,7 +31,7 @@ trait InterpolateTrait
      *
      * @return string
      */
-    protected static function staticToInterpolate(
+    protected static function toInterpolate(
         string $input,
         array $context = [],
         string $left = '%',
@@ -38,28 +41,15 @@ trait InterpolateTrait
             return $input;
         }
 
+        if (false === strpos($input, $left)) {
+            return $input;
+        }
+
         $replace = [];
         foreach ($context as $key => $value) {
             $replace[$left . $key . $right] = $value;
         }
 
         return strtr($input, $replace);
-    }
-
-    /**
-     * @param string   $input
-     * @param string[] $context
-     * @param string   $left
-     * @param string   $right
-     *
-     * @return string
-     */
-    protected function toInterpolate(
-        string $input,
-        array $context = [],
-        string $left = '%',
-        string $right = '%'
-    ): string {
-        return self::staticToInterpolate($input, $context, $left, $right);
     }
 }

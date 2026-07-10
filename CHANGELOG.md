@@ -1,6 +1,6 @@
 # Changelog
 
-## [4.0.0](https://github.com/phalcon/traits/releases/tag/4.0.0) (unreleased)
+## [4.0.0](https://github.com/phalcon/traits/releases/tag/4.0.0) (2026-07-10)
 
 ### Added
 

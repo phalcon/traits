@@ -64,6 +64,7 @@ final class UncamelizeTraitTest extends AbstractUnitTestCase
             ['CameLiZe', 'came.li.ze', '.'],
             ['CameLiZe', 'came-li-ze', '-'],
             ['CAMELIZE', 'c/a/m/e/l/i/z/e', '/'],
+            ["A\0B", 'a', '_'],
         ];
     }
 }

@@ -19,6 +19,7 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
 use function dataDir;
 use function is_resource;
 use function outputDir;
+use function substr;
 use function uniqid;
 
 /**
@@ -87,6 +88,12 @@ final class FileTraitTest extends AbstractUnitTestCase
         $this->assertEquals($expected, $actual);
 
         /**
+         * Read a fixed length (covers the $length branch)
+         */
+        $actual = $file->fileGetContents($fileName, false, null, 0, 5);
+        $this->assertEquals(substr($contents, 0, 5), $actual);
+
+        /**
          * Delete it
          */
         $actual = $file->unlink($fileName);
@@ -104,6 +111,12 @@ final class FileTraitTest extends AbstractUnitTestCase
          */
         $actual = $file->fwrite($handle, $contents);
         $this->assertGreaterThan(0, $actual);
+
+        /**
+         * fwrite with an explicit length (covers the $length branch)
+         */
+        $actual = $file->fwrite($handle, $contents, 3);
+        $this->assertSame(3, $actual);
 
         /**
          * fclose

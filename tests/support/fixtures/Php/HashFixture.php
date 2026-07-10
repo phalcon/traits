@@ -32,6 +32,19 @@ class HashFixture
     }
 
     /**
+     * Hashes relying on the trait default (binary false)
+     *
+     * @param string $algorithm
+     * @param string $data
+     *
+     * @return string
+     */
+    public function hashDefault(string $algorithm, string $data): string
+    {
+        return $this->phpHash($algorithm, $data);
+    }
+
+    /**
      * @param string $knownString
      * @param string $userString
      *
@@ -57,5 +70,19 @@ class HashFixture
         bool $binary = false
     ): string {
         return $this->phpHashHmac($algorithm, $data, $key, $binary);
+    }
+
+    /**
+     * HMAC hashes relying on the trait default (binary false)
+     *
+     * @param string $algorithm
+     * @param string $data
+     * @param string $key
+     *
+     * @return string
+     */
+    public function hashHmacDefault(string $algorithm, string $data, string $key): string
+    {
+        return $this->phpHashHmac($algorithm, $data, $key);
     }
 }

@@ -39,17 +39,17 @@ final class MbCaseTraitTest extends AbstractUnitTestCase
 
         $this->assertSame(
             'привет мир',
-            $mbCase->mbConvertCase('ПРИВЕТ МИР', MB_CASE_LOWER, 'strtolower')
+            $mbCase->mbConvertCase('ПРИВЕТ МИР', MB_CASE_LOWER)
         );
 
         $this->assertSame(
             'ПРИВЕТ МИР',
-            $mbCase->mbConvertCase('привет мир', MB_CASE_UPPER, 'strtoupper')
+            $mbCase->mbConvertCase('привет мир', MB_CASE_UPPER)
         );
 
         $this->assertSame(
             'Hello World',
-            $mbCase->mbConvertCase('hello world', MB_CASE_TITLE, 'ucwords')
+            $mbCase->mbConvertCase('hello world', MB_CASE_TITLE)
         );
     }
 }

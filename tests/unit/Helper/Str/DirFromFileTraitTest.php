@@ -70,6 +70,26 @@ final class DirFromFileTraitTest extends AbstractUnitTestCase
                 '',
                 '/',
             ],
+            // multibyte: mb_substr / mb_str_split must operate on characters
+            [
+                'абвгде.jpg',
+                'аб/вг/',
+            ],
+            // filesystemSafe defaults to false -> dots are preserved
+            [
+                'ab.cd.ef.jpg',
+                'ab/.c/d./',
+            ],
+            // short name falls back to the first character
+            [
+                'XY.jpg',
+                'X/',
+            ],
+            // short multibyte name -> first character kept intact
+            [
+                'я.jpg',
+                'я/',
+            ],
         ];
     }
 }

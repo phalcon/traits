@@ -37,4 +37,17 @@ class DecodeFixture
     ): mixed {
         return $this->toDecode($data, $associative, $depth, $options);
     }
+
+    /**
+     * Decodes a string relying on the trait defaults (associative false,
+     * options 79)
+     *
+     * @param string $data
+     *
+     * @return mixed
+     */
+    public function decodeDefault(string $data): mixed
+    {
+        return $this->toDecode($data);
+    }
 }

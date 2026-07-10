@@ -50,4 +50,21 @@ final class EncodeTraitTest extends AbstractUnitTestCase
 
         $object->encode("\xB1\x31");
     }
+
+    /**
+     * Tests Support\Helper\Json\EncodeTrait - default options (79)
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperJsonEncodeTraitDefaultOptions(): void
+    {
+        $object = new EncodeFixture();
+
+        // 79 includes JSON_HEX_TAG so `<` is escaped as \\u003C, and no pretty-print
+        $this->assertSame('"\\u003C"', $object->encodeDefault('<'));
+        $this->assertSame('{"a":"b"}', $object->encodeDefault(['a' => 'b']));
+    }
 }

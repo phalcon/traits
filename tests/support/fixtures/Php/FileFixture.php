@@ -32,15 +32,30 @@ class FileFixture
     }
 
     /**
-     * @param string $filename
+     * @param string           $filename
+     * @param bool             $useIncludePath
+     * @param resource|null    $context
+     * @param int              $offset
+     * @param int<0, max>|null $length
      *
      * @return string|false
      *
      * @link https://php.net/manual/en/function.file-get-contents.php
      */
-    public function fileGetContents($filename)
-    {
-        return $this->phpFileGetContents($filename);
+    public function fileGetContents(
+        $filename,
+        bool $useIncludePath = false,
+        $context = null,
+        int $offset = 0,
+        ?int $length = null
+    ) {
+        return $this->phpFileGetContents(
+            $filename,
+            $useIncludePath,
+            $context,
+            $offset,
+            $length
+        );
     }
 
     /**
@@ -82,8 +97,8 @@ class FileFixture
      * @param resource    $stream
      * @param int<0, max> $length
      * @param string      $separator
-     * @param string      $enclosure
-     * @param string      $escape
+     * @param string|null $enclosure
+     * @param string|null $escape
      *
      * @return array<array-key, mixed>|false
      *
@@ -93,8 +108,8 @@ class FileFixture
         $stream,
         $length = 0,
         $separator = ',',
-        $enclosure = '"',
-        $escape = '\\'
+        ?string $enclosure = null,
+        ?string $escape = null
     ) {
         return $this->phpFgetCsv(
             $stream,
@@ -124,14 +139,15 @@ class FileFixture
      *
      * @link https://php.net/manual/en/function.fwrite.php
      *
-     * @param resource $handle
-     * @param string   $data
+     * @param resource         $handle
+     * @param string           $data
+     * @param int<0, max>|null $length
      *
      * @return int|false
      */
-    public function fwrite($handle, string $data)
+    public function fwrite($handle, string $data, ?int $length = null)
     {
-        return $this->phpFwrite($handle, $data);
+        return $this->phpFwrite($handle, $data, $length);
     }
 
     /**

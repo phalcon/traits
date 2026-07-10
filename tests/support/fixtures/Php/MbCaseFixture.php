@@ -20,14 +20,13 @@ class MbCaseFixture
     use MbCaseTrait;
 
     /**
-     * @param string          $input
-     * @param int             $mode
-     * @param callable-string $fallback
+     * @param string $input
+     * @param int    $mode
      *
      * @return string
      */
-    public function mbConvertCase(string $input, int $mode, string $fallback): string
+    public function mbConvertCase(string $input, int $mode): string
     {
-        return $this->phpMbConvertCase($input, $mode, $fallback);
+        return $this->phpMbConvertCase($input, $mode);
     }
 }

@@ -50,4 +50,27 @@ final class HashTraitTest extends AbstractUnitTestCase
         $actual   = $hash->hashHmac('sha256', 'Phalcon Framework', 'secret');
         $this->assertSame($expected, $actual);
     }
+
+    /**
+     * Tests Phalcon\Traits\Php\HashTrait - binary defaults to false (hex)
+     *
+     * @return void
+     *
+     * @author Phalcon Team <team@phalcon.io>
+     * @since  2021-10-25
+     */
+    public function testHelperPhpHashTraitDefaultBinary(): void
+    {
+        $hash = new HashFixture();
+
+        $this->assertSame(
+            hash('sha256', 'Phalcon Framework'),
+            $hash->hashDefault('sha256', 'Phalcon Framework')
+        );
+
+        $this->assertSame(
+            hash_hmac('sha256', 'Phalcon Framework', 'secret'),
+            $hash->hashHmacDefault('sha256', 'Phalcon Framework', 'secret')
+        );
+    }
 }

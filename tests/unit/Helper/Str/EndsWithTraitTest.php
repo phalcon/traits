@@ -108,6 +108,20 @@ final class EndsWithTraitTest extends AbstractUnitTestCase
                 false,
                 false,
             ],
+            // empty needle -> false (guards the `||` short-circuit)
+            [
+                'Hello',
+                '',
+                true,
+                false,
+            ],
+            // multibyte case-fold: upper-case Cyrillic must lower-case
+            [
+                'ПРИВЕТ',
+                'ВЕТ',
+                true,
+                true,
+            ],
         ];
     }
 }

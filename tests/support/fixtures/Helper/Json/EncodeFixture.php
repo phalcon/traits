@@ -35,4 +35,16 @@ class EncodeFixture
     ): string {
         return $this->toEncode($data, $options, $depth);
     }
+
+    /**
+     * Encodes data relying on the trait defaults (options 79, depth 512)
+     *
+     * @param mixed $data
+     *
+     * @return string
+     */
+    public function encodeDefault(mixed $data): string
+    {
+        return $this->toEncode($data);
+    }
 }

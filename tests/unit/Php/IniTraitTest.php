@@ -15,10 +15,10 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\IniFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 use function dataDir;
 use function ini_get;
+use function ini_set;
 
 /**
  * Tests the Ini trait
@@ -87,5 +87,34 @@ final class IniTraitTest extends AbstractUnitTestCase
         $expected = 1234;
         $actual   = $ini->iniGetInt('unknown', 1234);
         $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * Tests Phalcon\Traits\Php\IniTrait :: phpIniGetBool() token mapping.
+     *
+     * Uses the writable `user_agent` directive as scratch storage so every
+     * truthy token (and the case-fold) exercises a distinct `match` arm.
+     *
+     * @return void
+     *
+     * @author Phalcon Team <team@phalcon.io>
+     * @since  2023-01-01
+     */
+    public function testHelperPhpIniTraitGetBoolValues(): void
+    {
+        $ini   = new IniFixture();
+        $saved = ini_get('user_agent');
+
+        foreach (['true', 'on', 'yes', 'y', '1', 'YES', 'On'] as $truthy) {
+            ini_set('user_agent', $truthy);
+            $this->assertTrue($ini->iniGetBool('user_agent'), $truthy);
+        }
+
+        foreach (['false', 'off', 'no', 'n', '0', ''] as $falsy) {
+            ini_set('user_agent', $falsy);
+            $this->assertFalse($ini->iniGetBool('user_agent'), $falsy);
+        }
+
+        ini_set('user_agent', (string) $saved);
     }
 }

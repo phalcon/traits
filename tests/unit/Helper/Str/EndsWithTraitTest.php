@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\EndsWithFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the EndsWith trait
@@ -24,28 +22,7 @@ use PHPUnit\Framework\TestCase;
 final class EndsWithTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Phalcon\Traits\Str\EndsWithTrait :: toEndsWith()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrEndsWithFilter(
-        string $haystack,
-        string $needle,
-        bool $insensitive,
-        bool $expected
-    ): void {
-        $object = new EndsWithFixture();
-        $actual = $object->endsWith($haystack, $needle, $insensitive);
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return array[]
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {
@@ -110,6 +87,40 @@ final class EndsWithTraitTest extends AbstractUnitTestCase
                 false,
                 false,
             ],
+            // empty needle -> false (guards the `||` short-circuit)
+            [
+                'Hello',
+                '',
+                true,
+                false,
+            ],
+            // multibyte case-fold: upper-case Cyrillic must lower-case
+            [
+                'ПРИВЕТ',
+                'ВЕТ',
+                true,
+                true,
+            ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\EndsWithTrait :: toEndsWith()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrEndsWithFilter(
+        string $haystack,
+        string $needle,
+        bool $insensitive,
+        bool $expected
+    ): void {
+        $object = new EndsWithFixture();
+        $actual = $object->endsWith($haystack, $needle, $insensitive);
+        $this->assertEquals($expected, $actual);
     }
 }

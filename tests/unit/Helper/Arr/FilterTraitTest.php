@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Arr;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Arr\FilterFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Filter trait
@@ -24,29 +22,7 @@ use PHPUnit\Framework\TestCase;
 final class FilterTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-25
-     */
-    public function testHelperArrFilterTraitToFilter(
-        array $source,
-        array $expected,
-        ?callable $method
-    ): void {
-        $filter = new FilterFixture();
-
-        $actual   = $filter->filter($source, $method);
-
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return array<array-key, array<string, mixed>>
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {
@@ -103,5 +79,29 @@ final class FilterTraitTest extends AbstractUnitTestCase
                 null,
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
+     *
+     * @dataProvider getExamples
+     *
+     * @param array<array-key, mixed> $source
+     * @param array<array-key, mixed> $expected
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-25
+     */
+    public function testHelperArrFilterTraitToFilter(
+        array $source,
+        array $expected,
+        ?callable $method
+    ): void {
+        $filter = new FilterFixture();
+
+        $actual   = $filter->filter($source, $method);
+
+        $this->assertEquals($expected, $actual);
     }
 }

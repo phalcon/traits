@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\LowerFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Lower trait
@@ -24,27 +22,7 @@ use PHPUnit\Framework\TestCase;
 final class LowerTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrLowerFilter(
-        string $text,
-        string $encoding,
-        string $expected
-    ): void {
-        $object = new LowerFixture();
-        $actual = $object->lower($text, $encoding);
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return array[]
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {
@@ -125,5 +103,24 @@ final class LowerTraitTest extends AbstractUnitTestCase
                 'καλημέ?α',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrLowerFilter(
+        string $text,
+        string $encoding,
+        string $expected
+    ): void {
+        $object = new LowerFixture();
+        $actual = $object->lower($text, $encoding);
+        $this->assertEquals($expected, $actual);
     }
 }

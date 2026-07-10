@@ -13,38 +13,13 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\CamelizeFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 final class CamelizeTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Str\CamelizeTrait
-     *
-     * @dataProvider getSources
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2020-09-09
-     */
-    public function testHelperStrCamelize(
-        string $value,
-        string $expected,
-        ?string $delimiter,
-        bool $lowercase
-    ): void {
-        $object    = new CamelizeFixture();
-        $delimiter = $delimiter ?: '\-_';
-
-        $actual = $object->toCamelize($value, $delimiter, $lowercase);
-        $this->assertSame($expected, $actual);
-    }
-
-    /**
-     * @return array
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getSources(): array
     {
@@ -76,5 +51,27 @@ final class CamelizeTraitTest extends AbstractUnitTestCase
             ['customer Session', 'customerSession', ' -_', true],
             ['customer-Session', 'customerSession', ' -_', true],
         ];
+    }
+    /**
+     * Tests Str\CamelizeTrait
+     *
+     * @dataProvider getSources
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperStrCamelize(
+        string $value,
+        string $expected,
+        ?string $delimiter,
+        bool $lowercase
+    ): void {
+        $object    = new CamelizeFixture();
+        $delimiter = $delimiter ?: '-_';
+
+        $actual = $object->camelize($value, $delimiter, $lowercase);
+        $this->assertSame($expected, $actual);
     }
 }

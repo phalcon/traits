@@ -1,5 +1,33 @@
 # Changelog
 
+## [4.0.0](https://github.com/phalcon/traits/releases/tag/4.0.0) (unreleased)
+
+### Added
+
+-   Added `Phalcon\Traits\Support\Helper\Json\EncodeTrait` and `Phalcon\Traits\Support\Helper\Json\DecodeTrait`, `json_encode()` / `json_decode()` wrappers that throw the native `\JsonException` on failure
+-   Added `Phalcon\Traits\Php\Base64Trait`, wrappers for the `base64_*` functions (Base64 URL encode/decode plus `phpBase64Encode()` / `phpBase64Decode()`), split out of `Php\UrlTrait`
+
+### Changed
+
+-   Moved the helper traits from `Phalcon\Traits\Helper\*` to `Phalcon\Traits\Support\Helper\*`, matching the `Phalcon\Support\Helper` namespace used by the framework (**BC break**)
+-   Replaced the `staticToX()` / `staticPhpX()` static delegate methods (e.g. `staticToCamelize()`, `staticToLower()`, `staticPhpIniGet()`) with a single `protected static` method per trait (**BC break**)
+-   Reduced `Phalcon\Traits\Php\UrlTrait` to the URL wrappers only (`phpParseUrl()`, `phpRawUrlDecode()`, `phpRawUrlEncode()`); the Base64 helpers moved to the new `Php\Base64Trait` (**BC break**)
+-   Simplified `Phalcon\Traits\Php\MbCaseTrait::phpMbConvertCase()` to `(string $input, int $mode)`, dropping the `$fallback` parameter and the `utf8_decode()` fallback (`mbstring` is a required extension) (**BC break**)
+-   Changed the default `$scannerMode` of `Phalcon\Traits\Php\IniTrait::phpParseIniFile()` to `0` (`INI_SCANNER_NORMAL`)
+-   Widened the `Phalcon\Traits\Php\FileTrait` wrappers to the full parameter sets of their underlying `file_*` functions
+-   Modernized the test setup: switched to the Talon runner, enforced 100% code coverage, and added Infection mutation testing
+
+### Removed
+
+-   Removed `Phalcon\Traits\Php\JsonTrait`; the thin `json_encode()` / `json_decode()` wrapper is superseded by the throwing `Support\Helper\Json\EncodeTrait` / `DecodeTrait` (**BC break**)
+
+### Fixed
+
+-   Reimplemented `Phalcon\Traits\Support\Helper\Str\CamelizeTrait` and `UncamelizeTrait` as byte-based ASCII conversions matching the cphalcon builtin
+-   Rewrote `Phalcon\Traits\Support\Helper\Str\EndsWithTrait` and `StartsWithTrait` on `str_ends_with()` / `str_starts_with()` with multibyte-aware case folding and empty-string guards
+-   Restored the `filesystemSafe` parameter and the `.` → `-` replacement on `Phalcon\Traits\Support\Helper\Str\DirFromFileTrait`
+-   Corrected the PHPDoc on `Phalcon\Traits\Factory\FactoryTrait` (`class-string<\Throwable>` exception class, removed the spurious `@property` tags)
+
 ## [3.0.0](https://github.com/phalcon/traits/releases/tag/3.0.0) (2025-02-11)
 
 

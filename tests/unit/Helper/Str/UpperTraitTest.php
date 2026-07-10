@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\UpperFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Upper trait
@@ -24,27 +22,7 @@ use PHPUnit\Framework\TestCase;
 final class UpperTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrUpperFilter(
-        string $text,
-        string $encoding,
-        string $expected
-    ): void {
-        $object = new UpperFixture();
-        $actual = $object->upper($text, $encoding);
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return array[]
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {
@@ -125,5 +103,24 @@ final class UpperTraitTest extends AbstractUnitTestCase
                 'καλημέ?α',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrUpperFilter(
+        string $text,
+        string $encoding,
+        string $expected
+    ): void {
+        $object = new UpperFixture();
+        $actual = $object->upper($text, $encoding);
+        $this->assertEquals($expected, $actual);
     }
 }

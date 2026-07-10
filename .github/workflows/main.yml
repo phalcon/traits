@@ -5,182 +5,155 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-name: "Phalcon CI"
+name: "Phalcon Traits CI"
 
 on:
-  schedule:
-    - cron: '0 2 * * *' # Daily at 02:00 runs only on default branch
   push:
     paths-ignore:
       - '**.md'
-      - '**.txt'
   pull_request:
   workflow_dispatch:
 
-env:
-  fail-fast: true
-
-  # For tests
-  LANG: en_US.UTF-8
-  LANGUAGE: en_US.UTF-8
-  LC_ALL: en_US.UTF-8
-
-  # PHP extensions required by Composer
-  EXTENSIONS: intl, json, mbstring, msgpack
-
 permissions: { }
-jobs:
-  # PHP CodeSniffer inspection
-  phpcs:
-    name: "Validate Tests code style"
-    if: "!contains(github.event.head_commit.message, 'ci skip')"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+env:
+  EXTENSIONS: "apcu, gettext, igbinary, mbstring, msgpack, yaml"
+
+jobs:
+  quality:
+    name: "Code quality (phpcs + phpstan + php-cs-fixer)"
     permissions:
       contents: read
-
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: true
-      matrix:
-        php:
-          - '8.1'
-          - '8.2'
-          - '8.3'
-          - '8.4'
-
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
 
       - name: "Setup PHP"
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.EXTENSIONS }}
-          ini-values: apc.enable_cli=on, session.save_path=/tmp
-          tools: pecl, composer:v2
-        env:
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: "Install development dependencies with Composer"
-        uses: "ramsey/composer-install@v3"
-        with:
-          composer-options: "--prefer-dist"
-
-      - name: "Code Sniffer"
-        run: |
-          composer cs
-
-      - name: "Code Analysis"
-        run: |
-          composer cs
-
-
-  unit-tests:
-    needs: phpcs
-
-    permissions:
-      contents: read # to fetch code (actions/checkout)
-
-    name: Unit tests / PHP-${{ matrix.php }}
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        php:
-          - '8.1'
-          - '8.2'
-          - '8.3'
-          - '8.4'
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: "Setup platform specific environment"
-        shell: pwsh
-        run: |
-          git config --global core.autocrlf false
-
-      - name: "Setup PHP"
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: ${{ env.EXTENSIONS }}
-          ini-values: apc.enable_cli=on
-          tools: pecl, composer:v2
-          coverage: pcov
-        env:
-          PHPTS: ${{ matrix.ts }}
-          COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          php-version: '8.4'
+          extensions: mbstring
+          tools: composer:v2
+          coverage: none
 
       - name: "Validate composer"
         run: composer validate --no-check-all --no-check-publish
 
-      - name: "Install development dependencies with Composer"
-        uses: "ramsey/composer-install@v3"
+      - name: "Install dependencies"
+        uses: ramsey/composer-install@26d8a556604053a9612623447203a691f406fbe6 # v4
         with:
           composer-options: "--prefer-dist"
 
-      - name: "Setup Tests"
-        shell: bash
-        run: |
-          cp -v config/.env.example .env
+      - name: "PHPCS"
+        run: composer cs
 
-      - name: "Run Unit Tests"
-        if: always()
-        run: |
-          composer test-unit-coverage
+      - name: "PHPStan"
+        run: composer analyze
 
-      - name: "Upload coverage file artifact"
-        uses: "actions/upload-artifact@v4"
-        with:
-          name: "unit-${{ matrix.php }}.coverage"
-          path: "tests/_output/coverage.xml"
+      - name: "PHP CS Fixer (dry-run)"
+        run: composer cs-fixer
 
-  upload-coverage:
+  tests:
+    name: "Tests / PHP ${{ matrix.php }}"
     permissions:
       contents: read
-
-    name: "Upload coverage to Sonarcloud"
     runs-on: ubuntu-latest
     needs:
-      - "unit-tests"
-
+      - quality
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.1', '8.2', '8.3', '8.4']
     steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v4"
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: ${{ env.EXTENSIONS }}
+          ini-values: apc.enable_cli=1
+          tools: composer:v2
+          coverage: none
+
+      - name: "Install dependencies"
+        uses: ramsey/composer-install@26d8a556604053a9612623447203a691f406fbe6 # v4
+        with:
+          composer-options: "--prefer-dist"
+
+      - name: "Run unit tests"
+        run: composer test
+
+  coverage:
+    name: "Coverage (SonarCloud + octocov)"
+    permissions:
+      contents: read
+      pull-requests: write
+      actions: read
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          # SonarCloud needs full history for blame/new-code detection;
+          # octocov uses it for the base-branch diff.
           fetch-depth: 0
 
-      - name: "Display structure of downloaded files"
-        run: |
-          mkdir -p cv
-
-      - name: "Download coverage files"
-        uses: "actions/download-artifact@v4"
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
-          path: "cv"
+          php-version: '8.4'
+          extensions: ${{ env.EXTENSIONS }}
+          ini-values: apc.enable_cli=1
+          coverage: pcov
+          tools: composer:v2
 
-      - name: "Display structure of downloaded files"
-        run: |
-          mv cv/unit-8.1.coverage/coverage.xml      cv/01.xml
-          mv cv/unit-8.2.coverage/coverage.xml      cv/02.xml
-          mv cv/unit-8.3.coverage/coverage.xml      cv/03.xml
-          mv cv/unit-8.4.coverage/coverage.xml      cv/04.xml
-          ls -la cv/
+      - name: "Install dependencies"
+        uses: ramsey/composer-install@26d8a556604053a9612623447203a691f406fbe6 # v4
+        with:
+          composer-options: "--prefer-dist"
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.2.1
+      - name: "Tests with coverage"
+        run: composer test-coverage
+
+      # SonarCloud first (push only) so a failing octocov gate can't skip the upload.
+      - name: "SonarQube Scan"
+        if: github.event_name == 'push'
+        uses: SonarSource/sonarqube-scan-action@713881670b6b3676cda39549040e2d88c70d582e # v8.2.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
-          projectBaseDir: ./
           args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.sources=src/
-            -Dsonar.exclusions=vendor/**,cv/**,tests/**
-            -Dsonar.sourceEncoding=UTF-8
-            -Dsonar.language=php
-            -Dsonar.tests=tests/
-            -Dsonar.php.coverage.reportPaths=cv/01.xml,cv/02.xml,cv/03.xml,cv/04.xml
+            -Dsonar.organization=phalcon
+            -Dsonar.projectKey=phalcon_traits
+            -Dsonar.sources=src
+            -Dsonar.tests=tests
+            -Dsonar.exclusions=resources/**
+            -Dsonar.php.coverage.reportPaths=tests/_output/coverage.xml
+
+      # octocov last: PR comment + coverage gate (strict on PRs via
+      # resources/octocov.pr.yml, floor only on pushes via resources/octocov.yml),
+      # stores the baseline report on the default branch, and writes the badge SVG.
+      - name: "octocov"
+        uses: k1LoW/octocov-action@b3b6ee60482a667950f87553abf1df63217235d9 # v1.5.1
+        with:
+          config: ${{ github.event_name == 'pull_request' && 'resources/octocov.pr.yml' || 'resources/octocov.yml' }}
+
+      - name: "Upload coverage badge"
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: coverage-badge
+          path: tests/_output/coverage.svg
+          if-no-files-found: ignore

@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\DirFromFileFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the DirFromFile trait
@@ -24,7 +22,43 @@ use PHPUnit\Framework\TestCase;
 final class DirFromFileTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Phalcon\Traits\Str\DirFromFileTrait
+     * @return array<array-key, array<array-key, mixed>>
+     */
+    public static function getExamples(): array
+    {
+        return [
+            [
+                'abcdef12345.jpg',
+                'ab/cd/ef/12/3/',
+            ],
+            [
+                '',
+                '/',
+            ],
+            // multibyte: mb_substr / mb_str_split must operate on characters
+            [
+                'абвгде.jpg',
+                'аб/вг/',
+            ],
+            // filesystemSafe defaults to false -> dots are preserved
+            [
+                'ab.cd.ef.jpg',
+                'ab/.c/d./',
+            ],
+            // short name falls back to the first character
+            [
+                'XY.jpg',
+                'X/',
+            ],
+            // short multibyte name -> first character kept intact
+            [
+                'я.jpg',
+                'я/',
+            ],
+        ];
+    }
+    /**
+     * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait
      *
      * @dataProvider getExamples
      *
@@ -43,19 +77,18 @@ final class DirFromFileTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * @return array[]
+     * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait - filesystemSafe
+     *
+     * @return void
+     *
+     * @author Phalcon Team <team@phalcon.io>
+     * @since  2021-10-26
      */
-    public static function getExamples(): array
+    public function testHelperStrDirFromFileTraitFilesystemSafe(): void
     {
-        return [
-            [
-                'abcdef12345.jpg',
-                'ab/cd/ef/12/3/',
-            ],
-            [
-                '',
-                '/',
-            ],
-        ];
+        $object = new DirFromFileFixture();
+
+        // With filesystemSafe, dots in the computed segments become dashes
+        $this->assertEquals('ab/c-/de/', $object->dirFromFile('abc.defg.jpg', true));
     }
 }

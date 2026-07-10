@@ -1,0 +1,29 @@
+{
+    "$schema": "../vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ]
+    },
+    "logs": {
+        "text": "../tests/_output/infection/infection.log",
+        "summary": "../tests/_output/infection/summary.log"
+    },
+    "tmpDir": "../tests/_output/infection/tmp",
+    "phpUnit": {
+        "configDir": "."
+    },
+    // Floor gate. The bulk of the surviving mutants are equivalent (thin
+    // passthrough wrappers + defaults masked by the php functions they call);
+    // this catches a real regression without chasing false positives.
+    "minMsi": 75,
+    "minCoveredMsi": 75,
+    "mutators": {
+        "@default": true,
+        // protected->private / public->protected on trait methods are
+        // behaviourally equivalent (a trait's private method is still callable
+        // by the composing class, and nothing subclasses these wrappers).
+        "ProtectedVisibility": false,
+        "PublicVisibility": false
+    }
+}

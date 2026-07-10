@@ -15,11 +15,11 @@ namespace Phalcon\Tests\Unit\Php;
 
 use Phalcon\Tests\Fixtures\Php\FileFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 use function dataDir;
 use function is_resource;
 use function outputDir;
+use function substr;
 use function uniqid;
 
 /**
@@ -48,6 +48,10 @@ final class FileTraitTest extends AbstractUnitTestCase
          */
         $source = dataDir('assets/sample.csv');
         $handle = $file->fopen($source, 'r');
+        if (false === $handle) {
+            $this->fail('Could not open file: ' . $source);
+        }
+
         $actual = $file->fgetCsv($handle, 0, ';');
         $result = $file->fclose($handle);
         $this->assertTrue($result);
@@ -84,6 +88,12 @@ final class FileTraitTest extends AbstractUnitTestCase
         $this->assertEquals($expected, $actual);
 
         /**
+         * Read a fixed length (covers the $length branch)
+         */
+        $actual = $file->fileGetContents($fileName, false, null, 0, 5);
+        $this->assertEquals(substr($contents, 0, 5), $actual);
+
+        /**
          * Delete it
          */
         $actual = $file->unlink($fileName);
@@ -101,6 +111,12 @@ final class FileTraitTest extends AbstractUnitTestCase
          */
         $actual = $file->fwrite($handle, $contents);
         $this->assertGreaterThan(0, $actual);
+
+        /**
+         * fwrite with an explicit length (covers the $length branch)
+         */
+        $actual = $file->fwrite($handle, $contents, 3);
+        $this->assertSame(3, $actual);
 
         /**
          * fclose

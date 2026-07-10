@@ -1,0 +1,8 @@
+parameters:
+    paths:
+        - ../src
+        - ../tests
+    excludePaths:
+        - ../tests/_output
+    level: max
+    tmpDir: ../tests/_output

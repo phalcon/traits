@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\InterpolateFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Interpolate trait
@@ -24,29 +22,7 @@ use PHPUnit\Framework\TestCase;
 final class InterpolateTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrInterpolateFilter(
-        string $expected,
-        string $format,
-        array $context,
-        string $left,
-        string $right
-    ): void {
-        $object = new InterpolateFixture();
-        $actual = $object->interpolate($format, $context, $left, $right);
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * @return array[]
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getExamples(): array
     {
@@ -116,5 +92,28 @@ final class InterpolateTraitTest extends AbstractUnitTestCase
                 ']',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
+     *
+     * @dataProvider getExamples
+     *
+     * @param array<string, string> $context
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrInterpolateFilter(
+        string $expected,
+        string $format,
+        array $context,
+        string $left,
+        string $right
+    ): void {
+        $object = new InterpolateFixture();
+        $actual = $object->interpolate($format, $context, $left, $right);
+        $this->assertEquals($expected, $actual);
     }
 }

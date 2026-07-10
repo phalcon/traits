@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Phalcon\Tests\Unit\Helper\Str;
 
-use Codeception\Example;
 use Phalcon\Tests\Fixtures\Helper\Str\UncamelizeFixture;
 use Phalcon\Tests\Unit\AbstractUnitTestCase;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class UncamelizeTraitTest extends TestCase
@@ -24,26 +22,7 @@ use PHPUnit\Framework\TestCase;
 final class UncamelizeTraitTest extends AbstractUnitTestCase
 {
     /**
-     * Tests Str\CamelizeTrait
-     *
-     * @dataProvider getSources
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2020-09-09
-     */
-    public function testHelperStrUncamelize(
-        string $value,
-        string $expected,
-        string $delimiter
-    ): void {
-        $object = new UncamelizeFixture();
-        $actual = $object->toUncamelize($value, $delimiter);
-
-        $this->assertSame($expected, $actual);
-    }
-
-    /**
-     * @return array
+     * @return array<array-key, array<array-key, mixed>>
      */
     public static function getSources(): array
     {
@@ -66,6 +45,25 @@ final class UncamelizeTraitTest extends AbstractUnitTestCase
             ['CameLiZe', 'came.li.ze', '.'],
             ['CameLiZe', 'came-li-ze', '-'],
             ['CAMELIZE', 'c/a/m/e/l/i/z/e', '/'],
+            ["A\0B", 'a', '_'],
         ];
+    }
+    /**
+     * Tests Str\CamelizeTrait
+     *
+     * @dataProvider getSources
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperStrUncamelize(
+        string $value,
+        string $expected,
+        string $delimiter
+    ): void {
+        $object = new UncamelizeFixture();
+        $actual = $object->uncamelize($value, $delimiter);
+
+        $this->assertSame($expected, $actual);
     }
 }

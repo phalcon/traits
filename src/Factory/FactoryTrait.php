@@ -21,9 +21,6 @@ use function array_merge;
  * Methods allowing a mapper based factory to operate. Supports injected
  * services, getting a service by name (key), initialization and setting of
  * the exception class (when exceptions are needed to be thrown)
- *
- * @property string $exceptionClass
- * @property array  $mapper
  */
 trait FactoryTrait
 {
@@ -38,9 +35,28 @@ trait FactoryTrait
     private array $mapper = [];
 
     /**
+     * Return an object from the instances pool. If it does not exist, create it
+     *
+     * @param string $name
+     * @param mixed  ...$arguments
+     *
+     * @return object
+     * @throws Exception
+     */
+    protected function getCachedInstance(string $name, mixed ...$arguments): object
+    {
+        if (true !== isset($this->instances[$name])) {
+            $definition = $this->getService($name);
+            $this->instances[$name] = new $definition(...$arguments);
+        }
+
+        return $this->instances[$name];
+    }
+
+    /**
      * Returns the exception class for the factory
      *
-     * @return string
+     * @return class-string<\Throwable>
      */
     abstract protected function getExceptionClass(): string;
 
@@ -50,7 +66,7 @@ trait FactoryTrait
      *
      * @param string $name
      *
-     * @return mixed
+     * @return string
      * @throws Exception
      */
     protected function getService(string $name): string
@@ -63,25 +79,6 @@ trait FactoryTrait
         }
 
         return $this->mapper[$name];
-    }
-
-    /**
-     * Return an object from the instances pool. If it does not exist, create it
-     *
-     * @param string $name
-     * @param mixed  ...$arguments
-     *
-     * @return object|mixed
-     * @throws Exception
-     */
-    protected function getCachedInstance(string $name, mixed ...$arguments): object
-    {
-        if (true !== isset($this->instances[$name])) {
-            $definition = $this->getService($name);
-            $this->instances[$name] = new $definition(...$arguments);
-        }
-
-        return $this->instances[$name];
     }
 
     /**

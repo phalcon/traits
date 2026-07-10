@@ -21,7 +21,7 @@ class FactoryFixture
     use FactoryTrait;
 
     /**
-     * @param array $services
+     * @param array<string> $services
      */
     public function __construct(array $services = [])
     {
@@ -31,8 +31,8 @@ class FactoryFixture
     /**
      * Create a new instance of the adapter
      *
-     * @param string $name
-     * @param array  $options
+     * @param string                  $name
+     * @param array<array-key, mixed> $options
      *
      * @throws FactoryExceptionFixture
      */
@@ -49,7 +49,7 @@ class FactoryFixture
      * @param string $name
      * @param mixed  ...$arguments
      *
-     * @return object|mixed
+     * @return object
      * @throws Exception
      */
     public function getInstance(string $name, mixed ...$arguments): object
@@ -58,7 +58,7 @@ class FactoryFixture
     }
 
     /**
-     * @return string
+     * @return class-string<\Throwable>
      */
     protected function getExceptionClass(): string
     {

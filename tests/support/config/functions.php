@@ -56,7 +56,7 @@ if (!function_exists('outputDir')) {
  * Utility
  *******************************************************************************/
 if (!function_exists('env')) {
-    function env(string $key, $default = null)
+    function env(string $key, mixed $default = null): mixed
     {
         if (defined($key)) {
             return constant($key);
@@ -71,7 +71,7 @@ if (!function_exists('env')) {
 }
 
 if (!function_exists('defineFromEnv')) {
-    function defineFromEnv(string $name)
+    function defineFromEnv(string $name): void
     {
         if (defined($name)) {
             return;

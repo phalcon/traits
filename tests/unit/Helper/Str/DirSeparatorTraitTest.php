@@ -23,24 +23,6 @@ use const DIRECTORY_SEPARATOR;
  */
 final class DirSeparatorTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Str\DirFromFileTrait
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrDirSeparatorTrait(
-        string $directory,
-        string $expected
-    ): void {
-        $object = new DirSeparatorFixture();
-        $actual = $object->dirSeparator($directory);
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -70,5 +52,23 @@ final class DirSeparatorTraitTest extends AbstractUnitTestCase
                 DIRECTORY_SEPARATOR,
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\DirFromFileTrait
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrDirSeparatorTrait(
+        string $directory,
+        string $expected
+    ): void {
+        $object = new DirSeparatorFixture();
+        $actual = $object->dirSeparator($directory);
+        $this->assertEquals($expected, $actual);
     }
 }

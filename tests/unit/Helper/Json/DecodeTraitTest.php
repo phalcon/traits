@@ -35,6 +35,22 @@ final class DecodeTraitTest extends AbstractUnitTestCase
     }
 
     /**
+     * Tests Support\Helper\Json\DecodeTrait - associative defaults to false
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperJsonDecodeTraitDefaultAssociative(): void
+    {
+        $object = new DecodeFixture();
+
+        // associative defaults to false -> an object decodes to \stdClass
+        $this->assertEquals((object) ['a' => 1], $object->decodeDefault('{"a":1}'));
+    }
+
+    /**
      * Tests Support\Helper\Json\DecodeTrait - throws on failure
      *
      * @return void
@@ -49,21 +65,5 @@ final class DecodeTraitTest extends AbstractUnitTestCase
         $this->expectException(JsonException::class);
 
         $object->decode('{"invalid": }');
-    }
-
-    /**
-     * Tests Support\Helper\Json\DecodeTrait - associative defaults to false
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2020-09-09
-     */
-    public function testHelperJsonDecodeTraitDefaultAssociative(): void
-    {
-        $object = new DecodeFixture();
-
-        // associative defaults to false -> an object decodes to \stdClass
-        $this->assertEquals((object) ['a' => 1], $object->decodeDefault('{"a":1}'));
     }
 }

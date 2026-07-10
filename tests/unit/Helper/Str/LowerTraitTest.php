@@ -21,25 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class LowerTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrLowerFilter(
-        string $text,
-        string $encoding,
-        string $expected
-    ): void {
-        $object = new LowerFixture();
-        $actual = $object->lower($text, $encoding);
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -123,5 +104,24 @@ final class LowerTraitTest extends AbstractUnitTestCase
                 'καλημέ?α',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrLowerFilter(
+        string $text,
+        string $encoding,
+        string $expected
+    ): void {
+        $object = new LowerFixture();
+        $actual = $object->lower($text, $encoding);
+        $this->assertEquals($expected, $actual);
     }
 }

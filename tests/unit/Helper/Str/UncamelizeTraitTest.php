@@ -21,24 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class UncamelizeTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Str\CamelizeTrait
-     *
-     * @dataProvider getSources
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2020-09-09
-     */
-    public function testHelperStrUncamelize(
-        string $value,
-        string $expected,
-        string $delimiter
-    ): void {
-        $object = new UncamelizeFixture();
-        $actual = $object->uncamelize($value, $delimiter);
-
-        $this->assertSame($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -66,5 +48,23 @@ final class UncamelizeTraitTest extends AbstractUnitTestCase
             ['CAMELIZE', 'c/a/m/e/l/i/z/e', '/'],
             ["A\0B", 'a', '_'],
         ];
+    }
+    /**
+     * Tests Str\CamelizeTrait
+     *
+     * @dataProvider getSources
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperStrUncamelize(
+        string $value,
+        string $expected,
+        string $delimiter
+    ): void {
+        $object = new UncamelizeFixture();
+        $actual = $object->uncamelize($value, $delimiter);
+
+        $this->assertSame($expected, $actual);
     }
 }

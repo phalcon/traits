@@ -18,28 +18,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
 
 final class CamelizeTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Str\CamelizeTrait
-     *
-     * @dataProvider getSources
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2020-09-09
-     */
-    public function testHelperStrCamelize(
-        string $value,
-        string $expected,
-        ?string $delimiter,
-        bool $lowercase
-    ): void {
-        $object    = new CamelizeFixture();
-        $delimiter = $delimiter ?: '-_';
-
-        $actual = $object->camelize($value, $delimiter, $lowercase);
-        $this->assertSame($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -74,5 +52,27 @@ final class CamelizeTraitTest extends AbstractUnitTestCase
             ['customer Session', 'customerSession', ' -_', true],
             ['customer-Session', 'customerSession', ' -_', true],
         ];
+    }
+    /**
+     * Tests Str\CamelizeTrait
+     *
+     * @dataProvider getSources
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperStrCamelize(
+        string $value,
+        string $expected,
+        ?string $delimiter,
+        bool $lowercase
+    ): void {
+        $object    = new CamelizeFixture();
+        $delimiter = $delimiter ?: '-_';
+
+        $actual = $object->camelize($value, $delimiter, $lowercase);
+        $this->assertSame($expected, $actual);
     }
 }

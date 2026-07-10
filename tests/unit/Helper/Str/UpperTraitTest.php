@@ -21,25 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class UpperTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrUpperFilter(
-        string $text,
-        string $encoding,
-        string $expected
-    ): void {
-        $object = new UpperFixture();
-        $actual = $object->upper($text, $encoding);
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -123,5 +104,24 @@ final class UpperTraitTest extends AbstractUnitTestCase
                 'καλημέ?α',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrUpperFilter(
+        string $text,
+        string $encoding,
+        string $expected
+    ): void {
+        $object = new UpperFixture();
+        $actual = $object->upper($text, $encoding);
+        $this->assertEquals($expected, $actual);
     }
 }

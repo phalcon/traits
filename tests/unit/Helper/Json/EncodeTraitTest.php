@@ -35,23 +35,6 @@ final class EncodeTraitTest extends AbstractUnitTestCase
     }
 
     /**
-     * Tests Support\Helper\Json\EncodeTrait - throws on failure
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2020-09-09
-     */
-    public function testHelperJsonEncodeTraitThrowsException(): void
-    {
-        $object = new EncodeFixture();
-
-        $this->expectException(JsonException::class);
-
-        $object->encode("\xB1\x31");
-    }
-
-    /**
      * Tests Support\Helper\Json\EncodeTrait - default options (79)
      *
      * @return void
@@ -66,5 +49,22 @@ final class EncodeTraitTest extends AbstractUnitTestCase
         // 79 includes JSON_HEX_TAG so `<` is escaped as \\u003C, and no pretty-print
         $this->assertSame('"\\u003C"', $object->encodeDefault('<'));
         $this->assertSame('{"a":"b"}', $object->encodeDefault(['a' => 'b']));
+    }
+
+    /**
+     * Tests Support\Helper\Json\EncodeTrait - throws on failure
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2020-09-09
+     */
+    public function testHelperJsonEncodeTraitThrowsException(): void
+    {
+        $object = new EncodeFixture();
+
+        $this->expectException(JsonException::class);
+
+        $object->encode("\xB1\x31");
     }
 }

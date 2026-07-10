@@ -21,29 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class InterpolateTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
-     *
-     * @dataProvider getExamples
-     *
-     * @param array<string, string> $context
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrInterpolateFilter(
-        string $expected,
-        string $format,
-        array $context,
-        string $left,
-        string $right
-    ): void {
-        $object = new InterpolateFixture();
-        $actual = $object->interpolate($format, $context, $left, $right);
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -116,5 +93,28 @@ final class InterpolateTraitTest extends AbstractUnitTestCase
                 ']',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
+     *
+     * @dataProvider getExamples
+     *
+     * @param array<string, string> $context
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrInterpolateFilter(
+        string $expected,
+        string $format,
+        array $context,
+        string $left,
+        string $right
+    ): void {
+        $object = new InterpolateFixture();
+        $actual = $object->interpolate($format, $context, $left, $right);
+        $this->assertEquals($expected, $actual);
     }
 }

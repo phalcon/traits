@@ -21,30 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class FilterTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
-     *
-     * @dataProvider getExamples
-     *
-     * @param array<array-key, mixed> $source
-     * @param array<array-key, mixed> $expected
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-25
-     */
-    public function testHelperArrFilterTraitToFilter(
-        array $source,
-        array $expected,
-        ?callable $method
-    ): void {
-        $filter = new FilterFixture();
-
-        $actual   = $filter->filter($source, $method);
-
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -104,5 +80,29 @@ final class FilterTraitTest extends AbstractUnitTestCase
                 null,
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
+     *
+     * @dataProvider getExamples
+     *
+     * @param array<array-key, mixed> $source
+     * @param array<array-key, mixed> $expected
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-25
+     */
+    public function testHelperArrFilterTraitToFilter(
+        array $source,
+        array $expected,
+        ?callable $method
+    ): void {
+        $filter = new FilterFixture();
+
+        $actual   = $filter->filter($source, $method);
+
+        $this->assertEquals($expected, $actual);
     }
 }

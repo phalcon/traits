@@ -21,26 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class EndsWithTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Str\EndsWithTrait :: toEndsWith()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrEndsWithFilter(
-        string $haystack,
-        string $needle,
-        bool $insensitive,
-        bool $expected
-    ): void {
-        $object = new EndsWithFixture();
-        $actual = $object->endsWith($haystack, $needle, $insensitive);
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -123,5 +103,25 @@ final class EndsWithTraitTest extends AbstractUnitTestCase
                 true,
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\EndsWithTrait :: toEndsWith()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrEndsWithFilter(
+        string $haystack,
+        string $needle,
+        bool $insensitive,
+        bool $expected
+    ): void {
+        $object = new EndsWithFixture();
+        $actual = $object->endsWith($haystack, $needle, $insensitive);
+        $this->assertEquals($expected, $actual);
     }
 }

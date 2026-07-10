@@ -21,26 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class StartsWithTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Str\StartsWithTrait :: toStartsWith()
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrStartsWithFilter(
-        string $haystack,
-        string $needle,
-        bool $insensitive,
-        bool $expected
-    ): void {
-        $object = new StartsWithFixture();
-        $actual = $object->startsWith($haystack, $needle, $insensitive);
-        $this->assertEquals($expected, $actual);
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -123,5 +103,25 @@ final class StartsWithTraitTest extends AbstractUnitTestCase
                 true,
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Str\StartsWithTrait :: toStartsWith()
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrStartsWithFilter(
+        string $haystack,
+        string $needle,
+        bool $insensitive,
+        bool $expected
+    ): void {
+        $object = new StartsWithFixture();
+        $actual = $object->startsWith($haystack, $needle, $insensitive);
+        $this->assertEquals($expected, $actual);
     }
 }

@@ -21,40 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class DirFromFileTraitTest extends AbstractUnitTestCase
 {
-    /**
-     * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait
-     *
-     * @dataProvider getExamples
-     *
-     * @return void
-     *
-     * @author       Phalcon Team <team@phalcon.io>
-     * @since        2021-10-26
-     */
-    public function testHelperStrDirFromFileTrait(
-        string $fileName,
-        string $expected
-    ): void {
-        $object = new DirFromFileFixture();
-        $actual = $object->dirFromFile($fileName);
-        $this->assertEquals($expected, $actual);
-    }
-
-    /**
-     * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait - filesystemSafe
-     *
-     * @return void
-     *
-     * @author Phalcon Team <team@phalcon.io>
-     * @since  2021-10-26
-     */
-    public function testHelperStrDirFromFileTraitFilesystemSafe(): void
-    {
-        $object = new DirFromFileFixture();
-
-        // With filesystemSafe, dots in the computed segments become dashes
-        $this->assertEquals('ab/c-/de/', $object->dirFromFile('abc.defg.jpg', true));
-    }
 
     /**
      * @return array<array-key, array<array-key, mixed>>
@@ -91,5 +57,39 @@ final class DirFromFileTraitTest extends AbstractUnitTestCase
                 'я/',
             ],
         ];
+    }
+    /**
+     * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait
+     *
+     * @dataProvider getExamples
+     *
+     * @return void
+     *
+     * @author       Phalcon Team <team@phalcon.io>
+     * @since        2021-10-26
+     */
+    public function testHelperStrDirFromFileTrait(
+        string $fileName,
+        string $expected
+    ): void {
+        $object = new DirFromFileFixture();
+        $actual = $object->dirFromFile($fileName);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait - filesystemSafe
+     *
+     * @return void
+     *
+     * @author Phalcon Team <team@phalcon.io>
+     * @since  2021-10-26
+     */
+    public function testHelperStrDirFromFileTraitFilesystemSafe(): void
+    {
+        $object = new DirFromFileFixture();
+
+        // With filesystemSafe, dots in the computed segments become dashes
+        $this->assertEquals('ab/c-/de/', $object->dirFromFile('abc.defg.jpg', true));
     }
 }

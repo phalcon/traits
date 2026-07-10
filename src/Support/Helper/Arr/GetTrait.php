@@ -36,10 +36,7 @@ trait GetTrait
         mixed $defaultValue = null,
         ?string $cast = null
     ): mixed {
-        $value = $defaultValue;
-        if (true === isset($collection[$index])) {
-            $value = $collection[$index];
-        }
+        $value = $collection[$index] ?? $defaultValue;
 
         if ($cast) {
             settype($value, $cast);

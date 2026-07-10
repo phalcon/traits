@@ -1,26 +1,20 @@
 ## Phalcon Traits
 
-Phalcon Traits is a package that contains traits useful to Phalcon v6+. That 
-does not stop developers for including the package in their applications and 
-even enhancing it.
+Phalcon Traits is a package that contains traits useful to Phalcon v6+. That does not stop developers from including the package in their own applications and even enhancing it.
 
-The available traits contain as little code as possible and in most cases cover 
-only one method. This might seem as an overkill since each trait inclusion in a 
-class will result in the same amount of file reads when the class file is read. 
-On the other hand, it is beneficial to do so, since only code that is required 
-by the class is going to be interpreted. 
+The available traits contain as little code as possible and in most cases cover only one method. This might seem like overkill, but it is beneficial: only the code that a class actually requires is interpreted, and each wrapper can be mocked in isolation to cover application paths that depend on it.
+
+Most methods are declared `protected static`, so a composing class can call them through `$this->` or `self::`. The exceptions are `Support\Helper\Str\CamelizeTrait::toCamelize()`, which is `public static`, and the `Factory\FactoryTrait` methods, which are instance methods.
+
+Namespaces: the array, string and JSON helpers live under `Phalcon\Traits\Support\Helper\*`, while the PHP function wrappers live under `Phalcon\Traits\Php\*`.
 
 The available traits are:
 
 ## Factory
+
 ### FactoryTrait
-This trait offers the skeleton for creating factories. It contains an array 
-where all the definitions are stored, which can be extended by passing 
-additional definitions as an array in the constructor. The string keys of the 
-array reflect the names of each service, while the values contain the string 
-name of the class (using the full namespace). By using the constructor injected 
-array of definitions, it is possible that certain elements will be replaced 
-if they have the same name.
+
+This trait offers the skeleton for creating factories. It holds an array where all the definitions are stored; the array can be extended by passing additional definitions to the constructor. The string keys are the service names and the values are the fully-qualified class names. Because the constructor-injected definitions are merged in, elements sharing the same name are replaced.
 
 The methods offered are:
 
@@ -28,92 +22,89 @@ The methods offered are:
 ```php
 protected function getCachedInstance(string $name, mixed ...$arguments): object
 ```
-Returns a instance based on its name. The instance is stored in an internal
-array and the method returns the same instance once initialized.
-(see `getService()` and `getExceptionClass()` method)
+Returns an instance based on its name. The instance is stored in an internal array and the same instance is returned once initialized (see `getService()` and `getExceptionClass()`).
 
 **getService**
 ```php
-protected function getService(string $name)
+protected function getService(string $name): string
 ```
-Returns a service based on the name; throws exception if it does not exist.
-(see `getExceptionClass()` method)
+Returns a service (the fully-qualified class name) based on the name; throws the configured exception if it does not exist (see `getExceptionClass()`).
 
 **getServices**
 ```php
 abstract protected function getServices(): array
 ```
-Returns the services for the factory. This is a string key/value array. As a key 
-we define the name of each service, while the value has the class name (with 
-the full namespace).
+Returns the services for the factory as a string key/value array, where the key is the service name and the value is the fully-qualified class name.
 
 **init**
 ```php
 protected function init(array $services = []): void
 ```
-Initialize services. Called in `__construct` and merges the passed services 
-with those set in the `getServices()` method.
-
+Initializes services. Called from `__construct` and merges the passed services with those returned by `getServices()`.
 
 **getExceptionClass**
 ```php
-abstract protected function getExceptionClass(): string;
+abstract protected function getExceptionClass(): string
 ```
-Returns the exception class for the factory (as a string with the full 
-namespace).
+Returns the exception class for the factory as a `class-string<\Throwable>` (the fully-qualified class name of a throwable that `getService()` raises when a service is missing).
 
-## Helper
+## Support\Helper
+
+Helpers under the `Phalcon\Traits\Support\Helper` namespace, matching the `Phalcon\Support\Helper` namespace used by the framework.
+
 ### Arr
+
 Namespace containing traits relevant to array manipulation and processing.
 
 #### FilterTrait
 ```php
-/**
- * @param array<array-key, mixed> $collection
- * @param callable|null           $method
- * @param int                     $mode
- *
- * @return array<int|string,mixed>
- */
-protected function toFilter(
+protected static function toFilter(
     array $collection,
-    callable $method = null,
-    int $mode = 0
-): array {
- ```
-Provides a wrapper to `array_filter` with a callable on an array.
+    callable|null $method = null
+): array
+```
+Wraps `array_filter`. When no callable is passed the collection is returned unchanged; otherwise the callable is applied as the filter.
 
 **Example**
 ```php
 $filtered = $this->toFilter(
-    $collection, 
-    function ($element) { 
-        return $element > 1; 
+    $collection,
+    function ($element) {
+        return $element > 1;
     }
 );
 ```
 
+#### GetTrait
+```php
+protected static function getArrVal(
+    array $collection,
+    int|string $index,
+    mixed $defaultValue = null,
+    ?string $cast = null
+): mixed
+```
+Returns an array element by key; when the key does not exist the default value is returned. The result can optionally be cast to a specific type (using `settype` internally) by passing a `$cast` such as `'boolean'`, `'integer'`, `'array'` etc.
+
+**Example**
+```php
+echo $this->getArrVal(['one' => 1, 'two' => 2], 'two');
+// 2
+```
+
 ### Str
+
 Namespace containing traits relevant to string manipulation and processing.
 
 #### CamelizeTrait
-
 ```php
-/**
- * @param string      $text
- * @param string|null $delimiters
- * @param bool        $lowerFirst
- *
- * @return string
- */
-public function toCamelize(
+public static function toCamelize(
     string $text,
-    string $delimiters = '\-_',
+    string $delimiters = '-_',
     bool $lowerFirst = false
 ): string
 ```
-Accepts a string and camelizes it based on the passed delimiter (or the 
-default one). It also allows the developer to lowercase the first character.
+Camelizes a string based on the passed delimiters (or the default `-_`). It optionally lowercases the first character. The conversion is byte-based ASCII, matching the cphalcon builtin.
 
 **Example**
 ```php
@@ -121,23 +112,14 @@ echo $this->toCamelize('came_li_ze');
 // CameLiZe
 ```
 
-The trait also exposes `staticToCamelize()` for calling the method statically.
-
 #### DirFromFileTrait
-
 ```php
-/**
- * @param string $file
- *
- * @return string
- */
-protected function toDirFromFile(string $file): string
+protected static function toDirFromFile(
+    string $file,
+    bool $filesystemSafe = false
+): string
 ```
-Accepts a file name (without extension) and returns a calculated directory
-structure with the filename in the end. The file structure keeps two letters
-from the file to create a deep directory structure based on the file name. This
-method is used to store files without ever reaching file system directory limits
-for files.
+Accepts a file name (without extension) and returns a calculated directory structure with the filename at the end. It keeps two letters at a time to build a deep directory tree, which avoids ever reaching file-system directory limits. When `$filesystemSafe` is `true`, dots in the computed segments are replaced with dashes.
 
 **Example**
 ```php
@@ -147,14 +129,9 @@ echo $this->toDirFromFile('abcdef12345.jpg');
 
 #### DirSeparatorTrait
 ```php
-/**
- * @param string $directory
- *
- * @return string
- */
-protected function toDirSeparator(string $directory): string
+protected static function toDirSeparator(string $directory): string
 ```
-Accepts a directory name and ensures that it ends with `DIRECTORY_SEPARATOR`
+Accepts a directory name and ensures that it ends with exactly one `DIRECTORY_SEPARATOR`.
 
 **Example**
 ```php
@@ -163,48 +140,31 @@ echo $this->toDirSeparator('/home/phalcon');
 ```
 
 #### EndsWithTrait
-Checks if a string ends with a given string
-
 ```php
-/**
- * @param string $haystack
- * @param string $needle
- * @param bool   $ignoreCase
- *
- * @return bool
- */
-protected function toEndsWith(
-  string $haystack,
-  string $needle,
-  bool $ignoreCase = true
+protected static function toEndsWith(
+    string $haystack,
+    string $needle,
+    bool $ignoreCase = true
 ): bool
 ```
+Checks if a string ends with a given string. The comparison is case-insensitive by default and multibyte-aware; an empty haystack or needle returns `false`.
 
 **Example**
 ```php
-var_dump($this->toEndsWith('Hello', 'O', true);
+var_dump($this->toEndsWith('Hello', 'O', true));
 // true
-````
+```
 
 #### InterpolateTrait
-Interpolates context values into the message placeholders [link][psr-3]
-
 ```php
-/**
- * @param string $input
- * @param array  $context
- * @param string $left
- * @param string $right
- *
- * @return string
- */
-protected function toInterpolate(
-  string $input,
-  array $context = [],
-  string $left = '%',
-  string $right = '%'
+protected static function toInterpolate(
+    string $input,
+    array $context = [],
+    string $left = '%',
+    string $right = '%'
 ): string
 ```
+Interpolates context values into the message placeholders, following [PSR-3][psr-3].
 
 **Example**
 ```php
@@ -215,72 +175,47 @@ $context = [
 ];
 echo $this->toInterpolate($input, $context, '[', ']');
 // 2020-09-09 is the date AAA is context
-````
+```
 
 #### LowerTrait
-Converts the passed string to lowercase using the `mbstring` extension.
-
 ```php
-/**
- * @param string $text
- * @param string $encoding
- *
- * @return string
- */
-protected function toLower(
-  string $text,
-  string $encoding = 'UTF-8'
+protected static function toLower(
+    string $text,
+    string $encoding = 'UTF-8'
 ): string
 ```
+Converts the passed string to lowercase using the `mbstring` extension.
 
 **Example**
 ```php
-echo $this->toEndsWith('PhAlcOn');
+echo $this->toLower('PhAlcOn');
 // phalcon
-````
-
-The trait also exposes `staticToLower()` for calling the method statically.
-
-#### StartsWithTrait
-Checks if a string starts with a given string
-
-```php
-/**
- * @param string $haystack
- * @param string $needle
- * @param bool   $ignoreCase
- *
- * @return bool
- */
-protected function toStartsWith(
-  string $haystack,
-  string $needle,
-  bool $ignoreCase = true
-): bool
 ```
 
+#### StartsWithTrait
+```php
+protected static function toStartsWith(
+    string $haystack,
+    string $needle,
+    bool $ignoreCase = true
+): bool
+```
+Checks if a string starts with a given string. The comparison is case-insensitive by default and multibyte-aware; an empty haystack or needle returns `false`.
+
 **Example**
 ```php
-var_dump($this->toStartsWith('Hello', 'h', true);
+var_dump($this->toStartsWith('Hello', 'h', true));
 // true
-````
+```
 
 #### UncamelizeTrait
-
 ```php
-/**
- * @param string $text
- * @param string $delimiters
- *
- * @return string
- */
-public function toUncamelize(
+protected static function toUncamelize(
     string $text,
     string $delimiter = '_'
 ): string
 ```
-Accepts a string and uncamelizes it based on the passed delimiter (or the
-default one)
+Uncamelizes a string based on the passed delimiter (or the default `_`). The conversion is byte-based ASCII, matching the cphalcon builtin.
 
 **Example**
 ```php
@@ -288,399 +223,429 @@ echo $this->toUncamelize('CameLiZe');
 // came_li_ze
 ```
 
-The trait also exposes `staticToUncamelize()` for calling the method statically.
-
 #### UpperTrait
-Converts the passed string to uppercase using the `mbstring` extension.
 ```php
-/**
- * @param string $text
- * @param string $encoding
- *
- * @return string
- */
-protected function toUpper(
-  string $text,
-  string $encoding = 'UTF-8'
+protected static function toUpper(
+    string $text,
+    string $encoding = 'UTF-8'
 ): string
 ```
+Converts the passed string to uppercase using the `mbstring` extension.
 
 **Example**
 ```php
 echo $this->toUpper('PhAlcOn');
 // PHALCON
-````
+```
 
-The trait also exposes `staticToUpper()` for calling the method statically.
+### Json
 
-### Php
-PHP function wrappers. These are strongly typed (compared to the methods they 
-wrap). They are very useful when testing different paths of an application 
-that rely on these methods. The wrapper method can be easily mocked to ensure
-high code coverage.
+Namespace containing traits that wrap `json_encode`/`json_decode`. Both throw the native `\JsonException` on failure (a framework-flavored exception can be layered on top by the `Support` helper classes that consume these traits). The default `$options` value is `79` and the default `$depth` is `512`.
 
-#### FileTrait
+#### EncodeTrait
+```php
+protected static function toEncode(
+    mixed $data,
+    int $options = 79,
+    int $depth = 512
+): string
+```
+Encodes data using [json_encode][json-encode], throwing `\JsonException` when the data cannot be encoded.
+
+#### DecodeTrait
+```php
+protected static function toDecode(
+    string $data,
+    bool $associative = false,
+    int $depth = 512,
+    int $options = 79
+): mixed
+```
+Decodes a string using [json_decode][json-decode], throwing `\JsonException` when the string cannot be decoded.
+
+## Php
+
+PHP function wrappers. These are strongly typed (compared to the methods they wrap) and are very useful when testing different paths of an application that rely on these functions: the wrapper method can be easily mocked to ensure high code coverage.
+
+### ApcuTrait
+`apcu` based wrapper methods.
+
+**phpApcuDec**
+```php
+protected static function phpApcuDec(string $key, int $step = 1): bool|int
+```
+[apcu_dec][apcu-dec]
+
+**phpApcuDelete**
+```php
+protected static function phpApcuDelete(array|string $key): bool|array
+```
+[apcu_delete][apcu-delete]
+
+**phpApcuExists**
+```php
+protected static function phpApcuExists(array|string $key): bool|array
+```
+[apcu_exists][apcu-exists]
+
+**phpApcuFetch**
+```php
+protected static function phpApcuFetch(array|string $key): mixed
+```
+[apcu_fetch][apcu-fetch]
+
+**phpApcuInc**
+```php
+protected static function phpApcuInc(string $key, int $step = 1): bool|int
+```
+[apcu_inc][apcu-inc]
+
+**phpApcuIterator**
+```php
+protected static function phpApcuIterator(string $pattern): APCUIterator|bool
+```
+[APCUIterator][apcu-iterator]
+
+**phpApcuStore**
+```php
+protected static function phpApcuStore(
+    array|string $key,
+    mixed $payload,
+    int $ttl = 0
+): bool|array
+```
+[apcu_store][apcu-store]
+
+### Base64Trait
+`base64` based wrapper methods.
+
+**doDecodeUrl**
+```php
+protected static function doDecodeUrl(string $input): string
+```
+Decodes a Base64 URL string. Missing padding is restored and the URL-safe `-`/`_` characters are translated back to `+`/`/` before decoding.
+
+**doEncodeUrl**
+```php
+protected static function doEncodeUrl(string $input): string
+```
+Encodes a string in Base64 URL format, translating `+`/`/` to `-`/`_` and stripping the `=` padding.
+
+**phpBase64Decode**
+```php
+protected static function phpBase64Decode(
+    string $input,
+    bool $strict = false
+): string|false
+```
+[base64_decode][base64-decode]
+
+**phpBase64Encode**
+```php
+protected static function phpBase64Encode(string $input): string
+```
+[base64_encode][base64-encode]
+
+### FileTrait
 File based wrapper methods.
-
-**phpFileExists**
-```php
-/**
- * @param string $filename
- *
- * @return bool
- */
-protected function phpFileExists(string $filename)
-```
-[file_exists][file-exists]
-
-**phpFileGetContents**
-```php
-/**
- * @param string $filename
- *
- * @return string|false
- */
-protected function phpFileGetContents(string $filename)
-```
-[file_get_contents][file-get-contents]
-
-**phpFilePutContents**
-```php
-/**
- * @param string   $filename
- * @param mixed    $data
- * @param int      $flags
- * @param resource $context
- *
- * @return int|false
- */
-protected function phpFilePutContents(
-  string $filename,
-  $data,
-  int $flags = 0,
-  $context = null
-)
-```
-[file_put_contents][file-put-contents]
 
 **phpFclose**
 ```php
-/**
- * Closes an open file pointer
- *
- * @param resource $handle
- *
- * @return bool
- */
-public function phpFclose($handle)
+protected static function phpFclose($handle): bool
 ```
 [fclose][fclose]
 
 **phpFgetCsv**
 ```php
-/**
- * @param resource $stream
- * @param int      $length
- * @param string   $separator
- * @param string   $enclosure
- * @param string   $escape
- *
- * @return array|null|false
- */
-protected function phpFgetCsv(
-  $stream,
-  int $length = 0,
-  string $separator = ',',
-  string $enclosure = '"',
-  string $escape = '\\'
-)
+protected static function phpFgetCsv(
+    $stream,
+    int $length = 0,
+    string $separator = ',',
+    ?string $enclosure = null,
+    ?string $escape = null
+): array|false
 ```
 [fgetcsv][fgetcsv]
 
+**phpFileExists**
+```php
+protected static function phpFileExists(string $filename): bool
+```
+[file_exists][file-exists]
+
+**phpFileGetContents**
+```php
+protected static function phpFileGetContents(
+    string $filename,
+    bool $useIncludePath = false,
+    $context = null,
+    int $offset = 0,
+    ?int $length = null
+): false|string
+```
+[file_get_contents][file-get-contents]
+
+**phpFilePutContents**
+```php
+protected static function phpFilePutContents(
+    string $filename,
+    $data,
+    int $flags = 0,
+    $context = null
+): false|int
+```
+[file_put_contents][file-put-contents]
+
 **phpFopen**
 ```php
-/**
- * @param string $filename
- * @param string $mode
- *
- * @return resource|false
- */
-protected function phpFopen(string $filename, string $mode)
+protected static function phpFopen(
+    string $filename,
+    string $mode,
+    bool $useIncludePath = false,
+    $context = null
+)
 ```
 [fopen][fopen]
 
 **phpFwrite**
 ```php
-/**
- * Binary-safe file write
- *
- * @param resource $handle
- * @param string   $data
- *
- * @return int|false
- */
-protected function phpFwrite($handle, string $data)
+protected static function phpFwrite(
+    $handle,
+    string $data,
+    ?int $length = null
+): false|int
 ```
 [fwrite][fwrite]
 
 **phpIsWritable**
 ```php
-/**
- * Tells whether the filename is writable
- *
- * @param string $filename
- *
- * @return bool
- */
-protected function phpIsWritable(string $filename): bool
+protected static function phpIsWritable(string $filename): bool
 ```
 [is_writable][is-writable]
 
 **phpUnlink**
 ```php
-/**
-* @param string $filename
-*
-* @return bool
-*/
-protected function phpUnlink(string $filename)
+protected static function phpUnlink(string $filename, $context = null): bool
 ```
 [unlink][unlink]
 
-##### InfoTrait
-Information method wrappers
+### HashTrait
+`hash` based wrapper methods.
+
+**phpHash**
+```php
+protected static function phpHash(
+    string $algorithm,
+    string $data,
+    bool $binary = false
+): string
+```
+[hash][hash]
+
+**phpHashEquals**
+```php
+protected static function phpHashEquals(
+    string $knownString,
+    string $userString
+): bool
+```
+[hash_equals][hash-equals]
+
+**phpHashHmac**
+```php
+protected static function phpHashHmac(
+    string $algorithm,
+    string $data,
+    string $key,
+    bool $binary = false
+): string
+```
+[hash_hmac][hash-hmac]
+
+### HeaderTrait
+Header based wrapper method.
+
+**phpHeadersSent**
+```php
+protected static function phpHeadersSent(): bool
+```
+[headers_sent][headers-sent]
+
+### IgbinaryTrait
+`igbinary` based wrapper methods.
+
+**phpIgbinarySerialize**
+```php
+protected static function phpIgbinarySerialize(mixed $value): string|null
+```
+[igbinary_serialize][igbinary-serialize]
+
+**phpIgbinaryUnserialize**
+```php
+protected static function phpIgbinaryUnserialize(string $value): mixed
+```
+[igbinary_unserialize][igbinary-unserialize]
+
+### InfoTrait
+Information method wrappers.
 
 **phpExtensionLoaded**
 ```php
-/**
- * @param string $name
- *
- * @return bool
- */
-protected function phpExtensionLoaded(string $name)
+protected static function phpExtensionLoaded(string $name): bool
 ```
 [extension_loaded][extension-loaded]
 
 **phpFunctionExists**
 ```php
-/**
- * @param string $function
- *
- * @return bool
- */
-protected function phpFunctionExists(string $function)
+protected static function phpFunctionExists(string $functionName): bool
 ```
 [function_exists][function-exists]
 
-
-#### IniTrait
+### IniTrait
 `ini` based wrapper methods.
 
-**iniGet**
+**phpIniGet**
 ```php
-/**
- * @param string $input
- * @param string $defaultValue
- *
- * @return string
- */
-protected function phpIniGet(string $input, string $defaultValue = ""): bool
+protected static function phpIniGet(
+    string $input,
+    string $defaultValue = ""
+): string
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-The trait also exposes `phpStaticIniGet()` for calling the method statically.
-
-**iniGetBool**
+**phpIniGetBool**
 ```php
-/**
- * @param string $input
- * @param bool   $defaultValue
- *
- * @return bool
- */
-protected function phpIniGetBool(string $input, bool $defaultValue = false): bool
+protected static function phpIniGetBool(
+    string $input,
+    bool $defaultValue = false
+): bool
+```
+Queries a php.ini value and returns it as a boolean; the tokens `true`, `on`, `yes`, `y` and `1` (case-insensitive) map to `true`. [ini_get][ini-get], [ini list][ini-list]
+
+**phpIniGetInt**
+```php
+protected static function phpIniGetInt(
+    string $input,
+    int $defaultValue = 0
+): int
 ```
 [ini_get][ini-get], [ini list][ini-list]
 
-The trait also exposes `phpStaticIniGetBool()` for calling the method statically.
-
-**iniGetInt**
+**phpParseIniFile**
 ```php
-/**
- * @param string $input
- * @param int    $defaultValue
- *
- * @return int
- */
-protected function phpIniGetInt(string $input, int $defaultValue = 0): int
-```
-[ini_get][ini-get], [ini list][ini-list]
-
-The trait also exposes `phpStaticIniGetInt()` for calling the method statically.
-
-**parseIniFile**
-```php
-/**
- * Parse a configuration file
- *
- * @param string $filename
- * @param bool   $process_sections
- * @param int    $scanner_mode
- *
- * @return array|false
- */
-protected function phpParseIniFile(
-  string $filename,
-  bool $process_sections = false,
-  int $scanner_mode = 1
-)
+protected static function phpParseIniFile(
+    string $filename,
+    bool $processSections = false,
+    int $scannerMode = 0
+): array|false
 ```
 [parse_ini_file][parse-ini-file]
 
-The trait also exposes `phpStaticParseIniFile()` for calling the method statically.
+### MbCaseTrait
+Multibyte case conversion wrapper method.
 
-#### JsonTrait
-JSON wrapper methods
-
-**phpJsonEncode**
+**phpMbConvertCase**
 ```php
-/**
- * @param mixed $value
- * @param int   $flags
- * @param int   $depth
- *
- * @return false|string
- */
-protected function phpJsonEncode($value, int $flags = 0, int $depth = 512)
+protected static function phpMbConvertCase(string $input, int $mode): string
 ```
-[json_encode][json-encode]
+Converts the case of a string using [mb_convert_case][mb-convert-case] with the `UTF-8` encoding (`mbstring` is a required extension).
 
-**phpJsonDecode**
+### MsgpackTrait
+`msgpack` based wrapper methods.
+
+**phpMsgpackPack**
 ```php
-/**
- * @param string    $json
- * @param bool|null $associative
- * @param int       $depth
- * @param int       $flags
- *
- * @return mixed
- */
-protected function phpJsonDecode(
-  string $json,
-  ?bool $associative = null,
-  int $depth = 512,
-  int $flags = 0
-)
+protected static function phpMsgpackPack(mixed $value): string
 ```
-[json_decode][json-decode]
+[msgpack_pack][msgpack-pack]
 
-
-#### UrlTrait
-Url wrapper methods
-
-**doBase64DecodeUrl**
+**phpMsgpackUnpack**
 ```php
-/**
- * @param string $input
- * @param bool   $strict
- *
- * @return string
- */
-protected function doBase64DecodeUrl(string $input, bool $strict = false): string
+protected static function phpMsgpackUnpack(string $value): mixed
 ```
-Decodes a URL using `base64_decode`. The decoding takes into account 
-replacements that occur during encoding.
+[msgpack_unpack][msgpack-unpack]
 
-**doBase64EncodeUrl**
-```php
-/**
- * @param string $input
- *
- * @return string
- */
-protected function doBase64EncodeUrl(string $input): string
-```
-Encodes a URL using `base64_encode`. The encoding replaces `-` and `_` characters
-with `+` and `/`.
+### OpensslTrait
+`openssl` based wrapper methods.
 
-**phpBase64Decode**
+**phpOpensslCipherIvLength**
 ```php
-/**
- * @param string $input
- * @param bool   $strict
- *
- * @return string|false
- *
- * @link https://www.php.net/manual/en/function.base64-decode.php
- */
-protected function phpBase64Decode(string $input, bool $strict = false)
+protected static function phpOpensslCipherIvLength(string $cipher): int|false
 ```
-[base64-decode][base64-decode]
+[openssl_cipher_iv_length][openssl-cipher-iv-length]
 
-**phpBase64Encode**
+**phpOpensslRandomPseudoBytes**
 ```php
-/**
- * @param string $input
- *
- * @return string
- *
- * @link https://www.php.net/manual/en/function.base64-encode.php
- */
-protected function phpBase64Encode(string $input): string
+protected static function phpOpensslRandomPseudoBytes(int $length): string
 ```
-[base64-encode][base64-encode]
+[openssl_random_pseudo_bytes][openssl-random-pseudo-bytes]
+
+### SerializeTrait
+`serialize`/`unserialize` based wrapper methods.
+
+**phpSerialize**
+```php
+protected static function phpSerialize(mixed $value): string
+```
+[serialize][serialize]
+
+**phpUnserialize**
+```php
+protected static function phpUnserialize(
+    string $data,
+    array $options = []
+): mixed
+```
+[unserialize][unserialize]
+
+### UrlTrait
+Url wrapper methods.
 
 **phpParseUrl**
 ```php
-/**
- * @param string $url
- * @param int    $component
- *
- * @return array|false|int|string|null
- *
- * @link https://www.php.net/manual/en/function.parse-url.php
- */
-protected function phpParseUrl(string $url, int $component = -1)
+protected static function phpParseUrl(
+    string $url,
+    int $component = -1
+): array|false|int|string|null
 ```
-[parse-url][parse-url]
+[parse_url][parse-url]
 
 **phpRawUrlDecode**
 ```php
-/**
- * @param string $string
- *
- * @return string
- *
- * @link https://www.php.net/manual/en/function.rawurldecode.php
- */
-protected function phpRawUrlDecode(string $string): string
+protected static function phpRawUrlDecode(string $string): string
 ```
 [rawurldecode][rawurldecode]
 
 **phpRawUrlEncode**
 ```php
-/**
- * @param string $string
- *
- * @return string
- *
- * @link https://www.php.net/manual/en/function.rawurlencode.php
- */
-protected function phpRawUrlEncode(string $string): string
+protected static function phpRawUrlEncode(string $string): string
 ```
 [rawurlencode][rawurlencode]
 
+### YamlTrait
+`yaml` based wrapper method.
 
+**phpYamlParseFile**
+```php
+protected static function phpYamlParseFile(
+    string $filename,
+    int $pos = 0,
+    mixed &$ndocs = null,
+    array $callbacks = []
+): mixed
+```
+[yaml_parse_file][yaml-parse-file]
 
-
-
-
-
+[apcu-dec]: https://php.net/manual/en/function.apcu-dec.php
+[apcu-delete]: https://php.net/manual/en/function.apcu-delete.php
+[apcu-exists]: https://php.net/manual/en/function.apcu-exists.php
+[apcu-fetch]: https://php.net/manual/en/function.apcu-fetch.php
+[apcu-inc]: https://php.net/manual/en/function.apcu-inc.php
+[apcu-iterator]: https://php.net/manual/en/class.apcuiterator.php
+[apcu-store]: https://php.net/manual/en/function.apcu-store.php
 [base64-decode]: https://www.php.net/manual/en/function.base64-decode.php
 [base64-encode]: https://www.php.net/manual/en/function.base64-encode.php
 [extension-loaded]: https://php.net/manual/en/function.extension-loaded.php
-[json-decode]: https://php.net/manual/en/function.json-decode.php
-[json-encode]: https://php.net/manual/en/function.json-encode.php
 [fclose]: https://php.net/manual/en/function.fclose.php
 [fgetcsv]: https://php.net/manual/en/function.fgetcsv.php
 [file-exists]: https://php.net/manual/en/function.file-exists.php
@@ -689,12 +654,28 @@ protected function phpRawUrlEncode(string $string): string
 [fopen]: https://php.net/manual/en/function.fopen.php
 [function-exists]: https://php.net/manual/en/function.function-exists.php
 [fwrite]: https://php.net/manual/en/function.fwrite.php
+[hash]: https://php.net/manual/en/function.hash.php
+[hash-equals]: https://php.net/manual/en/function.hash-equals.php
+[hash-hmac]: https://php.net/manual/en/function.hash-hmac.php
+[headers-sent]: https://php.net/manual/en/function.headers-sent.php
+[igbinary-serialize]: https://php.net/manual/en/function.igbinary-serialize.php
+[igbinary-unserialize]: https://php.net/manual/en/function.igbinary-unserialize.php
 [ini-get]: https://php.net/manual/en/function.ini-get.php
 [ini-list]: https://php.net/manual/en/ini.list.php
 [is-writable]: https://php.net/manual/en/function.is-writable.php
+[json-decode]: https://php.net/manual/en/function.json-decode.php
+[json-encode]: https://php.net/manual/en/function.json-encode.php
+[mb-convert-case]: https://php.net/manual/en/function.mb-convert-case.php
+[msgpack-pack]: https://php.net/manual/en/function.msgpack-pack.php
+[msgpack-unpack]: https://php.net/manual/en/function.msgpack-unpack.php
+[openssl-cipher-iv-length]: https://php.net/manual/en/function.openssl-cipher-iv-length.php
+[openssl-random-pseudo-bytes]: https://php.net/manual/en/function.openssl-random-pseudo-bytes.php
 [parse-ini-file]: https://php.net/manual/en/function.parse-ini-file.php
 [parse-url]: https://www.php.net/manual/en/function.parse-url.php
 [psr-3]: https://www.php-fig.org/psr/psr-3/
 [rawurldecode]: https://www.php.net/manual/en/function.rawurldecode.php
 [rawurlencode]: https://www.php.net/manual/en/function.rawurlencode.php
+[serialize]: https://php.net/manual/en/function.serialize.php
 [unlink]: https://php.net/manual/en/function.unlink.php
+[unserialize]: https://php.net/manual/en/function.unserialize.php
+[yaml-parse-file]: https://php.net/manual/en/function.yaml-parse-file.php

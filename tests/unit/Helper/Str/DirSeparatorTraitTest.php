@@ -23,7 +23,6 @@ use const DIRECTORY_SEPARATOR;
  */
 final class DirSeparatorTraitTest extends AbstractUnitTestCase
 {
-
     /**
      * @return array<array-key, array<array-key, mixed>>
      */

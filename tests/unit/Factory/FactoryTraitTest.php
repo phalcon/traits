@@ -26,7 +26,6 @@ use function spl_object_hash;
  */
 final class FactoryTraitTest extends AbstractUnitTestCase
 {
-
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() with init
      *

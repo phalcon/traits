@@ -18,7 +18,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
 
 final class CamelizeTraitTest extends AbstractUnitTestCase
 {
-
     /**
      * @return array<array-key, array<array-key, mixed>>
      */

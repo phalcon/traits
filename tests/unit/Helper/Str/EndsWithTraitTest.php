@@ -21,7 +21,6 @@ use Phalcon\Tests\Unit\AbstractUnitTestCase;
  */
 final class EndsWithTraitTest extends AbstractUnitTestCase
 {
-
     /**
      * @return array<array-key, array<array-key, mixed>>
      */

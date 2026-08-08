@@ -35,10 +35,9 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.75",
-        "infection/infection": "^0.29.9",
         "pds/composer-script-names": "^1.0",
         "pds/skeleton": "^1.0",
-        "phalcon/talon": "^0.7 || ^0.8 || ^0.9",
+        "phalcon/talon": "^1.0.0",
         "phpstan/phpstan": "^2.2",
         "phpunit/phpunit": "^10.5",
         "squizlabs/php_codesniffer": "^4.0"

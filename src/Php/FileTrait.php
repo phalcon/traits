@@ -20,7 +20,9 @@ use function file_get_contents;
 use function file_put_contents;
 use function fopen;
 use function fwrite;
+use function is_dir;
 use function is_writable;
+use function mkdir;
 use function unlink;
 
 /**
@@ -169,6 +171,20 @@ trait FileTrait
     }
 
     /**
+     * Tells whether the filename is a directory
+     *
+     * @param string $filename
+     *
+     * @return bool
+     *
+     * @link https://php.net/manual/en/function.is-dir.php
+     */
+    protected static function phpIsDir(string $filename): bool
+    {
+        return is_dir($filename);
+    }
+
+    /**
      * Tells whether the filename is writable
      *
      * @param string $filename
@@ -180,6 +196,27 @@ trait FileTrait
     protected static function phpIsWritable(string $filename): bool
     {
         return is_writable($filename);
+    }
+
+    /**
+     * Makes a directory
+     *
+     * @param string        $directory
+     * @param int           $permissions
+     * @param bool          $recursive
+     * @param resource|null $context
+     *
+     * @return bool
+     *
+     * @link https://php.net/manual/en/function.mkdir.php
+     */
+    protected static function phpMkdir(
+        string $directory,
+        int $permissions = 0777,
+        bool $recursive = false,
+        $context = null
+    ): bool {
+        return mkdir($directory, $permissions, $recursive, $context);
     }
 
     /**

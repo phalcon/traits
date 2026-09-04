@@ -127,4 +127,35 @@ final class FileTraitTest extends AbstractUnitTestCase
         $this->assertFileExists(outputDir($name));
         $this->safeDeleteFile($fileName);
     }
+
+    /**
+     * Tests Phalcon\Traits\Php\FileTrait :: phpIsDir()/phpMkdir()
+     *
+     * @return void
+     *
+     * @author Phalcon Team <team@phalcon.io>
+     * @since  2026-09-04
+     */
+    public function testHelperPhpFileTraitIsDirAndMkdir(): void
+    {
+        $file      = new FileFixture();
+        $directory = outputDir(uniqid('file-trait-'));
+
+        $actual = $file->isDir($directory);
+        $this->assertFalse($actual);
+
+        $actual = $file->mkdir($directory, 0755, true);
+        $this->assertTrue($actual);
+
+        $actual = $file->isDir($directory);
+        $this->assertTrue($actual);
+
+        /**
+         * A second call finds the directory and fails with "File exists".
+         */
+        $actual = @$file->mkdir($directory, 0755, true);
+        $this->assertFalse($actual);
+
+        $this->safeDeleteDirectory($directory);
+    }
 }

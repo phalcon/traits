@@ -151,6 +151,20 @@ class FileFixture
     }
 
     /**
+     * Tells whether the filename is a directory
+     *
+     * @param string $filename
+     *
+     * @return bool
+     *
+     * @link https://php.net/manual/en/function.is-dir.php
+     */
+    public function isDir($filename): bool
+    {
+        return $this->phpIsDir($filename);
+    }
+
+    /**
      * Tells whether the filename is writable
      *
      * @param string $filename
@@ -162,6 +176,27 @@ class FileFixture
     public function isWritable($filename): bool
     {
         return $this->phpIsWritable($filename);
+    }
+
+    /**
+     * Makes a directory
+     *
+     * @param string        $directory
+     * @param int           $permissions
+     * @param bool          $recursive
+     * @param resource|null $context
+     *
+     * @return bool
+     *
+     * @link https://php.net/manual/en/function.mkdir.php
+     */
+    public function mkdir(
+        $directory,
+        int $permissions = 0777,
+        bool $recursive = false,
+        $context = null
+    ): bool {
+        return $this->phpMkdir($directory, $permissions, $recursive, $context);
     }
 
     /**

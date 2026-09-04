@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.0.0](https://github.com/phalcon/traits/releases/tag/5.0.0) (2026-09-04)
+
+### Added
+
+-   Added `Phalcon\Traits\Php\FileTrait::phpIsDir` and `Phalcon\Traits\Php\FileTrait::phpMkDir`
+
+### Changed
+
+### Removed
+
+### Fixed
+
+
 ## [4.0.0](https://github.com/phalcon/traits/releases/tag/4.0.0) (2026-07-10)
 
 ### Added
@@ -79,7 +92,7 @@
 ## [2.0.0](https://github.com/phalcon/traits/releases/tag/2.0.0) (2023-01-01)
 
 ### Added
- 
+
 -   Added `Phalcon\Traits\Php\IniTrait` [#34](https://github.com/phalcon/traits/issues/34)
 
 ## [1.3.0](https://github.com/phalcon/traits/releases/tag/1.3.0) (2022-10-04)

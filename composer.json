@@ -38,6 +38,7 @@
         "pds/composer-script-names": "^1.0",
         "pds/skeleton": "^1.0",
         "phalcon/talon": "^1.0.0",
+        "phalcon/code-quality": "^1.0",
         "phpstan/phpstan": "^2.2",
         "phpunit/phpunit": "^10.5",
         "squizlabs/php_codesniffer": "^4.0"
@@ -50,8 +51,9 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
+            "pds/skeleton": false,
             "infection/extension-installer": true,
-            "pds/skeleton": false
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "autoload": {

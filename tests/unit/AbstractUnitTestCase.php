@@ -28,8 +28,6 @@ abstract class AbstractUnitTestCase extends TalonUnitTestCase
      *
      * @param string $prefix A prefix for the file
      * @param string $suffix A suffix for the file
-     *
-     * @return string
      */
     public function getNewFileName(
         string $prefix = '',
@@ -43,10 +41,6 @@ abstract class AbstractUnitTestCase extends TalonUnitTestCase
 
     /**
      * Deletes a file if it exists
-     *
-     * @param string $filename
-     *
-     * @return void
      */
     public function safeDeleteFile(string $filename): void
     {

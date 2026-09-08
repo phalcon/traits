@@ -24,8 +24,6 @@ final class HeaderTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\HeaderTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

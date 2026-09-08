@@ -37,16 +37,12 @@ trait FactoryTrait
     /**
      * Return an object from the instances pool. If it does not exist, create it
      *
-     * @param string $name
-     * @param mixed  ...$arguments
-     *
-     * @return object
      * @throws Exception
      */
     protected function getCachedInstance(string $name, mixed ...$arguments): object
     {
         if (true !== isset($this->instances[$name])) {
-            $definition = $this->getService($name);
+            $definition             = $this->getService($name);
             $this->instances[$name] = new $definition(...$arguments);
         }
 
@@ -64,9 +60,6 @@ trait FactoryTrait
      * Returns a service based on the name; throws exception if it does not
      * exist
      *
-     * @param string $name
-     *
-     * @return string
      * @throws Exception
      */
     protected function getService(string $name): string

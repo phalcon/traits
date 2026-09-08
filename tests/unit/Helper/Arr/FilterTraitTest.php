@@ -80,6 +80,7 @@ final class FilterTraitTest extends AbstractUnitTestCase
             ],
         ];
     }
+
     /**
      * Tests Phalcon\Traits\Arr\FilterTrait :: toFilter()
      *
@@ -87,8 +88,6 @@ final class FilterTraitTest extends AbstractUnitTestCase
      *
      * @param array<array-key, mixed> $source
      * @param array<array-key, mixed> $expected
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-25

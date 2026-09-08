@@ -28,13 +28,6 @@ use function strtoupper;
  */
 trait CamelizeTrait
 {
-    /**
-     * @param string $text
-     * @param string $delimiters
-     * @param bool   $lowerFirst
-     *
-     * @return string
-     */
     public static function toCamelize(
         string $text,
         string $delimiters = '-_',

@@ -21,13 +21,6 @@ use function str_ends_with;
  */
 trait EndsWithTrait
 {
-    /**
-     * @param string $haystack
-     * @param string $needle
-     * @param bool   $ignoreCase
-     *
-     * @return bool
-     */
     protected static function toEndsWith(
         string $haystack,
         string $needle,

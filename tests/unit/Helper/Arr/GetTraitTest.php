@@ -24,8 +24,6 @@ final class GetTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Support\Helper\Arr\GetTrait :: getArrVal()
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

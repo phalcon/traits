@@ -57,12 +57,11 @@ final class DirFromFileTraitTest extends AbstractUnitTestCase
             ],
         ];
     }
+
     /**
      * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait
      *
      * @dataProvider getExamples
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26
@@ -78,8 +77,6 @@ final class DirFromFileTraitTest extends AbstractUnitTestCase
 
     /**
      * Tests Phalcon\Traits\Support\Helper\Str\DirFromFileTrait - filesystemSafe
-     *
-     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-26

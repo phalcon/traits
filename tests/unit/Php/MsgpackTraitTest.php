@@ -24,8 +24,6 @@ final class MsgpackTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\MsgpackTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

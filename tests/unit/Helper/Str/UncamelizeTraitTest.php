@@ -48,6 +48,7 @@ final class UncamelizeTraitTest extends AbstractUnitTestCase
             ["A\0B", 'a', '_'],
         ];
     }
+
     /**
      * Tests Str\CamelizeTrait
      *

@@ -22,10 +22,6 @@ use function unserialize;
 trait SerializeTrait
 {
     /**
-     * @param mixed $value
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.serialize.php
      */
     protected static function phpSerialize(mixed $value): string
@@ -34,10 +30,7 @@ trait SerializeTrait
     }
 
     /**
-     * @param string $data
      * @param array{allowed_classes?: array<string>|bool, max_depth?: int} $options
-     *
-     * @return mixed
      *
      * @link https://php.net/manual/en/function.unserialize.php
      */

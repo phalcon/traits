@@ -22,12 +22,6 @@ use const MB_CASE_LOWER;
  */
 trait LowerTrait
 {
-    /**
-     * @param string $text
-     * @param string $encoding
-     *
-     * @return string
-     */
     protected static function toLower(
         string $text,
         string $encoding = 'UTF-8'

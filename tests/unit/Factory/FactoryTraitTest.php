@@ -29,8 +29,6 @@ final class FactoryTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() with init
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
@@ -45,7 +43,7 @@ final class FactoryTraitTest extends AbstractUnitTestCase
         /**
          * Get it again, it should not be the same
          */
-        $two = $factory->newInstance('one');
+        $two     = $factory->newInstance('one');
         $oneHash = spl_object_hash($one);
         $twoHash = spl_object_hash($two);
         $this->assertNotSame($oneHash, $twoHash);
@@ -60,15 +58,14 @@ final class FactoryTraitTest extends AbstractUnitTestCase
         /**
          * Get it again, it should not be the same
          */
-        $two = $factory->getInstance('one');
+        $two     = $factory->getInstance('one');
         $oneHash = spl_object_hash($one);
         $twoHash = spl_object_hash($two);
         $this->assertSame($oneHash, $twoHash);
     }
+
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance()
-     *
-     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
@@ -85,8 +82,6 @@ final class FactoryTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() - exception
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
@@ -102,8 +97,6 @@ final class FactoryTraitTest extends AbstractUnitTestCase
 
     /**
      * Tests Phalcon\Traits\Arr\FactoryTrait :: newInstance() with init
-     *
-     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25

@@ -35,8 +35,6 @@ trait EncodeTrait
      * @param int         $options Bitmask of json_encode options
      * @param int<1, max> $depth   Recursion depth
      *
-     * @return string
-     *
      * @throws JsonException if the data cannot be encoded
      * @link https://www.php.net/manual/en/function.json-encode.php
      */

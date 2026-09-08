@@ -23,11 +23,6 @@ use const DIRECTORY_SEPARATOR;
  */
 trait DirSeparatorTrait
 {
-    /**
-     * @param string $directory
-     *
-     * @return string
-     */
     protected static function toDirSeparator(string $directory): string
     {
         return rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;

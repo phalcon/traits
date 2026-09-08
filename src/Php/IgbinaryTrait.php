@@ -22,10 +22,6 @@ use function igbinary_unserialize;
 trait IgbinaryTrait
 {
     /**
-     * @param mixed $value
-     *
-     * @return string|null
-     *
      * @link https://php.net/manual/en/function.igbinary-serialize.php
      */
     protected static function phpIgbinarySerialize(mixed $value): string | null
@@ -34,10 +30,6 @@ trait IgbinaryTrait
     }
 
     /**
-     * @param string $value
-     *
-     * @return mixed
-     *
      * @link https://php.net/manual/en/function.igbinary-unserialize.php
      */
     protected static function phpIgbinaryUnserialize(string $value): mixed

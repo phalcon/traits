@@ -24,12 +24,7 @@ use function strtr;
 trait InterpolateTrait
 {
     /**
-     * @param string   $input
      * @param string[] $context
-     * @param string   $left
-     * @param string   $right
-     *
-     * @return string
      */
     protected static function toInterpolate(
         string $input,

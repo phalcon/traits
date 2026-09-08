@@ -93,14 +93,13 @@ final class InterpolateTraitTest extends AbstractUnitTestCase
             ],
         ];
     }
+
     /**
      * Tests Phalcon\Traits\Str\InterpolateTrait :: toInterpolate()
      *
      * @dataProvider getExamples
      *
      * @param array<string, string> $context
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26

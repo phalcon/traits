@@ -36,8 +36,6 @@ trait FileTrait
      * @link https://php.net/manual/en/function.fclose.php
      *
      * @param resource $handle
-     *
-     * @return bool
      */
     protected static function phpFclose($handle): bool
     {
@@ -47,11 +45,8 @@ trait FileTrait
     /**
      * Gets line from file pointer and parse for CSV fields
      *
-     * @param resource $stream
+     * @param resource    $stream
      * @param int<0, max> $length
-     * @param string   $separator
-     * @param string   $enclosure
-     * @param string   $escape
      *
      * @return array<array-key, mixed>|false
      *
@@ -76,10 +71,6 @@ trait FileTrait
     }
 
     /**
-     * @param string $filename
-     *
-     * @return bool
-     *
      * @link https://php.net/manual/en/function.file-exists.php
      */
     protected static function phpFileExists(string $filename): bool
@@ -88,13 +79,8 @@ trait FileTrait
     }
 
     /**
-     * @param string        $filename
-     * @param bool          $useIncludePath
-     * @param resource|null $context
-     * @param int           $offset
+     * @param resource|null    $context
      * @param int<0, max>|null $length
-     *
-     * @return false|string
      *
      * @link https://php.net/manual/en/function.file-get-contents.php
      */
@@ -113,12 +99,8 @@ trait FileTrait
     }
 
     /**
-     * @param string   $filename
      * @param mixed    $data
-     * @param int      $flags
      * @param resource $context
-     *
-     * @return false|int
      *
      * @link https://php.net/manual/en/function.file-put-contents.php
      */
@@ -132,12 +114,9 @@ trait FileTrait
     }
 
     /**
-     * @param string        $filename
-     * @param string        $mode
-     * @param bool          $useIncludePath
      * @param resource|null $context
      *
-     * @return resource|false
+     * @return false|resource
      *
      * @link https://php.net/manual/en/function.fopen.php
      */
@@ -155,11 +134,8 @@ trait FileTrait
      *
      * @link https://php.net/manual/en/function.fwrite.php
      *
-     * @param resource $handle
-     * @param string   $data
+     * @param resource         $handle
      * @param int<0, max>|null $length
-     *
-     * @return false|int
      */
     protected static function phpFwrite($handle, string $data, ?int $length = null): false | int
     {
@@ -173,10 +149,6 @@ trait FileTrait
     /**
      * Tells whether the filename is a directory
      *
-     * @param string $filename
-     *
-     * @return bool
-     *
      * @link https://php.net/manual/en/function.is-dir.php
      */
     protected static function phpIsDir(string $filename): bool
@@ -186,10 +158,6 @@ trait FileTrait
 
     /**
      * Tells whether the filename is writable
-     *
-     * @param string $filename
-     *
-     * @return bool
      *
      * @link https://php.net/manual/en/function.is-writable.php
      */
@@ -201,12 +169,7 @@ trait FileTrait
     /**
      * Makes a directory
      *
-     * @param string        $directory
-     * @param int           $permissions
-     * @param bool          $recursive
      * @param resource|null $context
-     *
-     * @return bool
      *
      * @link https://php.net/manual/en/function.mkdir.php
      */
@@ -220,10 +183,7 @@ trait FileTrait
     }
 
     /**
-     * @param string        $filename
      * @param resource|null $context
-     *
-     * @return bool
      *
      * @link https://php.net/manual/en/function.unlink.php
      */

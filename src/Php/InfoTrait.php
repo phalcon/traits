@@ -24,10 +24,6 @@ trait InfoTrait
     /**
      * Find out whether an extension is loaded
      *
-     * @param string $name
-     *
-     * @return bool
-     *
      * @link https://php.net/manual/en/function.extension-loaded.php
      */
     protected static function phpExtensionLoaded(string $name): bool
@@ -37,10 +33,6 @@ trait InfoTrait
 
     /**
      * Return true if the given function has been defined
-     *
-     * @param string $functionName
-     *
-     * @return bool
      *
      * @link https://php.net/manual/en/function.function-exists.php
      */

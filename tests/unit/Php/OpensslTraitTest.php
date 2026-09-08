@@ -26,8 +26,6 @@ final class OpensslTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\OpensslTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

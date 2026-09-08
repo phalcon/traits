@@ -28,8 +28,6 @@ final class MbCaseTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\MbCaseTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

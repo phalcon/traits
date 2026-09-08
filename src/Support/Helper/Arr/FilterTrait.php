@@ -24,13 +24,12 @@ trait FilterTrait
      * Helper method to filter the collection
      *
      * @param array<array-key, mixed> $collection
-     * @param callable|null           $method
      *
      * @return array<array-key, mixed>
      */
     protected static function toFilter(
         array $collection,
-        callable|null $method = null
+        callable | null $method = null
     ): array {
         if (null === $method) {
             return $collection;

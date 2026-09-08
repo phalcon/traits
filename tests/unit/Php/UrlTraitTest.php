@@ -24,8 +24,6 @@ final class UrlTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\UrlTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */

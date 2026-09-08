@@ -24,8 +24,6 @@ final class Base64TraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\Base64Trait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-30
      */

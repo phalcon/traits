@@ -26,8 +26,6 @@ final class YamlTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\YamlTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

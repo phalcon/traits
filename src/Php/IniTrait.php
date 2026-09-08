@@ -22,11 +22,6 @@ trait IniTrait
     /**
      * Gets the value of a configuration option
      *
-     * @param string $input
-     * @param string $defaultValue
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
      */
@@ -44,11 +39,6 @@ trait IniTrait
 
     /**
      * Query a php.ini value and return it back as boolean
-     *
-     * @param string $input
-     * @param bool   $defaultValue
-     *
-     * @return bool
      *
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
@@ -75,11 +65,6 @@ trait IniTrait
     /**
      * Query a php.ini value and return it back as integer
      *
-     * @param string $input
-     * @param int    $defaultValue
-     *
-     * @return int
-     *
      * @link https://php.net/manual/en/function.ini-get.php
      * @link https://php.net/manual/en/ini.list.php
      */
@@ -95,10 +80,6 @@ trait IniTrait
 
     /**
      * Parse a configuration file
-     *
-     * @param string $filename
-     * @param bool   $processSections
-     * @param int    $scannerMode
      *
      * @return array<array-key, mixed>|false
      *

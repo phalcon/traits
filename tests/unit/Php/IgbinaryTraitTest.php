@@ -24,8 +24,6 @@ final class IgbinaryTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\IgbinaryTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

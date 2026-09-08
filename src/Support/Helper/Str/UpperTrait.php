@@ -22,12 +22,6 @@ use const MB_CASE_UPPER;
  */
 trait UpperTrait
 {
-    /**
-     * @param string $text
-     * @param string $encoding
-     *
-     * @return string
-     */
     protected static function toUpper(
         string $text,
         string $encoding = 'UTF-8'

@@ -23,11 +23,6 @@ trait MbCaseTrait
     /**
      * Converts the case of a string using `mb_convert_case()`
      *
-     * @param string $input
-     * @param int    $mode
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.mb-convert-case.php
      */
     protected static function phpMbConvertCase(string $input, int $mode): string

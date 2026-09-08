@@ -22,8 +22,6 @@ final class DecodeTraitTest extends AbstractUnitTestCase
     /**
      * Tests Support\Helper\Json\DecodeTrait - decodes
      *
-     * @return void
-     *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09
      */
@@ -36,8 +34,6 @@ final class DecodeTraitTest extends AbstractUnitTestCase
 
     /**
      * Tests Support\Helper\Json\DecodeTrait - associative defaults to false
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09
@@ -52,8 +48,6 @@ final class DecodeTraitTest extends AbstractUnitTestCase
 
     /**
      * Tests Support\Helper\Json\DecodeTrait - throws on failure
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09

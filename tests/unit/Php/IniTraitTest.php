@@ -28,8 +28,6 @@ final class IniTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\IniTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2023-01-01
      */
@@ -94,8 +92,6 @@ final class IniTraitTest extends AbstractUnitTestCase
      *
      * Uses the writable `user_agent` directive as scratch storage so every
      * truthy token (and the case-fold) exercises a distinct `match` arm.
-     *
-     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2023-01-01

@@ -23,12 +23,6 @@ use function hash_hmac;
 trait HashTrait
 {
     /**
-     * @param string $algorithm
-     * @param string $data
-     * @param bool   $binary
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.hash.php
      */
     protected static function phpHash(string $algorithm, string $data, bool $binary = false): string
@@ -37,11 +31,6 @@ trait HashTrait
     }
 
     /**
-     * @param string $knownString
-     * @param string $userString
-     *
-     * @return bool
-     *
      * @link https://php.net/manual/en/function.hash-equals.php
      */
     protected static function phpHashEquals(string $knownString, string $userString): bool
@@ -50,13 +39,6 @@ trait HashTrait
     }
 
     /**
-     * @param string $algorithm
-     * @param string $data
-     * @param string $key
-     * @param bool   $binary
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.hash-hmac.php
      */
     protected static function phpHashHmac(

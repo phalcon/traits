@@ -103,12 +103,11 @@ final class EndsWithTraitTest extends AbstractUnitTestCase
             ],
         ];
     }
+
     /**
      * Tests Phalcon\Traits\Str\EndsWithTrait :: toEndsWith()
      *
      * @dataProvider getExamples
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26

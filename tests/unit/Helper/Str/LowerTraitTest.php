@@ -104,12 +104,11 @@ final class LowerTraitTest extends AbstractUnitTestCase
             ],
         ];
     }
+
     /**
      * Tests Phalcon\Traits\Str\LowerTrait :: toLower()
      *
      * @dataProvider getExamples
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26

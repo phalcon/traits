@@ -21,13 +21,6 @@ use function str_starts_with;
  */
 trait StartsWithTrait
 {
-    /**
-     * @param string $haystack
-     * @param string $needle
-     * @param bool   $ignoreCase
-     *
-     * @return bool
-     */
     protected static function toStartsWith(
         string $haystack,
         string $needle,

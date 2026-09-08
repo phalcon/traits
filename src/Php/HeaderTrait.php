@@ -23,8 +23,6 @@ trait HeaderTrait
     /**
      * Checks if or where headers have been sent
      *
-     * @return bool
-     *
      * @link https://php.net/manual/en/function.headers-sent.php
      */
     protected static function phpHeadersSent(): bool

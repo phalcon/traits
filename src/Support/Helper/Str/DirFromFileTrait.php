@@ -27,12 +27,6 @@ use const PATHINFO_FILENAME;
  */
 trait DirFromFileTrait
 {
-    /**
-     * @param string $file
-     * @param bool   $filesystemSafe
-     *
-     * @return string
-     */
     protected static function toDirFromFile(string $file, bool $filesystemSafe = false): string
     {
         $name  = pathinfo($file, PATHINFO_FILENAME);

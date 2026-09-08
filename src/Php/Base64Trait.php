@@ -27,10 +27,6 @@ trait Base64Trait
 {
     /**
      * Decode a Base64 URL string
-     *
-     * @param string $input
-     *
-     * @return string
      */
     protected static function doDecodeUrl(string $input): string
     {
@@ -44,10 +40,6 @@ trait Base64Trait
 
     /**
      * Encode a string in Base64 URL format
-     *
-     * @param string $input
-     *
-     * @return string
      */
     protected static function doEncodeUrl(string $input): string
     {
@@ -55,25 +47,16 @@ trait Base64Trait
     }
 
     /**
-     * @param string $input
-     * @param bool   $strict
-     *
-     * @return string|false
-     *
      * @link https://php.net/manual/en/function.base64-decode.php
      */
     protected static function phpBase64Decode(
         string $input,
         bool $strict = false
-    ): string | false {
+    ): false | string {
         return base64_decode($input, $strict);
     }
 
     /**
-     * @param string $input
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.base64-encode.php
      */
     protected static function phpBase64Encode(string $input): string

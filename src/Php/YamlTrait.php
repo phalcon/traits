@@ -23,12 +23,7 @@ trait YamlTrait
     /**
      * Parse a YAML stream from a file
      *
-     * @param string                  $filename
-     * @param int                     $pos
-     * @param mixed                   $ndocs
      * @param array<string, callable> $callbacks
-     *
-     * @return mixed
      *
      * @link https://php.net/manual/en/function.yaml-parse-file.php
      */

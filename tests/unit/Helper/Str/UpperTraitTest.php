@@ -104,12 +104,11 @@ final class UpperTraitTest extends AbstractUnitTestCase
             ],
         ];
     }
+
     /**
      * Tests Phalcon\Traits\Str\UpperTrait :: toUpper()
      *
      * @dataProvider getExamples
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2021-10-26

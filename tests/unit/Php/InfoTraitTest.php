@@ -24,8 +24,6 @@ final class InfoTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\InfoTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */

@@ -28,11 +28,6 @@ use function apcu_store;
 trait ApcuTrait
 {
     /**
-     * @param string $key
-     * @param int    $step
-     *
-     * @return bool|int
-     *
      * @link https://php.net/manual/en/function.apcu-dec.php
      */
     protected static function phpApcuDec(string $key, int $step = 1): bool | int
@@ -47,7 +42,7 @@ trait ApcuTrait
      *
      * @link https://php.net/manual/en/function.apcu-delete.php
      */
-    protected static function phpApcuDelete(array | string $key): bool | array
+    protected static function phpApcuDelete(array | string $key): array | bool
     {
         return apcu_delete($key);
     }
@@ -59,15 +54,13 @@ trait ApcuTrait
      *
      * @link https://php.net/manual/en/function.apcu-exists.php
      */
-    protected static function phpApcuExists(array | string $key): bool | array
+    protected static function phpApcuExists(array | string $key): array | bool
     {
         return apcu_exists($key);
     }
 
     /**
      * @param array<string>|string $key
-     *
-     * @return mixed
      *
      * @link https://php.net/manual/en/function.apcu-fetch.php
      */
@@ -77,11 +70,6 @@ trait ApcuTrait
     }
 
     /**
-     * @param string $key
-     * @param int    $step
-     *
-     * @return bool|int
-     *
      * @link https://php.net/manual/en/function.apcu-inc.php
      */
     protected static function phpApcuInc(string $key, int $step = 1): bool | int
@@ -90,10 +78,6 @@ trait ApcuTrait
     }
 
     /**
-     * @param string $pattern
-     *
-     * @return APCUIterator|bool
-     *
      * @link https://php.net/manual/en/class.apcuiterator.php
      */
     protected static function phpApcuIterator(string $pattern): APCUIterator | bool
@@ -103,8 +87,6 @@ trait ApcuTrait
 
     /**
      * @param array<array-key, mixed>|string $key
-     * @param mixed                          $payload
-     * @param int                            $ttl
      *
      * @return array<array-key, mixed>|bool
      *
@@ -114,7 +96,7 @@ trait ApcuTrait
         array | string $key,
         mixed $payload,
         int $ttl = 0
-    ): bool | array {
+    ): array | bool {
         return apcu_store($key, $payload, $ttl);
     }
 }

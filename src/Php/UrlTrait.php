@@ -34,10 +34,7 @@ use function rawurlencode;
 trait UrlTrait
 {
     /**
-     * @param string $url
-     * @param int    $component
-     *
-     * @return TParseUrl|false|int|string|null
+     * @return false|int|string|TParseUrl|null
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */
@@ -47,10 +44,6 @@ trait UrlTrait
     }
 
     /**
-     * @param string $string
-     *
-     * @return string
-     *
      * @link https://www.php.net/manual/en/function.rawurldecode.php
      */
     protected static function phpRawUrlDecode(string $string): string
@@ -59,10 +52,6 @@ trait UrlTrait
     }
 
     /**
-     * @param string $string
-     *
-     * @return string
-     *
      * @link https://www.php.net/manual/en/function.rawurlencode.php
      */
     protected static function phpRawUrlEncode(string $string): string

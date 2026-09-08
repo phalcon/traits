@@ -52,12 +52,11 @@ final class CamelizeTraitTest extends AbstractUnitTestCase
             ['customer-Session', 'customerSession', ' -_', true],
         ];
     }
+
     /**
      * Tests Str\CamelizeTrait
      *
      * @dataProvider getSources
-     *
-     * @return void
      *
      * @author       Phalcon Team <team@phalcon.io>
      * @since        2020-09-09

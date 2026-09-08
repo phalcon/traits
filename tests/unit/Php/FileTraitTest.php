@@ -30,8 +30,6 @@ final class FileTraitTest extends AbstractUnitTestCase
     /**
      * Tests Phalcon\Traits\Php\FileTrait
      *
-     * @return void
-     *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2021-10-25
      */
@@ -130,8 +128,6 @@ final class FileTraitTest extends AbstractUnitTestCase
 
     /**
      * Tests Phalcon\Traits\Php\FileTrait :: phpIsDir()/phpMkdir()
-     *
-     * @return void
      *
      * @author Phalcon Team <team@phalcon.io>
      * @since  2026-09-04

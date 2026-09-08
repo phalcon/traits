@@ -22,10 +22,6 @@ use function msgpack_unpack;
 trait MsgpackTrait
 {
     /**
-     * @param mixed $value
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.msgpack-pack.php
      */
     protected static function phpMsgpackPack(mixed $value): string
@@ -34,10 +30,6 @@ trait MsgpackTrait
     }
 
     /**
-     * @param string $value
-     *
-     * @return mixed
-     *
      * @link https://php.net/manual/en/function.msgpack-unpack.php
      */
     protected static function phpMsgpackUnpack(string $value): mixed

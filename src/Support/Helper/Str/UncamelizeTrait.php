@@ -26,12 +26,6 @@ use function strlen;
  */
 trait UncamelizeTrait
 {
-    /**
-     * @param string $text
-     * @param string $delimiter
-     *
-     * @return string
-     */
     protected static function toUncamelize(
         string $text,
         string $delimiter = '_'

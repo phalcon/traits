@@ -37,8 +37,6 @@ trait DecodeTrait
      * @param int<1, max> $depth       Recursion depth
      * @param int         $options     Bitmask of json_decode options
      *
-     * @return mixed
-     *
      * @throws JsonException if the data cannot be decoded
      * @link https://www.php.net/manual/en/function.json-decode.php
      */

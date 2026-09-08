@@ -25,10 +25,6 @@ trait GetTrait
     /**
      * @param array<array-key, mixed> $collection
      * @param array-key               $index
-     * @param mixed                   $defaultValue
-     * @param string|null             $cast
-     *
-     * @return mixed
      */
     protected static function getArrVal(
         array $collection,

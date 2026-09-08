@@ -22,22 +22,14 @@ use function openssl_random_pseudo_bytes;
 trait OpensslTrait
 {
     /**
-     * @param string $cipher
-     *
-     * @return int|false
-     *
      * @link https://php.net/manual/en/function.openssl-cipher-iv-length.php
      */
-    protected static function phpOpensslCipherIvLength(string $cipher): int | false
+    protected static function phpOpensslCipherIvLength(string $cipher): false | int
     {
         return openssl_cipher_iv_length($cipher);
     }
 
     /**
-     * @param int $length
-     *
-     * @return string
-     *
      * @link https://php.net/manual/en/function.openssl-random-pseudo-bytes.php
      */
     protected static function phpOpensslRandomPseudoBytes(int $length): string

@@ -20,7 +20,7 @@ use function rawurlencode;
 /**
  * URL based wrapper methods.
  *
- * @phpstan-type TParseUrl = array{
+ * @phpstan-type traits_parse_url array{
  *       scheme?: string,
  *       host?: string,
  *       port?: int<0, 65535>,
@@ -34,7 +34,7 @@ use function rawurlencode;
 trait UrlTrait
 {
     /**
-     * @return false|int|string|TParseUrl|null
+     * @return false|int|string|traits_parse_url|null
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */

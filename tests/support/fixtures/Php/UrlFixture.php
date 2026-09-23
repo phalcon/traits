@@ -16,7 +16,7 @@ namespace Phalcon\Tests\Fixtures\Php;
 use Phalcon\Traits\Php\UrlTrait;
 
 /**
- * @phpstan-type TParseUrl = array{
+ * @phpstan-type traits_parse_url array{
  *       scheme?: string,
  *       host?: string,
  *       port?: int<0, 65535>,
@@ -35,7 +35,7 @@ class UrlFixture
      * @param string $url
      * @param int    $component
      *
-     * @return TParseUrl|false|int|string|null
+     * @return false|int|string|traits_parse_url|null
      *
      * @link https://www.php.net/manual/en/function.parse-url.php
      */

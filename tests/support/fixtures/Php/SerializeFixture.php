@@ -15,6 +15,12 @@ namespace Phalcon\Tests\Fixtures\Php;
 
 use Phalcon\Traits\Php\SerializeTrait;
 
+/**
+ * @phpstan-type traits_unserialize_options array{
+ *     allowed_classes?: array<string>|bool,
+ *     max_depth?: int
+ * }
+ */
 class SerializeFixture
 {
     use SerializeTrait;
@@ -30,8 +36,8 @@ class SerializeFixture
     }
 
     /**
-     * @param string $data
-     * @param array{allowed_classes?: array<string>|bool, max_depth?: int} $options
+     * @param string                     $data
+     * @param traits_unserialize_options $options
      *
      * @return mixed
      */

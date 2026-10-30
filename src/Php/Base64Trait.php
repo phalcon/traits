@@ -15,8 +15,6 @@ namespace Phalcon\Traits\Php;
 
 use function base64_decode;
 use function base64_encode;
-use function mb_strlen;
-use function str_repeat;
 use function str_replace;
 use function strtr;
 
@@ -30,11 +28,10 @@ trait Base64Trait
      */
     protected static function doDecodeUrl(string $input): string
     {
-        $remainder = mb_strlen($input) % 4;
-        if (0 !== $remainder) {
-            $input .= str_repeat('=', 4 - $remainder);
-        }
-
+        /**
+         * No "=" padding: base64_decode() that is not strict accepts a string
+         * with no padding, and it skips each "=".
+         */
         return base64_decode(strtr($input, '-_', '+/'));
     }
 

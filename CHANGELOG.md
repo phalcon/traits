@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.2.0](https://github.com/phalcon/traits/releases/tag/4.2.0) (2026-10-30)
+
+### Added
+
+### Changed
+
+-   Changed `Phalcon\Traits\Php\Base64Trait::doDecodeUrl()` to decode without `=` padding (faster, same result)
+
+### Removed
+
+### Fixed
+
+
 ## [4.1.0](https://github.com/phalcon/traits/releases/tag/4.1.0) (2026-09-04)
 
 ### Added
